@@ -1,0 +1,230 @@
+{
+  "id": "game_1789677572119_223063",
+  "name": "Reino de Valoria",
+  "storylineId": "khar_invasion",
+  "storylineTitle": "A Fúria das Estepes",
+  "worldLorePrompt": "\nUniverso: Fronteira Setentrional do Reino, linha de fortalezas de pedra cinzenta.\nCenário Atual: A Grande Horda de Khar cercou o desfiladeiro ocidental. Tambores de guerra de couro de boi ecoam nos vales.\nCultura: Marcial e austera. Ferrarias trabalham dia e noite, estandartes manchados de poeira e sangue.\nTensão Central: Se o exército falhar, o reino será saqueado. Se o povo morrer de fome pela guerra, haverá motim interno.\nEstilo Narrativo: Épico, cru, tenso, com vocabulário de infantaria, cavalaria de choque, balistas e cerco militar.\n",
+  "seed": 223063,
+  "turn": 1,
+  "year": 1150,
+  "month": 6,
+  "gold": 320,
+  "food": 480,
+  "population": 22000,
+  "stability": 55,
+  "military": 82,
+  "factions": {
+    "nobles": 10,
+    "merchants": -10,
+    "clergy": 5,
+    "peasants": -5,
+    "military": 45
+  },
+  "relations": {
+    "arvandor": 10,
+    "eldoria": -10,
+    "khar": -95
+  },
+  "flags": {
+    "under_siege": true,
+    "wartime_economy": true
+  },
+  "activeWars": [
+    "khar"
+  ],
+  "laws": [
+    "Mobilização Geral de Armas",
+    "Racionamento Bélico Obrigatório"
+  ],
+  "currentRuler": {
+    "id": "ruler_1",
+    "name": "Alden II",
+    "dynasty": "Casa de Valente",
+    "title": "Sua Majestade Real",
+    "age": 36,
+    "reignYears": 4,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "avatar": "👑"
+  },
+  "heirs": [
+    {
+      "id": "heir_1",
+      "name": "Príncipe Bryan",
+      "dynasty": "Casa de Valente",
+      "title": "Príncipe Herdeiro",
+      "age": 18,
+      "reignYears": 0,
+      "traits": [
+        "Audaz",
+        "Guerreiro"
+      ],
+      "avatar": "🗡️"
+    },
+    {
+      "id": "heir_2",
+      "name": "Princesa Lyra",
+      "dynasty": "Casa de Valente",
+      "title": "Princesa Real",
+      "age": 15,
+      "reignYears": 0,
+      "traits": [
+        "Erudita",
+        "Diplomata"
+      ],
+      "avatar": "📜"
+    }
+  ],
+  "rulersHistory": [],
+  "characters": {
+    "general_ironwall": {
+      "id": "general_ironwall",
+      "name": "Comandante Valerius",
+      "title": "O Escudo do Norte",
+      "role": "General",
+      "loyalty": 75,
+      "influence": 85,
+      "alive": true,
+      "traits": [
+        "Implacável",
+        "Tático de Cerco",
+        "Cicatrizes de Ferro"
+      ],
+      "faction": "military",
+      "avatar": "🛡️"
+    },
+    "blacksmith_bronn": {
+      "id": "blacksmith_bronn",
+      "name": "Mestre Bronn",
+      "title": "Mestre das Armaduras e Forjas",
+      "role": "Comerciante",
+      "loyalty": 40,
+      "influence": 60,
+      "alive": true,
+      "traits": [
+        "Robusto",
+        "Metalurgista",
+        "Inflexível"
+      ],
+      "faction": "merchants",
+      "avatar": "🔨"
+    },
+    "sister_maela": {
+      "id": "sister_maela",
+      "name": "Madre Maela",
+      "title": "Chefe dos Enfermeiros da Fé",
+      "role": "Sacerdotisa",
+      "loyalty": 60,
+      "influence": 55,
+      "alive": true,
+      "traits": [
+        "Compassiva",
+        "Curandeira",
+        "Corajosa"
+      ],
+      "faction": "clergy",
+      "avatar": "🕊️"
+    }
+  },
+  "realms": {
+    "khar": {
+      "id": "khar",
+      "name": "A Grande Horda de Khar",
+      "population": 40000,
+      "military": 95,
+      "wealth": 35,
+      "relation": -95,
+      "flags": {
+        "raiders": true,
+        "relentless": true
+      }
+    },
+    "arvandor": {
+      "id": "arvandor",
+      "name": "Império de Arvandor",
+      "population": 42000,
+      "military": 70,
+      "wealth": 65,
+      "relation": 15,
+      "flags": {
+        "cautious_ally": true
+      }
+    },
+    "eldoria": {
+      "id": "eldoria",
+      "name": "Cidades Livres de Eldoria",
+      "population": 26000,
+      "military": 40,
+      "wealth": 90,
+      "relation": -5,
+      "flags": {
+        "arms_dealers": true
+      }
+    }
+  },
+  "delayedEvents": [],
+  "history": [],
+  "currentEvent": {
+    "id": "scorched_earth_farms",
+    "title": "Tática de Terra Arrasada",
+    "description": "A vanguarda nômade avança pelas campinas setentrionais. Seus batedores queimarão celeiros de qualquer forma. O Conselho Militar propõe queimar nossas próprias lavouras antes que sirvam de alimento ao invasor.",
+    "characterId": "general_ironwall",
+    "tags": [
+      "guerra",
+      "camponeses",
+      "comida"
+    ],
+    "weight": 12,
+    "choices": [
+      {
+        "id": "burn_crops",
+        "label": "Incendiar os campos e evacuar os colonos para a capital",
+        "intentDescription": "Mata o invasor de inanição mas deixa milhares desabrigados.",
+        "actions": [
+          {
+            "type": "ADD_FOOD",
+            "amount": -160
+          },
+          {
+            "type": "MODIFY_POPULATION",
+            "amount": -1500
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "peasants",
+            "amount": -25
+          },
+          {
+            "type": "MODIFY_MILITARY",
+            "amount": 10
+          }
+        ]
+      },
+      {
+        "id": "defend_farms",
+        "label": "Guarnecer cada vila com piquetes de infantaria",
+        "intentDescription": "Protege os agricultores ao custo de dispersão de tropas.",
+        "actions": [
+          {
+            "type": "MODIFY_MILITARY",
+            "amount": -10
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "peasants",
+            "amount": 25
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "nobles",
+            "amount": -10
+          }
+        ]
+      }
+    ]
+  },
+  "isGameOver": false
+}

@@ -1,0 +1,278 @@
+{
+  "id": "game_1789675908762_980179",
+  "name": "Reino de Valoria",
+  "seed": 980179,
+  "turn": 1,
+  "year": 1142,
+  "month": 3,
+  "gold": 450,
+  "food": 700,
+  "population": 26500,
+  "stability": 72,
+  "military": 60,
+  "factions": {
+    "nobles": 15,
+    "merchants": 25,
+    "clergy": 20,
+    "peasants": 10,
+    "military": 30
+  },
+  "relations": {
+    "arvandor": -15,
+    "eldoria": 30,
+    "khar": -40
+  },
+  "flags": {
+    "spring_season": true,
+    "coronation_completed": true
+  },
+  "activeWars": [],
+  "laws": [
+    "Dízimo Real Padrão",
+    "Alistamento Obrigatório de Fronteira"
+  ],
+  "currentRuler": {
+    "id": "ruler_1",
+    "name": "Alden II",
+    "dynasty": "Casa de Valente",
+    "title": "Sua Majestade Real",
+    "age": 36,
+    "reignYears": 4,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "avatar": "👑"
+  },
+  "heirs": [
+    {
+      "id": "heir_1",
+      "name": "Príncipe Bryan",
+      "dynasty": "Casa de Valente",
+      "title": "Príncipe Herdeiro",
+      "age": 18,
+      "reignYears": 0,
+      "traits": [
+        "Audaz",
+        "Guerreiro"
+      ],
+      "avatar": "🗡️"
+    },
+    {
+      "id": "heir_2",
+      "name": "Princesa Lyra",
+      "dynasty": "Casa de Valente",
+      "title": "Princesa Real",
+      "age": 15,
+      "reignYears": 0,
+      "traits": [
+        "Erudita",
+        "Diplomata"
+      ],
+      "avatar": "📜"
+    }
+  ],
+  "rulersHistory": [],
+  "characters": {
+    "chancellor_vane": {
+      "id": "chancellor_vane",
+      "name": "Lorde Vane",
+      "title": "Chanceler da Coroa",
+      "role": "Chanceler",
+      "loyalty": 35,
+      "influence": 75,
+      "alive": true,
+      "traits": [
+        "Astuto",
+        "Aristocrata",
+        "Ambicioso"
+      ],
+      "faction": "nobles",
+      "avatar": "👑"
+    },
+    "general_thorne": {
+      "id": "general_thorne",
+      "name": "General Thorne",
+      "title": "Comandante das Legiões",
+      "role": "General",
+      "loyalty": 60,
+      "influence": 80,
+      "alive": true,
+      "traits": [
+        "Disciplinado",
+        "Veterano",
+        "Implacável"
+      ],
+      "faction": "military",
+      "avatar": "⚔️"
+    },
+    "merchant_alistair": {
+      "id": "merchant_alistair",
+      "name": "Mestre Alistair",
+      "title": "Porta-voz da Liga Mercante",
+      "role": "Comerciante",
+      "loyalty": 40,
+      "influence": 70,
+      "alive": true,
+      "traits": [
+        "Pragmático",
+        "Rico",
+        "Calculista"
+      ],
+      "faction": "merchants",
+      "avatar": "💰"
+    },
+    "archbishop_ignatius": {
+      "id": "archbishop_ignatius",
+      "name": "Arcebispo Ignatius",
+      "title": "Guardião da Chama Sagrada",
+      "role": "Sacerdote",
+      "loyalty": 50,
+      "influence": 65,
+      "alive": true,
+      "traits": [
+        "Piedoso",
+        "Dogmático",
+        "Tradicionalista"
+      ],
+      "faction": "clergy",
+      "avatar": "🕊️"
+    },
+    "elenor_peasant": {
+      "id": "elenor_peasant",
+      "name": "Elenor dos Vales",
+      "title": "Voz dos Lavradores",
+      "role": "Camponesa",
+      "loyalty": 20,
+      "influence": 45,
+      "alive": true,
+      "traits": [
+        "Obstinada",
+        "Carismática",
+        "Idealista"
+      ],
+      "faction": "peasants",
+      "avatar": "🌾"
+    }
+  },
+  "realms": {
+    "arvandor": {
+      "id": "arvandor",
+      "name": "Império de Arvandor",
+      "population": 45000,
+      "military": 85,
+      "wealth": 70,
+      "relation": -15,
+      "flags": {
+        "militarist": true
+      }
+    },
+    "eldoria": {
+      "id": "eldoria",
+      "name": "Principado de Eldoria",
+      "population": 28000,
+      "military": 45,
+      "wealth": 95,
+      "relation": 30,
+      "flags": {
+        "trade_hub": true
+      }
+    },
+    "khar": {
+      "id": "khar",
+      "name": "Horda de Khar",
+      "population": 32000,
+      "military": 75,
+      "wealth": 30,
+      "relation": -40,
+      "flags": {
+        "raiders": true
+      }
+    }
+  },
+  "delayedEvents": [],
+  "history": [],
+  "currentEvent": {
+    "id": "merchant_tax_protest",
+    "title": "A Fronda dos Mercadores",
+    "description": "Mestre Alistair reúne guildas ricas que ameaçam fechar armazéns e desviar rotas marítimas se as tarifas alfandegárias da coroa não forem imediatamente abolidas.",
+    "characterId": "merchant_alistair",
+    "tags": [
+      "economia",
+      "comerciantes"
+    ],
+    "weight": 10,
+    "choices": [
+      {
+        "id": "concede_tax_relief",
+        "label": "Conceder isenção temporária nas alfândegas",
+        "intentDescription": "Agrada os mercadores reduzindo a arrecadação futura.",
+        "actions": [
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "merchants",
+            "amount": 20
+          },
+          {
+            "type": "ADD_GOLD",
+            "amount": -60
+          },
+          {
+            "type": "MODIFY_STABILITY",
+            "amount": 5
+          }
+        ]
+      },
+      {
+        "id": "arrest_leaders",
+        "label": "Prender os agitadores e confiscar seus armazéns",
+        "intentDescription": "Demonstrar autoridade régia com mão de ferro.",
+        "actions": [
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "merchants",
+            "amount": -40
+          },
+          {
+            "type": "ADD_GOLD",
+            "amount": 180,
+            "reason": "Bens apreendidos da guilda"
+          },
+          {
+            "type": "MODIFY_STABILITY",
+            "amount": -10
+          }
+        ],
+        "delayedEvents": [
+          {
+            "triggerAfterTurns": 4,
+            "eventId": "merchant_smuggling_syndicate"
+          }
+        ]
+      },
+      {
+        "id": "negotiate_monopoly",
+        "label": "Oferecer monopólio de especiarias em troca de lealdade",
+        "intentDescription": "Favorecer a liga mercante em troca de tributo imediato.",
+        "actions": [
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "merchants",
+            "amount": 15
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "nobles",
+            "amount": -15
+          },
+          {
+            "type": "ADD_GOLD",
+            "amount": 100
+          }
+        ]
+      }
+    ]
+  },
+  "isGameOver": false
+}

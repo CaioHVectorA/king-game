@@ -1,0 +1,323 @@
+{
+  "id": "game_1789675908778_985755",
+  "name": "Reino de Valoria",
+  "seed": 985755,
+  "turn": 3,
+  "year": 1142,
+  "month": 5,
+  "gold": 626,
+  "food": 704,
+  "population": 26500,
+  "stability": 82,
+  "military": 55,
+  "factions": {
+    "nobles": -5,
+    "merchants": 25,
+    "clergy": 20,
+    "peasants": 10,
+    "military": 30
+  },
+  "relations": {
+    "arvandor": -15,
+    "eldoria": 30,
+    "khar": -65
+  },
+  "flags": {
+    "spring_season": true,
+    "coronation_completed": true
+  },
+  "activeWars": [],
+  "laws": [
+    "Dízimo Real Padrão",
+    "Alistamento Obrigatório de Fronteira"
+  ],
+  "currentRuler": {
+    "id": "ruler_1",
+    "name": "Alden II",
+    "dynasty": "Casa de Valente",
+    "title": "Sua Majestade Real",
+    "age": 36,
+    "reignYears": 4,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "avatar": "👑"
+  },
+  "heirs": [
+    {
+      "id": "heir_1",
+      "name": "Príncipe Bryan",
+      "dynasty": "Casa de Valente",
+      "title": "Príncipe Herdeiro",
+      "age": 18,
+      "reignYears": 0,
+      "traits": [
+        "Audaz",
+        "Guerreiro"
+      ],
+      "avatar": "🗡️"
+    },
+    {
+      "id": "heir_2",
+      "name": "Princesa Lyra",
+      "dynasty": "Casa de Valente",
+      "title": "Princesa Real",
+      "age": 15,
+      "reignYears": 0,
+      "traits": [
+        "Erudita",
+        "Diplomata"
+      ],
+      "avatar": "📜"
+    }
+  ],
+  "rulersHistory": [],
+  "characters": {
+    "chancellor_vane": {
+      "id": "chancellor_vane",
+      "name": "Lorde Vane",
+      "title": "Chanceler da Coroa",
+      "role": "Chanceler",
+      "loyalty": 35,
+      "influence": 75,
+      "alive": true,
+      "traits": [
+        "Astuto",
+        "Aristocrata",
+        "Ambicioso"
+      ],
+      "faction": "nobles",
+      "avatar": "👑"
+    },
+    "general_thorne": {
+      "id": "general_thorne",
+      "name": "General Thorne",
+      "title": "Comandante das Legiões",
+      "role": "General",
+      "loyalty": 60,
+      "influence": 80,
+      "alive": true,
+      "traits": [
+        "Disciplinado",
+        "Veterano",
+        "Implacável"
+      ],
+      "faction": "military",
+      "avatar": "⚔️"
+    },
+    "merchant_alistair": {
+      "id": "merchant_alistair",
+      "name": "Mestre Alistair",
+      "title": "Porta-voz da Liga Mercante",
+      "role": "Comerciante",
+      "loyalty": 40,
+      "influence": 70,
+      "alive": true,
+      "traits": [
+        "Pragmático",
+        "Rico",
+        "Calculista"
+      ],
+      "faction": "merchants",
+      "avatar": "💰"
+    },
+    "archbishop_ignatius": {
+      "id": "archbishop_ignatius",
+      "name": "Arcebispo Ignatius",
+      "title": "Guardião da Chama Sagrada",
+      "role": "Sacerdote",
+      "loyalty": 50,
+      "influence": 65,
+      "alive": true,
+      "traits": [
+        "Piedoso",
+        "Dogmático",
+        "Tradicionalista"
+      ],
+      "faction": "clergy",
+      "avatar": "🕊️"
+    },
+    "elenor_peasant": {
+      "id": "elenor_peasant",
+      "name": "Elenor dos Vales",
+      "title": "Voz dos Lavradores",
+      "role": "Camponesa",
+      "loyalty": 20,
+      "influence": 45,
+      "alive": true,
+      "traits": [
+        "Obstinada",
+        "Carismática",
+        "Idealista"
+      ],
+      "faction": "peasants",
+      "avatar": "🌾"
+    }
+  },
+  "realms": {
+    "arvandor": {
+      "id": "arvandor",
+      "name": "Império de Arvandor",
+      "population": 45000,
+      "military": 85,
+      "wealth": 70,
+      "relation": -15,
+      "flags": {
+        "militarist": true
+      }
+    },
+    "eldoria": {
+      "id": "eldoria",
+      "name": "Principado de Eldoria",
+      "population": 28000,
+      "military": 45,
+      "wealth": 95,
+      "relation": 30,
+      "flags": {
+        "trade_hub": true
+      }
+    },
+    "khar": {
+      "id": "khar",
+      "name": "Horda de Khar",
+      "population": 32000,
+      "military": 75,
+      "wealth": 30,
+      "relation": -40,
+      "flags": {
+        "raiders": true
+      }
+    }
+  },
+  "delayedEvents": [],
+  "history": [
+    {
+      "id": "hist_2_1789675953182",
+      "turn": 1,
+      "year": 1142,
+      "month": 4,
+      "eventTitle": "Cavaleiros de Khar no Horizonte",
+      "playerDecision": "Lançar contra-ofensiva de cavalaria para esmagar os invasores",
+      "narrative": "Você decretou: \"Lançar contra-ofensiva de cavalaria para esmagar os invasores\". A corte acatou suas ordens imediatas.",
+      "effectsSummary": [
+        "-5% Poder Militar",
+        "+80 Comida",
+        "+10% Estabilidade",
+        "Relação com khar: -25"
+      ],
+      "rulerName": "Alden II"
+    },
+    {
+      "id": "hist_3_1789676161148",
+      "turn": 2,
+      "year": 1142,
+      "month": 5,
+      "eventTitle": "Veneno na Taça Real",
+      "playerDecision": "Vou enviar carrocas de suprimentos aos camponeses e cobrar impostos extraordinarios dos nobres para cobrir os custos.",
+      "narrative": "Uma contribuição extraordinária foi imposta sobre as grandes propriedades nobres.",
+      "effectsSummary": [
+        "+120 Ouro",
+        "-20 Aprovação (Nobres)"
+      ],
+      "rulerName": "Alden II"
+    }
+  ],
+  "currentEvent": {
+    "id": "drought_south",
+    "title": "Seca Severa nas Terras do Sul",
+    "description": "A estiagem já dura quatro meses. As plantações secaram e os poços dos vilarejos do sul estão vazios. Elenor dos Vales chega à corte rogando pela abertura dos celeiros da coroa ou redução dos tributos.",
+    "characterId": "elenor_peasant",
+    "tags": [
+      "natureza",
+      "camponeses",
+      "comida"
+    ],
+    "weight": 12,
+    "requirements": [
+      {
+        "type": "MIN_FOOD",
+        "value": 100
+      }
+    ],
+    "choices": [
+      {
+        "id": "open_granaries",
+        "label": "Abrir os celeiros reais e enviar carretas de grãos",
+        "intentDescription": "Gastar reservas de comida para socorrer os lavradores.",
+        "actions": [
+          {
+            "type": "ADD_FOOD",
+            "amount": -150,
+            "reason": "Ajuda aos famintos"
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "peasants",
+            "amount": 25
+          },
+          {
+            "type": "MODIFY_STABILITY",
+            "amount": 10
+          }
+        ]
+      },
+      {
+        "id": "tax_nobles_for_wells",
+        "label": "Obrigar os nobres locais a financiarem novos poços",
+        "intentDescription": "Poupar grãos reais e transferir o encargo aos barões.",
+        "actions": [
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "nobles",
+            "amount": -20
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "peasants",
+            "amount": 15
+          },
+          {
+            "type": "ADD_GOLD",
+            "amount": 60,
+            "reason": "Contribuição compulsória dos barões"
+          }
+        ],
+        "delayedEvents": [
+          {
+            "triggerAfterTurns": 3,
+            "eventId": "noble_retaliation"
+          }
+        ]
+      },
+      {
+        "id": "ignore_drought",
+        "label": "Ignorar a seca. As reservas devem proteger a capital",
+        "intentDescription": "Preservar recursos da corte a custo do povo.",
+        "actions": [
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "peasants",
+            "amount": -35
+          },
+          {
+            "type": "MODIFY_STABILITY",
+            "amount": -15
+          },
+          {
+            "type": "MODIFY_POPULATION",
+            "amount": -1200
+          }
+        ],
+        "delayedEvents": [
+          {
+            "triggerAfterTurns": 2,
+            "eventId": "peasant_revolt"
+          }
+        ]
+      }
+    ]
+  },
+  "isGameOver": false
+}
