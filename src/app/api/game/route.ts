@@ -4,6 +4,8 @@ import { createInitialKingdomState } from "@/lib/game/state";
 import { selectNextEvent } from "@/lib/game/events";
 import { PRNG } from "@/lib/game/rng";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   const repo = getGameRepository();
   const searchParams = req.nextUrl.searchParams;
