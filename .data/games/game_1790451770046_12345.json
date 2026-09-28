@@ -1,0 +1,201 @@
+{
+  "id": "game_1790451770046_12345",
+  "name": "Reino de Valoria",
+  "storylineId": "valoria_classic",
+  "storylineTitle": "As Crônicas de Valoria",
+  "worldLorePrompt": "\nUniverso: Reino de Valoria e as Terras Centrais.\nCultura: Nobreza feudal tradicional que valoriza linhagens antigas e banquetes suntuosos, contrastada pela emergente Liga Mercante de Eldoria.\nClima Religioso: Culto da Chama Sagrada liderado pelo Arcebispo, zeloso contra heresias e dízimos em atraso.\nTensão Central: Os barões temem a perda de terras para as guildas, e os camponeses suportam o peso dos tributos nas épocas de seca.\nEstilo Narrativo: Solene, cortesão, com foco em intrigas palacianas e decisões de estado ponderadas.\n",
+  "seed": 12345,
+  "turn": 1,
+  "year": 1142,
+  "month": 3,
+  "gold": 450,
+  "food": 700,
+  "population": 26500,
+  "stability": 72,
+  "military": 60,
+  "factions": {
+    "nobles": 15,
+    "merchants": 25,
+    "clergy": 20,
+    "peasants": 10,
+    "military": 30
+  },
+  "relations": {
+    "arvandor": -15,
+    "eldoria": 30,
+    "khar": -40
+  },
+  "flags": {
+    "spring_season": true,
+    "coronation_completed": true
+  },
+  "activeWars": [],
+  "laws": [
+    "Dízimo Real Padrão",
+    "Alistamento Obrigatório de Fronteira"
+  ],
+  "currentRuler": {
+    "id": "ruler_1",
+    "name": "Alden II",
+    "dynasty": "Casa de Valente",
+    "title": "Sua Majestade Real",
+    "age": 36,
+    "reignYears": 4,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "avatar": "👑"
+  },
+  "heirs": [
+    {
+      "id": "heir_1",
+      "name": "Príncipe Bryan",
+      "dynasty": "Casa de Valente",
+      "title": "Príncipe Herdeiro",
+      "age": 18,
+      "reignYears": 0,
+      "traits": [
+        "Audaz",
+        "Guerreiro"
+      ],
+      "avatar": "🗡️"
+    },
+    {
+      "id": "heir_2",
+      "name": "Princesa Lyra",
+      "dynasty": "Casa de Valente",
+      "title": "Princesa Real",
+      "age": 15,
+      "reignYears": 0,
+      "traits": [
+        "Erudita",
+        "Diplomata"
+      ],
+      "avatar": "📜"
+    }
+  ],
+  "rulersHistory": [],
+  "characters": {
+    "chancellor_vane": {
+      "id": "chancellor_vane",
+      "name": "Lorde Vane",
+      "title": "Chanceler da Coroa",
+      "role": "Chanceler",
+      "loyalty": 35,
+      "influence": 75,
+      "alive": true,
+      "traits": [
+        "Astuto",
+        "Aristocrata",
+        "Ambicioso"
+      ],
+      "faction": "nobles",
+      "avatar": "👑"
+    },
+    "general_thorne": {
+      "id": "general_thorne",
+      "name": "General Thorne",
+      "title": "Comandante das Legiões",
+      "role": "General",
+      "loyalty": 60,
+      "influence": 80,
+      "alive": true,
+      "traits": [
+        "Disciplinado",
+        "Veterano",
+        "Implacável"
+      ],
+      "faction": "military",
+      "avatar": "⚔️"
+    },
+    "merchant_alistair": {
+      "id": "merchant_alistair",
+      "name": "Mestre Alistair",
+      "title": "Porta-voz da Liga Mercante",
+      "role": "Comerciante",
+      "loyalty": 40,
+      "influence": 70,
+      "alive": true,
+      "traits": [
+        "Pragmático",
+        "Rico",
+        "Calculista"
+      ],
+      "faction": "merchants",
+      "avatar": "💰"
+    },
+    "archbishop_ignatius": {
+      "id": "archbishop_ignatius",
+      "name": "Arcebispo Ignatius",
+      "title": "Guardião da Chama Sagrada",
+      "role": "Sacerdote",
+      "loyalty": 50,
+      "influence": 65,
+      "alive": true,
+      "traits": [
+        "Piedoso",
+        "Dogmático",
+        "Tradicionalista"
+      ],
+      "faction": "clergy",
+      "avatar": "🕊️"
+    },
+    "elenor_peasant": {
+      "id": "elenor_peasant",
+      "name": "Elenor dos Vales",
+      "title": "Voz dos Lavradores",
+      "role": "Camponesa",
+      "loyalty": 20,
+      "influence": 45,
+      "alive": true,
+      "traits": [
+        "Obstinada",
+        "Carismática",
+        "Idealista"
+      ],
+      "faction": "peasants",
+      "avatar": "🌾"
+    }
+  },
+  "realms": {
+    "arvandor": {
+      "id": "arvandor",
+      "name": "Império de Arvandor",
+      "population": 45000,
+      "military": 85,
+      "wealth": 70,
+      "relation": -15,
+      "flags": {
+        "militarist": true
+      }
+    },
+    "eldoria": {
+      "id": "eldoria",
+      "name": "Principado de Eldoria",
+      "population": 28000,
+      "military": 45,
+      "wealth": 95,
+      "relation": 30,
+      "flags": {
+        "trade_hub": true
+      }
+    },
+    "khar": {
+      "id": "khar",
+      "name": "Horda de Khar",
+      "population": 32000,
+      "military": 75,
+      "wealth": 30,
+      "relation": -40,
+      "flags": {
+        "raiders": true
+      }
+    }
+  },
+  "delayedEvents": [],
+  "history": [],
+  "currentEvent": null,
+  "isGameOver": false
+}

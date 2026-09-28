@@ -1,0 +1,386 @@
+{
+  "id": "game_1790478952528_622312",
+  "name": "Bastião 7 — Zona Murada",
+  "storylineId": "zombie_apocalypse",
+  "storylineTitle": "Protocolo ZERO — Última Fortaleza",
+  "worldLorePrompt": "\nUniverso: Assentamento Ferrão, antiga base industrial em São Paulo, agora fortaleza-cidade murada com 12.000 sobreviventes no Ano 3 Pós-Zero.\nCultura: Sociedade militarizada de sobrevivência. Democracia de crise onde a autoridade do Governador depende de manter o povo vivo. Raças, classes e credos foram nivelados — o que importa é competência e comida.\nAutoridade: O Governador possui poder de decreto sustentado pelo Conselho de Crise (3 líderes setoriais) e pela confiança popular. Pode ser deposto se a estabilidade social colapsar.\nRecursos: Ouro = Créditos Ferrão (moeda interna baseada em horas de trabalho); Comida = Rações Diárias e Estoques dos Silos; População = Sobreviventes Ativos com capacidade de trabalho; Ordem = Moral e Coesão Social; Exército = Forças de Guarda e Milícia Armada.\nAmeaças Externas: A Horda Leste (milhares de infectados), a Facção Escarlate (sobreviventes hostis armados), os Bandoleiros das Autopistas (saqueadores), e os Bunkers Cooperados (possíveis aliados isolacionistas).\nEstilo Narrativo: Tenso, seco, cinematográfico, urgente. Personagens falam de forma direta, sem adornos medievais. Tom de drama pós-apocalíptico realista.\nTerminologia: \"Governador\" em vez de \"Majestade\"; \"setor\" em vez de \"província\"; \"rações\" em vez de \"celeiros\"; \"créditos\" em vez de \"moedas\"; \"guarda\" em vez de \"exército\"; \"estabilidade\" em vez de \"nobreza\"; \"conselho de crise\" em vez de \"corte\".\n\n\nANTECEDENTES DA COROAÇÃO (SEED 622312):\n- Soberano: Alex Mercer (Justo, Cauteloso, Estratégico) - Ascensão como Eleito pelo Comitê de Sobreviventes. Perfil governante: Sobrevivente Tático. Juramento íntimo: \"Manter as muralhas de pé e sintetizar o soro antes do colapso total\".\n- Antecessor: Rei Cedric, o Severo (Vosso tio). Causa da transição: Morreu de febre repentina após caçar nos pântanos do oeste; a sucessão foi disputada.\n- Acontecimentos Imediatos: A Liga Mercante de Eldoria enviou uma delegação suntuosa exigindo a renegociação das taxas alfandegárias.\n- Rumor da Corte: \"Dizem que Lorde Vane, o Chanceler, financiou secretamente a eleição do novo Arcebispo.\"\n",
+  "seed": 622312,
+  "prologue": {
+    "rulerTitle": "Comandante do Bastião",
+    "rulerName": "Alex Mercer",
+    "dynasty": "Casa de Valente",
+    "age": 36,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "reputation": "Ascensão como Eleito pelo Comitê de Sobreviventes. Perfil governante: Sobrevivente Tático. Juramento íntimo: \"Manter as muralhas de pé e sintetizar o soro antes do colapso total\".",
+    "predecessorName": "Rei Cedric, o Severo",
+    "predecessorRelation": "Vosso tio",
+    "ascensionCircumstance": "Morreu de febre repentina após caçar nos pântanos do oeste; a sucessão foi disputada.",
+    "recentEvents": [
+      "A cerimônia solene de coroação na Sé Sagrada reuniu barões de todas as províncias.",
+      "As guildas artesãs ofereceram presentes de seda e prata em troca de proteção comercial.",
+      "O conselho da coroa jurou lealdade perante a espada ancestral da dinastia."
+    ],
+    "initialCrisis": "Emissários do povo e das guildas aguardam ansiosos na antecâmara para a primeira audiência do novo reinado.",
+    "courtWhisper": "Dizem que Lorde Vane, o Chanceler, financiou secretamente a eleição do novo Arcebispo.",
+    "proceduralVariation": "A Liga Mercante de Eldoria enviou uma delegação suntuosa exigindo a renegociação das taxas alfandegárias."
+  },
+  "turn": 7,
+  "year": 4,
+  "month": 1,
+  "gold": 380,
+  "food": 312,
+  "population": 12000,
+  "stability": 55,
+  "military": 60,
+  "factions": {
+    "nobles": 10,
+    "merchants": 15,
+    "clergy": 20,
+    "peasants": -5,
+    "military": 30
+  },
+  "relations": {
+    "horda_leste": -90,
+    "faccao_escarlate": -45,
+    "bunkers_cooperados": 20,
+    "bandoleiros": -60
+  },
+  "flags": {
+    "muros_intactos": true,
+    "gerador_ativo": true,
+    "virus_mutando": false
+  },
+  "activeWars": [],
+  "laws": [
+    "Toque de Recolher após as 22h",
+    "Racionamento Nível 2 — 1800kcal/dia",
+    "Quarentena Obrigatória de 72h para novos entrantes"
+  ],
+  "currentRuler": {
+    "id": "ruler_1",
+    "name": "Alex Mercer",
+    "dynasty": "Casa de Valente",
+    "title": "Comandante do Bastião",
+    "age": 37,
+    "reignYears": 2,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "avatar": "👑",
+    "archetype": "Sobrevivente Tático",
+    "origin": "Eleito pelo Comitê de Sobreviventes",
+    "personalIntent": "Manter as muralhas de pé e sintetizar o soro antes do colapso total"
+  },
+  "heirs": [
+    {
+      "id": "heir_1",
+      "name": "Príncipe Bryan",
+      "dynasty": "Casa de Valente",
+      "title": "Príncipe Herdeiro",
+      "age": 18,
+      "reignYears": 0,
+      "traits": [
+        "Audaz",
+        "Guerreiro"
+      ],
+      "avatar": "🗡️"
+    },
+    {
+      "id": "heir_2",
+      "name": "Princesa Lyra",
+      "dynasty": "Casa de Valente",
+      "title": "Princesa Real",
+      "age": 15,
+      "reignYears": 0,
+      "traits": [
+        "Erudita",
+        "Diplomata"
+      ],
+      "avatar": "📜"
+    }
+  ],
+  "rulersHistory": [],
+  "characters": {
+    "commander_drak": {
+      "id": "commander_drak",
+      "name": "Comandante Drak",
+      "role": "Chefe das Forças de Defesa",
+      "title": "Comandante Geral",
+      "loyalty": 67,
+      "influence": 75,
+      "alive": true,
+      "faction": "military",
+      "traits": [
+        "Severo",
+        "Pragmático",
+        "Incansável",
+        "Empático"
+      ],
+      "avatar": "🪖"
+    },
+    "dr_moreau": {
+      "id": "dr_moreau",
+      "name": "Dra. Elise Moreau",
+      "role": "Diretora Médica e Virologista",
+      "title": "Dra. Chefe do Laboratório",
+      "loyalty": 59,
+      "influence": 69,
+      "alive": true,
+      "faction": "clergy",
+      "traits": [
+        "Brilhante",
+        "Ética",
+        "Exausta",
+        "Disciplinado"
+      ],
+      "avatar": "🧬"
+    },
+    "councilor_vera": {
+      "id": "councilor_vera",
+      "name": "Vera Salles",
+      "role": "Conselheira Política e Porta-voz",
+      "title": "Coordenadora do Conselho",
+      "loyalty": 54,
+      "influence": 65,
+      "alive": true,
+      "faction": "nobles",
+      "traits": [
+        "Calculista",
+        "Diplomata",
+        "Ambiciosa",
+        "Silencioso"
+      ],
+      "avatar": "📋"
+    },
+    "supply_chief": {
+      "id": "supply_chief",
+      "name": "Ronan Queiroz",
+      "role": "Coordenador de Suprimentos",
+      "title": "Chefe dos Silos e Logística",
+      "loyalty": 70,
+      "influence": 47,
+      "alive": true,
+      "faction": "merchants",
+      "traits": [
+        "Metódico",
+        "Honesto",
+        "Sobrecarregado",
+        "Silencioso"
+      ],
+      "avatar": "📦"
+    },
+    "scout_mira": {
+      "id": "scout_mira",
+      "name": "Mira Costa",
+      "role": "Líder dos Exploradores",
+      "title": "Batedor Chefe das Zonas Externas",
+      "loyalty": 73,
+      "influence": 49,
+      "alive": true,
+      "faction": "military",
+      "traits": [
+        "Corajosa",
+        "Leal",
+        "Ferida",
+        "Pragmático"
+      ],
+      "avatar": "🏹"
+    }
+  },
+  "deceasedCharacters": [],
+  "activeChains": {},
+  "ongoingSituations": [],
+  "realms": {
+    "horda_leste": {
+      "id": "horda_leste",
+      "name": "Horda Leste",
+      "population": 50000,
+      "military": 90,
+      "wealth": 0,
+      "relation": -90,
+      "flags": {
+        "atWar": false,
+        "undead": true
+      }
+    },
+    "faccao_escarlate": {
+      "id": "faccao_escarlate",
+      "name": "Facção Escarlate",
+      "population": 3000,
+      "military": 55,
+      "wealth": 40,
+      "relation": -45,
+      "flags": {
+        "hostile": true
+      }
+    },
+    "bunkers_cooperados": {
+      "id": "bunkers_cooperados",
+      "name": "Bunkers Cooperados",
+      "population": 5500,
+      "military": 30,
+      "wealth": 55,
+      "relation": 20,
+      "flags": {
+        "allied": false
+      }
+    },
+    "bandoleiros": {
+      "id": "bandoleiros",
+      "name": "Bandoleiros das Autopistas",
+      "population": 800,
+      "military": 35,
+      "wealth": 25,
+      "relation": -60,
+      "flags": {
+        "hostile": true
+      }
+    }
+  },
+  "delayedEvents": [],
+  "history": [
+    {
+      "id": "hist_2_1790479047847",
+      "turn": 1,
+      "year": 3,
+      "month": 8,
+      "eventTitle": "Contaminação nos Silos de Grãos",
+      "playerDecision": "dsdas",
+      "narrative": "Ronan Queiroz franze a testa, confuso com o barulho estático que saiu do seu microfone. 'Governador, o rádio está com interferência ou você está testando o sistema? A amostra de grão enegrecido está aqui na mesa e o relógio está correndo contra nós.' Ele bate a mão na amostra, esperando uma ordem clara.",
+      "effectsSummary": [],
+      "rulerName": "Alex Mercer"
+    },
+    {
+      "id": "hist_3_1790479080891",
+      "turn": 2,
+      "year": 3,
+      "month": 9,
+      "eventTitle": "Decisão sobre o Silo B",
+      "playerDecision": "Filtragem!",
+      "narrative": "Ronan Queiroz assente com um aceno seco, os olhos brilhando de alívio ao ver a decisão. 'Ótimo. Vou mobilizar a equipe de manutenção e os químicos do setor 4 imediatamente. Se os filtros aguentarem a pressão, salvamos pelo menos 120 rações antes que o mofo se espalhe para o Silo A.' Ele pega o rádio portátil e sai apressado, deixando a amostra enegrecida sobre a mesa.",
+      "effectsSummary": [],
+      "rulerName": "Alex Mercer"
+    },
+    {
+      "id": "hist_4_1790479116036",
+      "turn": 3,
+      "year": 3,
+      "month": 10,
+      "eventTitle": "Resultado da Filtragem",
+      "playerDecision": "Façam-o com calma,. Sem toxicidade no meu povo!",
+      "narrative": "Ronan Queiroz acena com a cabeça, a expressão tensa suavizando levemente ao ouvir a ordem. 'Entendido, Governador. Vou instruir a equipe a reduzir o fluxo de ar e priorizar a ventilação natural, mesmo que isso atrase a neutralização em algumas horas. A segurança dos trabalhadores e da população é a prioridade máxima; não arriscaremos uma explosão de toxinas por pressa.' Ele anota a diretriz no caderno de campo e se prepara para transmitir as novas instruções de segurança.",
+      "effectsSummary": [],
+      "rulerName": "Alex Mercer"
+    },
+    {
+      "id": "hist_5_1790479259503",
+      "turn": 4,
+      "year": 3,
+      "month": 11,
+      "eventTitle": "Status da Ventilação",
+      "playerDecision": "Certo, certo. Vc tá certo.",
+      "narrative": "Ronan Queiroz solta um suspiro de alívio, ajustando o cinto da farda enquanto anota a aprovação no caderno. 'Perfeito, Governador. Vou manter a ventilação em fluxo lento e seguro, priorizando a integridade da equipe e a qualidade das rações. A distribuição será planejada com base nos estoques reais, sem pressa que coloque vidas em risco.' Ele se vira para sair, mas para por um instante. 'Sobre os estoques: temos 396 rações disponíveis, mas a perda no Silo B pode reduzir isso em até 10% se o mofo avançar. Precisamos de uma ordem clara sobre a prioridade de distribuição para os próximos dias.'",
+      "effectsSummary": [],
+      "rulerName": "Alex Mercer"
+    },
+    {
+      "id": "hist_6_1790479303127",
+      "turn": 5,
+      "year": 3,
+      "month": 12,
+      "eventTitle": "Prioridade de Distribuição",
+      "playerDecision": "Mantenha.",
+      "narrative": "Ronan Queiroz ergue uma sobrancelha, surpreso com a ordem direta, mas obedece imediatamente. 'Mantido, Governador. Vou suspender a distribuição geral e redirecionar as rações para os setores críticos e a guarda, mantendo o restante em quarentena até termos certeza do estado do Silo B.' Ele anota a ordem com firmeza, percebendo que a cautela é a sua prioridade, mesmo que isso teste a paciência dos 12.000 sobreviventes.",
+      "effectsSummary": [],
+      "rulerName": "Alex Mercer"
+    },
+    {
+      "id": "hist_7_1790479340296",
+      "turn": 6,
+      "year": 4,
+      "month": 1,
+      "eventTitle": "Tensão nos Setores",
+      "playerDecision": "Queiroz, não enche mais a porra do meu saco.",
+      "narrative": "Ronan Queiroz congela, o rosto endurecendo enquanto ele devolve o olhar do Governador com uma frieza calculada. 'Eu não vim aqui para trocar farpas, Mercer. Vim porque a distribuição está suspensa e a moral nos dormitórios está a um passo do colapso.' Ele dá um passo à frente, a voz baixa e perigosa: 'Se você quer uma paralisação total, é só assinar o decreto. Mas saiba que, sem comida nas mãos da população, a sua autoridade vira papelão molhado em 48 horas.'",
+      "effectsSummary": [],
+      "rulerName": "Alex Mercer"
+    }
+  ],
+  "currentEvent": {
+    "id": "dynamic_evt_1790479340296",
+    "title": "Ameaça de Paralisação",
+    "description": "Ronan exige uma solução imediata para a distribuição de rações ou ameaça liderar uma greve geral dos trabalhadores, o que paralisaria a produção e a defesa do assentamento.",
+    "characterId": "supply_chief",
+    "tags": [
+      "dinamico",
+      "ia",
+      "escadinha"
+    ],
+    "weight": 100,
+    "isDynamic": true,
+    "generatedByAI": true,
+    "choices": [
+      {
+        "id": "dyn_opt_1",
+        "label": "Aprovar as medidas e selar o pacto",
+        "actions": []
+      },
+      {
+        "id": "dyn_opt_2",
+        "label": "Recusar a proposta e mobilizar as sentinelas",
+        "actions": []
+      }
+    ]
+  },
+  "pendingDynamicEvent": null,
+  "documents": [
+    {
+      "id": "z_protocol_zero",
+      "title": "Protocolo ZERO — Manual de Sobrevivência",
+      "subtitle": "Documento Fundador do Assentamento Ferrão",
+      "category": "edito",
+      "author": "Fundadores do Assentamento — Coletivo de Crise",
+      "content": "PROTOCOLO ZERO — REGRAS FUNDADORAS DO ASSENTAMENTO FERRÃO\nEscrito no Ano 1 Pós-Zero. Subscrito pelos 47 fundadores sobreviventes.\n\nI. SOBRE A VIDA\nNenhuma vida é descartável por conveniência. Mas nenhuma vida pode arriscar o assentamento inteiro. O bem do conjunto precede o individual — e esta regra dolorosa é o preço da sobrevivência.\n\nII. SOBRE O ALIMENTO\nAs rações são igualitárias. Não existe \"mais importante\" na fila do pão. O Governador come o mesmo que o varredor de rua. Quem for flagrado desviando ração ajena perde o dobro no mês seguinte.\n\nIII. SOBRE OS INFECTADOS\nQualquer pessoa mordida ou arranhada por infectado tem 6 horas para se apresentar voluntariamente ao posto médico. A ocultação de infecção é o único crime punível com exclusão imediata dos muros.\n\nIV. SOBRE O PODER\nO Governador é eleito anualmente pelo voto das brigadas de trabalho. Pode ser destituído a qualquer momento se 60% dos líderes setoriais assinarem petição de crise.\n\nV. SOBRE O FUTURO\nVamos sobreviver. Vamos reconstruir. Não sabemos como, mas escolhemos acreditar que há um futuro — porque sem essa crença, não há razão para defender estes muros.\n\nQue Ferrão resista."
+    },
+    {
+      "id": "z_virus_report",
+      "title": "Relatório do Vírus Z-17",
+      "subtitle": "Análise Virologica — Dra. Elise Moreau",
+      "category": "relatorio",
+      "author": "Dra. Elise Moreau, Virologista-Chefe",
+      "content": "RELATÓRIO TÉCNICO — VÍRUS Z-17 (CLASSIFICAÇÃO: NECRÓFAGO MUTANTE)\nAno 3 Pós-Zero — Uso restrito ao Conselho de Crise\n\nORIGEM CONFIRMADA:\nO Z-17 é uma variante mutada do vírus H-99 de influenza hemorrágica, modificado (provavelmente acidentalmente) em laboratório de defesa biológica no sul da Ásia. O vetor de transmissão inicial foi água de esgoto contaminada nas grandes capitais.\n\nMECANISMO DE INFECÇÃO:\n• Contato direto com fluidos corporais do infectado (sangue, saliva, lágrimas)\n• Período de incubação: 12 a 72 horas\n• Progressão: febre, alucinações, necrose de tecidos, perda de funções cognitivas superiores\n• Fase final (zumbificação): 24 a 96 horas após os primeiros sintomas neurológicos\n\nDESCOBERTA CRÍTICA:\nIdentificamos 2,3% da população com mutação genética CCRS2 que confere resistência parcial ao Z-17. Estes indivíduos não desenvolvem a fase neurológica mas podem ser portadores assintomáticos temporários.\n\nHIPÓTESE DE CURA:\nAmostras do Laboratório Ômega em São Paulo podem conter o antígeno ancestral do H-99. Com este material, estimamos 60% de chance de desenvolver um tratamento em 18 meses.\n\nO TEMPO É O RECURSO MAIS ESCASSO."
+    },
+    {
+      "id": "z_military_assessment",
+      "title": "Avaliação Estratégica de Defesa",
+      "subtitle": "Relatório do Comandante Drak — Ano 3",
+      "category": "relatorio",
+      "author": "Comandante Drak, Chefe das Forças de Defesa",
+      "content": "AVALIAÇÃO ESTRATÉGICA — USO ESTRITAMENTE INTERNO\n\nSITUAÇÃO DAS MURALHAS:\n• Perímetro total: 4,2 km de concreto reforçado com arame farpado eletrificado\n• Condição geral: 78% — setor leste necessita reforço urgente\n• Postos de guarda ativos: 24 de 30 (6 desativados por falta de pessoal)\n\nFORÇAS DISPONÍVEIS:\n• 340 guardas treinados (turno duplo está comprometendo eficiência)\n• 120 milicianos civis com treinamento básico\n• Armamento: suficiente para 6 meses de uso intenso\n• Combustível para geradores e veículos: 40 dias em ritmo atual\n\nAMEAÇAS ATIVAS:\n→ Horda Leste: estimativa de 30-50 mil infectados a 8km dos muros. Migração lenta mas constante.\n→ Facção Escarlate: grupo de 3.000 sobreviventes armados hostis a 45km. Ataque de oportunidade é risco real.\n→ Bandoleiros: grupos pequenos que atacam comboios de abastecimento. Perda de 3 caminhões no último mês.\n\nRECOMENDAÇÃO DO COMANDANTE:\nPrecisamos de mais 80 recrutas treinados e um segundo gerador. Sem isso, em 60 dias estaremos defendendo os muros em turno único — e isso é insuficiente."
+    },
+    {
+      "id": "z_trade_routes",
+      "title": "Mapeamento das Rotas de Troca",
+      "subtitle": "Conectividade com os Bunkers Cooperados",
+      "category": "tratado",
+      "author": "Vera Salles, Conselheira Política",
+      "content": "PROPOSTA DE ACORDO COMERCIAL — BUNKERS COOPERADOS\n\nApós três meses de negociações via rádio, os Bunkers Cooperados propõem:\n\nO QUE ELES OFERECEM:\n• 200 unidades de ração médica especializada (antibióticos, soro, morfina) por mês\n• 50 litros de diesel refinado por semana\n• Acesso a sua rede de informações sobre movimentos de hordas no raio de 80km\n\nO QUE PEDEM EM TROCA:\n• 400 créditos Ferrão por mês (acesso à nossa rede elétrica via cabo externo)\n• Proteção armada para comboios de troca mensais\n• Direito de enviarem 10 técnicos para estudo de nossas instalações (com retorno garantido)\n\nANÁLISE DA CONSELHEIRA VERA:\nO risco de espionagem existe — mas a alternativa é o isolamento total. Recomendo aceitar com cláusula de revogação de 30 dias e restrição dos técnicos a setores não-militares.\n\nUma aliança, mesmo imperfeita, vale mais que a solidão armada."
+    },
+    {
+      "id": "z_founding_names",
+      "title": "Livro dos Fundadores",
+      "subtitle": "Os 47 Primeiros — Nomes que não devem ser esquecidos",
+      "category": "diario",
+      "author": "Ronan Queiroz, Coordenador de Suprimentos",
+      "content": "Este livro é mantido porque se esquecer de onde viemos, perderemos o por quê de sobreviver.\n\nOs 47 Fundadores chegaram ao Assentamento Ferrão em 14 de Março do Ano 1 Pós-Zero. Vieram de um hospital universitário em Campinas, atravessando 340km de estradas infestadas em 9 caminhões de carga.\n\nPerdemos 23 pessoas na travessia. Chegamos 47.\n\nAlguns nomes:\n• Maria Benedita Fonseca — professora de matemática. Hoje nossa coordenadora de educação.\n• Tenente Augusto Drak — o soldado que nos manteve vivos no caminho. Hoje nosso Comandante.\n• Dr. Fábio Lemos — médico que operou 3 pacientes num caminhão em movimento. Morreu de infecção no mês 2.\n• Elise Moreau — aluna de doutorado em virologia que nunca deveria ter sobrevivido mas aqui está.\n• Crianças — 11 delas chegaram. 13 nasceram aqui. Elas são o motivo de tudo.\n\nSe você está lendo este livro, é porque sobrevivemos mais um dia.\nValeu a pena.\n\n— Ronan Q., Ano 3"
+    }
+  ],
+  "conversationHistory": [],
+  "isGameOver": false
+}

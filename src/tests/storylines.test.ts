@@ -71,3 +71,86 @@ test("AI Wrapper & Lore Injection: Conexão e Injeção de Contexto", async () =
   assert.ok(Array.isArray(response.actions));
   assert.ok(response.narrative && response.narrative.length > 5);
 });
+
+test("Storylines: Zombie Apocalypse & Sistema de Crises", () => {
+  // 1. Instanciação Zombie Apocalypse
+  const zombieState = createInitialKingdomState({ storylineId: "zombie_apocalypse" });
+  assert.strictEqual(zombieState.storylineId, "zombie_apocalypse");
+  assert.strictEqual(zombieState.flags["muros_intactos"], true);
+  assert.ok(zombieState.characters["commander_drak"] !== undefined);
+  assert.ok(zombieState.realms["horda_leste"] !== undefined);
+  assert.ok(zombieState.documents && zombieState.documents.length >= 3);
+
+  // 2. Sistema de Crises do Domínio
+  const { evaluateDomainCrises } = require("../lib/game/crises");
+  
+  // Estado saudável: sem crises
+  const healthyCrises = evaluateDomainCrises(zombieState);
+  assert.strictEqual(healthyCrises.length, 0, "Estado inicial saudável não deve ter crises ativas");
+
+  // Simula fome extrema (comida quase zerada)
+  const famineState = { ...zombieState, food: 15 };
+  const famineCrises = evaluateDomainCrises(famineState);
+  assert.ok(famineCrises.some((c: any) => c.id === "food_famine"), "Deve detectar crise de fome com comida <= 60");
+
+  // Simula insolvência (ouro zerado)
+  const brokeState = { ...zombieState, gold: 0 };
+  const brokeCrises = evaluateDomainCrises(brokeState);
+  assert.ok(brokeCrises.some((c: any) => c.id === "gold_insolvency"), "Deve detectar crise de insolvência com ouro <= 20");
+
+  // 3. Geração de Mapa Urbano com Escala Real
+  const { generateCityMap } = require("../lib/game/map");
+  const cityMap = generateCityMap("zombie_apocalypse", 42);
+  assert.ok(cityMap.cityName.includes("Bastião"));
+  assert.ok(cityMap.districts.length >= 6);
+  assert.ok(cityMap.totalAreaKm2 > 0);
+  assert.ok(cityMap.metricScaleText.includes("metros"));
+});
+
+test("Storylines: Rio de Janeiro Zombie Apocalypse (Zona Morta: Rio dos Condenados)", () => {
+  // 1. Instanciação e verificação do cenário RJ estilo TLOU/TWD
+  const rioState = createInitialKingdomState({ storylineId: "rio_zombie" });
+  assert.strictEqual(rioState.storylineId, "rio_zombie");
+  assert.ok(rioState.characters["capitao_bras"] !== undefined, "Deve conter Capitão Brás");
+  assert.ok(rioState.characters["dr_camargo"] !== undefined, "Deve conter Dr. Marcelo Camargo");
+  assert.ok(rioState.characters["padre_bento"] !== undefined, "Deve conter Padre Bento");
+  assert.ok(rioState.realms["milicia_linha_vermelha"] !== undefined, "Deve conter Milícia da Linha Vermelha");
+  assert.ok(rioState.realms["culto_estaladores_tijuca"] !== undefined, "Deve conter Culto/Ninho dos Estaladores da Tijuca");
+
+  // 2. Rótulos e Unidades customizadas do domínio
+  const rioStoryline = getStoryline("rio_zombie");
+  assert.ok(rioStoryline.resourceLabels !== undefined, "Deve possuir resourceLabels customizados");
+  assert.strictEqual(rioStoryline.resourceLabels?.gold.name, "Munição & Sucata");
+  assert.strictEqual(rioStoryline.resourceLabels?.food.name, "Peixes & Ração Seca");
+  assert.strictEqual(rioStoryline.resourceLabels?.population.unit, "almas");
+
+  // 3. Mapa Urbano de Urca & Pão de Açúcar
+  const { generateCityMap } = require("../lib/game/map");
+  const rioCityMap = generateCityMap("rio_zombie", 12345);
+  assert.ok(rioCityMap.cityName.includes("Urca"), "Mapa urbano deve ser do Reduto da Urca");
+  assert.ok(rioCityMap.districts.some((d: any) => d.name.includes("São João")), "Deve ter Posto de Comando de São João");
+  assert.ok(rioCityMap.districts.some((d: any) => d.name.includes("Traineiras")), "Deve ter Trapiche das Traineiras");
+  assert.ok(rioCityMap.districts.some((d: any) => d.name.includes("Fiocruz")), "Deve ter Laboratório da Fiocruz");
+
+  // 4. Cólices e Documentos Vivos
+  assert.ok(rioState.documents, "Documentos devem estar definidos");
+  assert.ok(rioState.documents.length >= 4, "Deve ter pelo menos 4 documentos iniciais");
+  assert.ok(
+    rioState.documents.some((d: any) => d.subtitle?.includes("Fiocruz") || d.title.includes("Estaladores")),
+    "Deve ter registro da Fiocruz / Estaladores"
+  );
+  assert.ok(rioState.documents.some((d: any) => d.category === "dossie"), "Deve conter documento do tipo dossie");
+
+  // 5. Teste de adição de Livro / Documento Vivo
+  const { appendLivingDocument } = require("../lib/game/documents");
+  const updatedDocs = appendLivingDocument(rioState.documents || [], {
+    title: "Relatório de Patrulha na Praia Vermelha",
+    category: "relatorio",
+    author: "Sargento Dias",
+    content: "Avistamos três estaladores na encosta do morro. Nenhuma baixa.",
+    turn: 2,
+  });
+  assert.strictEqual(updatedDocs.length, (rioState.documents?.length || 0) + 1);
+  assert.strictEqual(updatedDocs[updatedDocs.length - 1].updatedAtTurn, 2);
+});
+

@@ -36,6 +36,13 @@ export type GameOverCheck = {
 };
 
 export function checkGameOver(state: KingdomState): GameOverCheck {
+  if (state.isGameOver) {
+    return {
+      isGameOver: true,
+      reason: state.gameOverReason || "Fim de campanha reconhecido.",
+    };
+  }
+
   if (state.population <= 0) {
     return {
       isGameOver: true,

@@ -1,0 +1,384 @@
+{
+  "id": "game_1790478296971_738100",
+  "name": "Reduto da Urca",
+  "storylineId": "rio_zombie",
+  "storylineTitle": "Zona Morta — Rio dos Condenados",
+  "worldLorePrompt": "\nUniverso: Rio de Janeiro pós-apocalíptico no Ano 10 Pós-Colapso (Estilo The Last of Us e The Walking Dead).\nCenário: O Reduto da Urca é uma cidadela encravada entre o Pão de Açúcar, o Morro da Babilônia e a Praia Vermelha. 4.500 sobreviventes protegidos por muralhas de containers enferrujados, arame farpado e o mar da Guanabara.\nInfectados: Mutantes por esporos fúngicos divididos em estágios: Corredores (rápidos e raivosos), Estaladores (cegos, guiam-se por ecolocalização, mordida letal instantânea) e Baiacus/Alfas (monstros blindados com fungo denso que arremessam sacos de esporos).\nCultura e Sobrevivência: Racionamento brutal de peixe e água das nascentes. A munição 7.62 e 9mm substitui o dinheiro. Máscaras de gás e filtros são tesouros inestimáveis contra os ninhos de esporos da Floresta da Tijuca.\nAmeaças Externas:\n1. A Milícia da Linha Vermelha: Senhores da guerra com caminhões blindados e armamento pesado que cobram pedágio e escravizam comunidades.\n2. A Comunidade de Paquetá: Pescadores livres da ilha que mantêm o único entreposto neutro de trocas pacíficas.\n3. O Culto dos Filhos da Espora: Fanáticos do Corcovado que adoram a mutação como providência divina.\n4. O Forte de Copacabana: Guarnição militar ultra-reclusa com artilharia pesada que não aceita refugiados.\nEstilo Narrativo: Crudíssimo, seco, atmosférico, dramático, cinematográfico. Linguagem direta de sobreviventes cariocas endurecidos pela morte diária. NUNCA use termos medievais como \"majestade\", \"vossa graça\", \"nobres\", \"escribas\", \"arautos\". Trate a liderança por \"Comandante\", \"Líder\" ou pelo nome.\n\n\nANTECEDENTES DA COROAÇÃO (SEED 738100):\n- Soberano: Comandante Rodrigo (Justo, Cauteloso, Estratégico) - Ascensão como Herdeiro de Direito. Perfil governante: Diplomata Cínico. Juramento íntimo: \"Consolidar o tesouro da dinastia e conter as ambições da nobreza\".\n- Antecessor: Rei Alden I (Vosso pai). Causa da transição: Faleceu pacificamente durante o sono aos 62 anos, deixando uma dinastia respeitada.\n- Acontecimentos Imediatos: Dois barões de linhagem antiga rivalizam pelo controle da rica mina de ferro de Oakhaven.\n- Rumor da Corte: \"Dizem que Lorde Vane, o Chanceler, financiou secretamente a eleição do novo Arcebispo.\"\n",
+  "seed": 738100,
+  "prologue": {
+    "rulerTitle": "Lider do Reduto",
+    "rulerName": "Comandante Rodrigo",
+    "dynasty": "Casa de Valente",
+    "age": 36,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "reputation": "Ascensão como Herdeiro de Direito. Perfil governante: Diplomata Cínico. Juramento íntimo: \"Consolidar o tesouro da dinastia e conter as ambições da nobreza\".",
+    "predecessorName": "Rei Alden I",
+    "predecessorRelation": "Vosso pai",
+    "ascensionCircumstance": "Faleceu pacificamente durante o sono aos 62 anos, deixando uma dinastia respeitada.",
+    "recentEvents": [
+      "A cerimônia solene de coroação na Sé Sagrada reuniu barões de todas as províncias.",
+      "As guildas artesãs ofereceram presentes de seda e prata em troca de proteção comercial.",
+      "O conselho da coroa jurou lealdade perante a espada ancestral da dinastia."
+    ],
+    "initialCrisis": "Emissários do povo e das guildas aguardam ansiosos na antecâmara para a primeira audiência do novo reinado.",
+    "courtWhisper": "Dizem que Lorde Vane, o Chanceler, financiou secretamente a eleição do novo Arcebispo.",
+    "proceduralVariation": "Dois barões de linhagem antiga rivalizam pelo controle da rica mina de ferro de Oakhaven."
+  },
+  "turn": 2,
+  "year": 10,
+  "month": 6,
+  "gold": 283,
+  "food": 397,
+  "population": 4500,
+  "stability": 62,
+  "military": 65,
+  "factions": {
+    "nobles": 20,
+    "merchants": 20,
+    "clergy": 10,
+    "peasants": 0,
+    "military": 35
+  },
+  "relations": {
+    "milicia_linha_vermelha": -75,
+    "comunidade_paqueta": 35,
+    "culto_estaladores_tijuca": -40,
+    "guarnicao_forte_copacabana": 10
+  },
+  "flags": {
+    "zombieClassic": true,
+    "hasNavalAccess": true,
+    "sporeThreatHigh": true
+  },
+  "activeWars": [],
+  "laws": [
+    "Quarentena compulsória de 14 dias para recém-chegados",
+    "Proibição absoluta de disparos não-autorizados na baía",
+    "Racionamento de 2 litros de água e 400g de peixe por adulto"
+  ],
+  "currentRuler": {
+    "id": "ruler_1",
+    "name": "Comandante Rodrigo",
+    "dynasty": "Casa de Valente",
+    "title": "Lider do Reduto",
+    "age": 36,
+    "reignYears": 1,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "avatar": "👑",
+    "archetype": "Diplomata Cínico",
+    "origin": "Herdeiro de Direito",
+    "personalIntent": "Consolidar o tesouro da dinastia e conter as ambições da nobreza"
+  },
+  "heirs": [
+    {
+      "id": "heir_1",
+      "name": "Príncipe Bryan",
+      "dynasty": "Casa de Valente",
+      "title": "Príncipe Herdeiro",
+      "age": 18,
+      "reignYears": 0,
+      "traits": [
+        "Audaz",
+        "Guerreiro"
+      ],
+      "avatar": "🗡️"
+    },
+    {
+      "id": "heir_2",
+      "name": "Princesa Lyra",
+      "dynasty": "Casa de Valente",
+      "title": "Princesa Real",
+      "age": 15,
+      "reignYears": 0,
+      "traits": [
+        "Erudita",
+        "Diplomata"
+      ],
+      "avatar": "📜"
+    }
+  ],
+  "rulersHistory": [],
+  "characters": {
+    "capitao_bras": {
+      "id": "capitao_bras",
+      "name": "Capitão Brás",
+      "role": "Chefe de Segurança e Defesa",
+      "title": "Comandante da Barricada da Urca",
+      "loyalty": 72,
+      "influence": 83,
+      "alive": true,
+      "faction": "military",
+      "traits": [
+        "Brutal",
+        "Pragmático",
+        "Leal",
+        "Idealista"
+      ],
+      "avatar": "🪖",
+      "appearance": "Ex-oficial de operações especiais de meia-idade com cicatriz de queimadura no pescoço e colete balístico riscado por marcas de garras. Empunha um fuzil FAL 7.62 gasto e fita o líder com a frieza de quem já executou infectados sem vacilar."
+    },
+    "dr_camargo": {
+      "id": "dr_camargo",
+      "name": "Dr. Marcelo Camargo",
+      "role": "Diretor Científico e Médico",
+      "title": "Virologista Veterano da Fiocruz",
+      "loyalty": 65,
+      "influence": 68,
+      "alive": true,
+      "faction": "clergy",
+      "traits": [
+        "Obsessivo",
+        "Brilhante",
+        "Exausto",
+        "Implacável"
+      ],
+      "avatar": "🔬",
+      "appearance": "Médico veterano de cabelos brancos desgrenhados e jaleco escurecido por reagentes sobre roupas táticas. Carrega um microscópio de campo protegido em caixa metálica e fala com o fervor científico de quem busca a cura há dez anos."
+    },
+    "taina_tracker": {
+      "id": "taina_tracker",
+      "name": "Tainá da Tijuca",
+      "role": "Líder dos Batedores da Mata",
+      "title": "Rastreadora Silenciosa do Maciço",
+      "loyalty": 74,
+      "influence": 51,
+      "alive": true,
+      "faction": "peasants",
+      "traits": [
+        "Silenciosa",
+        "Letal",
+        "Protetora",
+        "Leal"
+      ],
+      "avatar": "🏹",
+      "appearance": "Jovem esguia de pele morena vestindo capa de camuflagem artesanal de folhagens e máscara de gás pendurada ao peito. Traz arco composto no ombro, facão de caça e ferimentos de espinhos nas mãos, conhecendo cada trilha do Corcovado."
+    },
+    "ze_do_porto": {
+      "id": "ze_do_porto",
+      "name": "Zé do Porto",
+      "role": "Comandante da Flotilha e Logística",
+      "title": "Mestre dos Pescadores da Guanabara",
+      "loyalty": 61,
+      "influence": 68,
+      "alive": true,
+      "faction": "merchants",
+      "traits": [
+        "Astuto",
+        "Comerciante",
+        "Veterano",
+        "Perspicaz"
+      ],
+      "avatar": "⚓",
+      "appearance": "Barqueiro grisalho de pele curtida pelo sol e salitre com dente de ouro gasto. Fuma palha com calma calculista, traz bússola de latão no peito e comanda as únicas traineiras que navegam sem encalhar nos cascos submersos da baía."
+    },
+    "padre_bento": {
+      "id": "padre_bento",
+      "name": "Padre Bento",
+      "role": "Patriarca Religioso do Corcovado",
+      "title": "Voz dos Eremitas do Redentor",
+      "loyalty": 37,
+      "influence": 46,
+      "alive": true,
+      "faction": "clergy",
+      "traits": [
+        "Fanático",
+        "Carismático",
+        "Perigoso",
+        "Calculista"
+      ],
+      "avatar": "✝️",
+      "appearance": "Homem esguio vestindo batina puída amarrada por corda de cânhamo, com pés descalços calejados pelas pedras do morro. Segura um crucifixo de ferro batido e prega com olhos febris que os infectados são instrumentos divinos."
+    }
+  },
+  "deceasedCharacters": [],
+  "activeChains": {},
+  "ongoingSituations": [
+    {
+      "id": "sit-1790478491423-aklp",
+      "title": "Expedição de Traineiras na Baía",
+      "type": "expedicao",
+      "description": "Expedição despachada: \"Capitao, posicione os atiradores na Praia Vermelha e prepare a balsa de suprimentos.\"",
+      "startedAtTurn": 1,
+      "totalTurns": 3,
+      "turnsRemaining": 2,
+      "status": "ativa",
+      "assignedPersonnel": "Zé do Porto"
+    }
+  ],
+  "realms": {
+    "milicia_linha_vermelha": {
+      "id": "milicia_linha_vermelha",
+      "name": "Milícia da Linha Vermelha",
+      "population": 3200,
+      "military": 85,
+      "wealth": 60,
+      "relation": -75,
+      "flags": {
+        "hostile": true,
+        "warlords": true
+      }
+    },
+    "comunidade_paqueta": {
+      "id": "comunidade_paqueta",
+      "name": "Pescadores Livres de Paquetá",
+      "population": 1800,
+      "military": 30,
+      "wealth": 50,
+      "relation": 35,
+      "flags": {
+        "neutral": true,
+        "trading_post": true
+      }
+    },
+    "culto_estaladores_tijuca": {
+      "id": "culto_estaladores_tijuca",
+      "name": "Filhos da Espora do Corcovado",
+      "population": 900,
+      "military": 45,
+      "wealth": 15,
+      "relation": -40,
+      "flags": {
+        "fanatical": true
+      }
+    },
+    "guarnicao_forte_copacabana": {
+      "id": "guarnicao_forte_copacabana",
+      "name": "Guarnição do Forte de Copacabana",
+      "population": 1200,
+      "military": 90,
+      "wealth": 70,
+      "relation": 10,
+      "flags": {
+        "heavy_artillery": true,
+        "isolated": true
+      }
+    }
+  },
+  "delayedEvents": [],
+  "history": [
+    {
+      "id": "hist_2_1790478491424",
+      "turn": 1,
+      "year": 10,
+      "month": 6,
+      "eventTitle": "O Ultimato da Linha Vermelha",
+      "playerDecision": "Capitao, posicione os atiradores na Praia Vermelha e prepare a balsa de suprimentos.",
+      "narrative": "O soberano proferiu suas palavras com firmeza: \"Capitao, posicione os atiradores na Praia Vermelha e prepare a balsa de suprimentos.\". Os ministros executaram o decreto conforme seus julgamentos.",
+      "effectsSummary": [
+        "+2% Estabilidade",
+        "+5 Aprovação (Nobres)",
+        "Nova situação iniciada: \"Expedição de Traineiras na Baía\" (3 turnos de duração)."
+      ],
+      "rulerName": "Comandante Rodrigo"
+    }
+  ],
+  "currentEvent": {
+    "id": "rz_culto_cristo",
+    "title": "Os Fanáticos do Cristo Redentor",
+    "description": "Padre Bento surge no portão externo com pés descalços envoltos em trapos e seguidores de tochas acesas. 'Governador da carne! Os Estaladores não são demônios, são os Anjos da Peste enviados para varrer a vaidade humana! Exigimos que cessem a caça aos infectados e nos entreguem os doentes do isolamento para que subam a montanha sagrada até o Cristo. Se recusarem, os céus farão os mortos uivarem em suas portas!'",
+    "characterId": "padre_bento",
+    "tags": [
+      "fanatismo",
+      "religião",
+      "crise_social"
+    ],
+    "weight": 15,
+    "choices": [
+      {
+        "id": "reprimir_culto",
+        "label": "Prender Padre Bento e dispersar os fanáticos com canhões d'água e bastões",
+        "intentDescription": "Impõe a razão e o laicismo na colônia com uso firme da força.",
+        "actions": [
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "clergy",
+            "amount": -30
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "military",
+            "amount": 15
+          },
+          {
+            "type": "MODIFY_STABILITY",
+            "amount": 5
+          }
+        ]
+      },
+      {
+        "id": "negociar_tregua",
+        "label": "Oferecer remédios para a comunidade do Corcovado em troca de manterem a trilha segura",
+        "intentDescription": "Mantém os fanáticos pacificados e assegura batedores na montanha.",
+        "actions": [
+          {
+            "type": "ADD_FOOD",
+            "amount": -30
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "clergy",
+            "amount": 20
+          },
+          {
+            "type": "MODIFY_STABILITY",
+            "amount": -5
+          }
+        ]
+      }
+    ]
+  },
+  "pendingDynamicEvent": null,
+  "documents": [
+    {
+      "id": "diario_dr_camargo_fiocruz",
+      "title": "Dossiê Biológico: O Fungo dos Estaladores",
+      "subtitle": "Notas de Pesquisa — Fiocruz e Laboratório Subterrâneo da Urca",
+      "category": "dossie",
+      "author": "Dr. Marcelo Camargo, Virologista Chefe",
+      "content": "RELATÓRIO CONFIDENCIAL — CLASSIFICAÇÃO BIO-PERIGO NÍVEL 5\n\nO agente causador não é bacteriano nem um vírus clássico de influenza. Trata-se de uma mutação do gênero Ophiocordyceps combinada a um vetor sintético de laboratório (Cepa Z-17).\n\nESTÁGIOS DA INFECÇÃO OBSERVADOS NA ZONA SUL:\n1. Corredores (1 a 4 dias após inalação de esporos ou mordida):\nO parasita atinge o córtex motor. O hospedeiro mantém a visão turva e desenvolve agressividade frenética e velocidade extrema. O sangue torna-se escuro e espesso.\n\n2. Estaladores (1 a 3 anos após o contágio):\nO tecido fúngico calcifica-se e rompe o crânio, destruindo completamente os globos oculares. A criatura torna-se 100% cega e desenvolve ecolocalização por estalos guturais agudos de alta frequência. Uma única mordida na jugular é fatal. Sua cabeça é blindada contra projéteis de baixo calibre.\n\n3. Baiacus / Titãs da Baía (5 a 10 anos):\nApenas 0.5% dos infectados sobrevivem a esse estágio. O corpo atinge massas colossais de musgo negro e bolsas de esporos que explodem ao menor impacto, infectando qualquer um sem máscara em 30 metros de raio.\n\nA CURA:\nAinda acreditamos que a matriz da Cepa Alfa no Jardim Botânico possua os anticorpos primários. Se capturarmos a espécime fúngica matriz, a humanidade na costa sul pode renascer."
+    },
+    {
+      "id": "manual_sobrevivencia_urca",
+      "title": "Código de Segurança da Praia Vermelha",
+      "subtitle": "Decreto de Sobrevivência Civil e Militar",
+      "category": "edito",
+      "author": "Capitão Brás, Comandante da Defesa",
+      "content": "ORDENS PERMANENTES PARA TODOS OS HABITANTES DO REDUTO DA URCA:\n\nI. TOQUE DE SILÊNCIO E LUZ:\nA partir das 19h00, qualquer luz exposta na orla voltada para Niterói ou Botafogo será punida com três dias de solitária. Os Estaladores não enxergam, mas a Milícia da Linha Vermelha tem binóculos térmicos.\n\nII. PROTOCOLO DE MORDIDA:\nQualquer sentinela ou civil que apresente arranhões profundos ou mordidas em combate tem exatamente 15 minutos para relatar ao posto médico. Ocultar ferimentos é considerado crime de alta traição contra a colônia, sujeito a execução sumária imediata.\n\nIII. CONTROLE DE MUNIÇÃO:\nCada cartucho 7.62mm e 9mm deve ser justificado com uma carcaça abatida. Tiros para o alto ou disparos por pânico implicam apreensão da arma e rebaixamento para as brigadas de pesca.\n\nIV. NAVEGAÇÃO NA BAÍA:\nNenhum barco particular zarpou sem autorização de Zé do Porto. Os arrecifes de navios naufragados estão cheios de saqueadores e criaturas que aprenderam a se esconder nos cascos.\n\nA disciplina é o que nos separa dos monstros lá fora."
+    },
+    {
+      "id": "mapa_rotas_guanabara",
+      "title": "Cartas Marítimas da Baía de Guanabara",
+      "subtitle": "Rotas Seguras, Ilhas Neutras e Favelas Hostis",
+      "category": "mapa",
+      "author": "Zé do Porto, Mestre dos Pescadores",
+      "content": "GUIA DE NAVEGAÇÃO PARA AS TRAINEIRAS DA URCA:\n\n• Ilha de Paquetá (Distância: 18km ao norte):\nÁrea pacífica. 1.800 pescadores e artesãos. Eles têm água doce de poço e trocam farinha de mandioca por pólvora e pilhas. Nunca atraque com armas empunhadas; eles têm barricadas na balsa.\n\n• Linha Vermelha e Caju (ZONA VERMELHA):\nSob controle absoluto do Major Carcará e sua milícia. Eles montaram ninhos de metralhadora .50 sobre os pilares da ponte velha. Evite navegar a menos de dois quilômetros da margem oeste.\n\n• Forte de Copacabana:\nOs militares veteranos de lá não abrem os portões para ninguém. Seus canhões de 305mm ainda funcionam. Eles abatem qualquer embarcação que não responda ao sinal de holofote em três segundos.\n\n• Canal do Mangue e Baía Central:\nCemitério de navios petroleiros encalhados. Há rumores de colônias inteiras de infectados rastejando dentro dos porões dos navios abandonados. Só atravesse à luz do meio-dia."
+    },
+    {
+      "id": "evangelho_espora_padre_bento",
+      "title": "O Testamento do Morro: Palavras do Padre Bento",
+      "subtitle": "Manuscrito dos Eremitas do Corcovado",
+      "category": "sagrado",
+      "author": "Padre Bento, Voz dos Eremitas do Redentor",
+      "content": "AOS SOBREVIVENTES DA COSTA E DAS ROCHAS:\n\nNão temais a flor que desabrocha na carne dos vossos irmãos. A praga não veio do abismo, mas dos céus para expurgar a vaidade da antiga metrópole.\n\nOs Estaladores não são monstros; são os anjos que não veem com os olhos da cobiça. O canto fúngico é a verdadeira harmonia.\n\nAquele que erguer o fuzil contra o inocente transformado sofrerá a queda das muralhas. Acolhei os esporos quando a vossa hora chegar, pois na rocha do Redentor, a dor não mais existe.\n\n— Pregado aos pés da estátua partida, Ano 9."
+    },
+    {
+      "id": "doc_1790478491423_ifg8",
+      "title": "Despacho de Situação: Expedição de Traineiras na Baía",
+      "subtitle": "Registro Operacional do Turno 1",
+      "category": "relatorio",
+      "author": "Zé do Porto",
+      "content": "Diretriz oficial estabelecida:\n\"Expedição despachada: \"Capitao, posicione os atiradores na Praia Vermelha e prepare a balsa de suprimentos.\"\"\n\nDuração estipulada: 3 turnos.\nResponsável designado: Zé do Porto.",
+      "updatedAtTurn": 1
+    }
+  ],
+  "conversationHistory": [],
+  "isGameOver": false
+}

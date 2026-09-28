@@ -2,7 +2,7 @@
 
 import React from "react";
 import { KingdomState } from "@/types/game";
-import { Skull, RotateCcw, Award } from "lucide-react";
+import { RotateCcw, Trophy, Skull } from "lucide-react";
 
 interface GameOverModalProps {
   isOpen: boolean;
@@ -13,52 +13,78 @@ interface GameOverModalProps {
 export function GameOverModal({ isOpen, state, onRestart }: GameOverModalProps) {
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-fade-in">
-      <div className="w-full max-w-lg bg-gradient-to-b from-[#180d0d] to-[#0a0606] border border-red-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl text-center relative overflow-hidden">
-        {/* Glow vermelho de tragédia */}
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 bg-red-600/20 rounded-full blur-3xl pointer-events-none" />
+  const isVictory = Boolean(state.flags?.isVictory || state.flags?.victory);
+  const isCustom =
+    state.storylineId === "rio_zombie" ||
+    state.storylineId === "zombie_apocalypse" ||
+    state.storylineId === "colony_exodus";
 
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-600 to-red-950 flex items-center justify-center text-3xl mx-auto mb-4 shadow-xl shadow-red-900/40 border border-red-400/40">
-          <Skull className="w-8 h-8 text-red-200" />
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 select-none font-mono animate-fadeIn">
+      <div
+        className={`w-full max-w-lg border p-6 sm:p-8 text-center space-y-5 shadow-2xl ${
+          isVictory
+            ? "bg-[#0d1610] border-emerald-500/60 shadow-emerald-950/40"
+            : "bg-[#140a0a] border-red-500/60 shadow-red-950/40"
+        }`}
+      >
+        <div className="flex items-center justify-center gap-2">
+          {isVictory ? (
+            <Trophy className="w-5 h-5 text-amber-400" />
+          ) : (
+            <Skull className="w-5 h-5 text-red-400" />
+          )}
+          <span
+            className={`text-xs uppercase tracking-widest font-bold ${
+              isVictory ? "text-emerald-400" : "text-red-400"
+            }`}
+          >
+            {isVictory
+              ? "🏆 VITÓRIA HISTÓRICA • TRIUNFO DO ENCLAVE"
+              : isCustom
+              ? "COLAPSO DO REDUTO • FIM DA CAMPANHA"
+              : "A QUEDA DA COROA • FIM DA DINASTIA"}
+          </span>
         </div>
 
-        <span className="text-xs uppercase font-semibold tracking-widest text-red-400 block mb-1">
-          A Queda da Coroa
-        </span>
-
-        <h3 className="font-royal text-2xl sm:text-3xl font-bold text-red-100 mb-3">
-          O Fim do {state.name}
+        <h3 className="font-royal text-2xl sm:text-3xl font-bold text-[#f4f4f5]">
+          {isVictory ? `O Triunfo de ${state.name}` : `O Fim de ${state.name}`}
         </h3>
 
-        <div className="p-4 rounded-2xl bg-black/60 border border-red-500/30 text-left mb-6 space-y-2">
-          <div className="text-xs text-red-400 font-semibold uppercase">
-            Causa do Colapso:
+        <div
+          className={`p-4 border text-left space-y-2 text-xs ${
+            isVictory
+              ? "bg-[#0f1d14] border-emerald-500/30 text-emerald-200"
+              : "bg-[#1c0f0f] border-red-500/30 text-red-200"
+          }`}
+        >
+          <div className="text-[11px] text-[#a1a1aa] uppercase font-mono font-bold">
+            {isVictory ? "Registro da Vitória:" : "Causa do Colapso:"}
           </div>
-          <p className="text-sm text-slate-200 leading-relaxed">
-            {state.gameOverReason || "O reino ruiu sob o peso de crises inconciliáveis e revoltas populares."}
+          <p className="text-[#f4f4f5] leading-relaxed font-sans text-sm">
+            {state.gameOverReason ||
+              (isVictory
+                ? "Sua liderança guiou o povo à sobrevivência definitiva e triunfou sobre as ameaças do mundo."
+                : "O reduto ruiu sob o peso de crises inconciliáveis e revoltas populares.")}
           </p>
         </div>
 
-        {/* Resumo da Dinastia */}
-        <div className="grid grid-cols-3 gap-2 mb-6 text-center">
-          <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-            <span className="text-[10px] text-slate-400 block uppercase">Turnos</span>
-            <span className="font-bold text-base text-slate-100 font-royal">
-              {state.turn}
-            </span>
+        <div className="grid grid-cols-3 gap-2.5 text-center text-xs">
+          <div className="p-3 bg-[#111116] border border-[#27272a]">
+            <span className="text-[10px] text-[#a1a1aa] block uppercase font-mono">Turnos</span>
+            <span className="font-bold text-base text-[#f4f4f5] font-mono">{state.turn}</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-            <span className="text-[10px] text-slate-400 block uppercase">Ano Final</span>
-            <span className="font-bold text-base text-amber-300 font-royal">
-              {state.year}
-            </span>
+          <div className="p-3 bg-[#111116] border border-[#27272a]">
+            <span className="text-[10px] text-[#a1a1aa] block uppercase font-mono">Ano Final</span>
+            <span className="font-bold text-base text-[#f4f4f5] font-mono">{state.year}</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-            <span className="text-[10px] text-slate-400 block uppercase">Monarcas</span>
-            <span className="font-bold text-base text-slate-100 font-royal">
+          <div className="p-3 bg-[#111116] border border-[#27272a]">
+            <span className="text-[10px] text-[#a1a1aa] block uppercase font-mono">
+              {isCustom ? "Comandantes" : "Monarcas"}
+            </span>
+            <span className="font-bold text-base text-[#f4f4f5] font-mono">
               {state.rulersHistory.length + 1}
             </span>
           </div>
@@ -66,10 +92,14 @@ export function GameOverModal({ isOpen, state, onRestart }: GameOverModalProps) 
 
         <button
           onClick={onRestart}
-          className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-red-700 via-red-600 to-amber-700 hover:from-red-600 hover:to-red-500 text-white font-bold font-royal text-base tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-red-900/30 cursor-pointer transition-all hover:scale-[1.01]"
+          className={`w-full py-4 px-6 font-mono font-bold text-xs uppercase tracking-widest cursor-pointer transition-all active:translate-y-0.5 flex items-center justify-center gap-2 shadow-lg ${
+            isVictory
+              ? "bg-emerald-500 hover:bg-emerald-400 text-black shadow-emerald-500/20"
+              : "bg-[#f4f4f5] hover:bg-white text-black shadow-white/10"
+          }`}
         >
           <RotateCcw className="w-4 h-4" />
-          <span>Fundar Nova Dinastia</span>
+          <span>[ INICIAR NOVA CAMPANHA ]</span>
         </button>
       </div>
     </div>

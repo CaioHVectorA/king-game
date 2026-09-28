@@ -6,7 +6,9 @@ import { LIMITS } from "../lib/game/rules";
 import { processTurn } from "../lib/game/engine";
 import { MockAIProvider } from "../lib/ai/mock";
 import { PRNG } from "../lib/game/rng";
-import { selectNextEvent } from "../lib/game/events";
+import { selectNextEvent, GAME_EVENTS } from "../lib/game/events";
+import { resolveEncounter } from "../lib/game/encounters";
+import { getActiveOrSuccessorCharacter } from "../lib/game/characters";
 
 test("Game Engine: Limites e Bounds Numéricos", () => {
   const state = createInitialKingdomState({ seed: 42 });
@@ -106,4 +108,123 @@ test("Game Engine: Simulação Contínua de 30 Turnos Sem Quebra", async () => {
   }
 
   assert.ok(state.turn >= 30 || state.isGameOver);
+});
+
+test("Game Engine: Morte Permanente e Sucessão de Personagens", () => {
+  let state = createInitialKingdomState({ seed: 555 });
+  const elenorBefore = state.characters["elenor_peasant"];
+  assert.ok(elenorBefore && elenorBefore.alive === true);
+
+  // Executa Elenor
+  const actionResult = applyAction(state, {
+    type: "EXECUTE_OR_EXILE_CHARACTER",
+    characterId: "elenor_peasant",
+    actionType: "execute",
+  });
+  state = actionResult.state;
+
+  // 1. Elenor deve estar morta e registrada na lista de falecidos
+  assert.strictEqual(state.characters["elenor_peasant"].alive, false);
+  assert.ok(state.deceasedCharacters?.some((d) => d.id === "elenor_peasant"));
+
+  // 2. Ao invocar o personagem daquela posição, o sucessor (Thomas) deve assumir
+  const activeChar = getActiveOrSuccessorCharacter("elenor_peasant", state);
+  assert.strictEqual(activeChar.id, "thomas_peasant");
+  assert.strictEqual(activeChar.alive, true);
+
+  // 3. Ao resolver um encontro de camponeses, Elenor NUNCA mais deve ser o peticionário
+  const droughtEvent = GAME_EVENTS.find((e) => e.id === "drought_south")!;
+  const encounter = resolveEncounter(droughtEvent, state);
+  assert.notStrictEqual(encounter.character.id, "elenor_peasant");
+  assert.strictEqual(encounter.character.id, "thomas_peasant");
+  assert.ok(encounter.dialogue.includes("Após o fim de meu antecessor"));
+});
+
+test("Game Engine: Escadinha Narrativa de Eventos (Event Chains)", async () => {
+  let state = createInitialKingdomState({ seed: 777 });
+  const mockAI = new MockAIProvider();
+
+  // Inicia explicitamente com a Seca no Sul (Passo 1)
+  const droughtEvent = GAME_EVENTS.find((e) => e.id === "drought_south")!;
+  state.currentEvent = droughtEvent;
+
+  // Turno 1: Soberano escolhe abrir os celeiros (choiceId: open_granaries)
+  const result1 = await processTurn(
+    state,
+    { gameId: state.id, choiceId: "open_granaries" },
+    mockAI
+  );
+  state = result1.state;
+
+  // Turno 2: A escadinha DEVE agendar e apresentar o Esvaziamento dos Silos (Passo 2)
+  assert.ok(state.currentEvent !== null);
+  assert.strictEqual(state.currentEvent.id, "drought_step2_granary_depletion");
+  assert.strictEqual(state.currentEvent.chain?.step, 2);
+
+  // Turno 2: Soberano escolhe subsidiar navios de grãos (choiceId: subsidize_grain_import)
+  const result2 = await processTurn(
+    state,
+    { gameId: state.id, choiceId: "subsidize_grain_import" },
+    mockAI
+  );
+  state = result2.state;
+
+  // Turno 3: A escadinha DEVE culminar no Grande Edito Agrário (Passo 3)
+  assert.ok(state.currentEvent !== null);
+  assert.strictEqual(state.currentEvent.id, "drought_step3_agrarian_treaty");
+  assert.strictEqual(state.currentEvent.chain?.step, 3);
+});
+
+test("Game Engine: Eventos Dinâmicos Procedurais Propostos pela IA", async () => {
+  let state = createInitialKingdomState({ seed: 888 });
+
+  // Cria um provedor que propõe um evento dinâmico
+  const dynamicAI = {
+    name: "Dynamic Creative AI",
+    async interpretAndNarrate() {
+      return {
+        intent: "Expansão de Frotas",
+        actions: [{ type: "ADD_GOLD" as const, amount: -80 }],
+        narrative: "Vossa ordem de erguer uma esquadra pirata foi executada.",
+        confidence: 0.95,
+        nextEventProposal: {
+          title: "O Almirante Corsário nas Docas",
+          description: "Os galeões armados atracaram nas docas sob aplausos de contrabandistas.",
+          characterName: "Capitão Bruno das Docas",
+          characterRole: "Corsário",
+          choices: [
+            { id: "sail_free", label: "Autorizar ataque a frotas inimigas" },
+          ],
+        },
+      };
+    },
+  };
+
+  const droughtEvent = GAME_EVENTS.find((e) => e.id === "drought_south")!;
+  state.currentEvent = droughtEvent;
+
+  // Executa turno com texto livre
+  const turnResult = await processTurn(
+    state,
+    { gameId: state.id, freeTextDecision: "Quero criar uma frota corsária no norte" },
+    dynamicAI
+  );
+  state = turnResult.state;
+
+  // O próximo evento deve ser exatamente a criação dinâmica da IA
+  assert.ok(state.currentEvent !== null);
+  assert.strictEqual(state.currentEvent.title, "O Almirante Corsário nas Docas");
+  assert.strictEqual(state.currentEvent.isDynamic, true);
+  assert.strictEqual(state.currentEvent.generatedByAI, true);
+});
+
+test("Game Engine: Audiência Privada do Conselheiro Real", () => {
+  const state = createInitialKingdomState({ seed: 1010 });
+  const counselorEvent = GAME_EVENTS.find((e) => e.id === "counselor_audience_state")!;
+  assert.ok(counselorEvent);
+
+  const encounter = resolveEncounter(counselorEvent, state);
+  assert.strictEqual(encounter.character.id, "counselor_morris");
+  assert.strictEqual(encounter.character.role, "Conselheiro Real");
+  assert.ok(encounter.character.appearance.includes("Mestre Morris"));
 });

@@ -96,6 +96,41 @@ export function processEndOfTurnEffects(state: KingdomState, prng: PRNG): {
     next.stability = clamp(next.stability - 1, LIMITS.MIN_STABILITY, LIMITS.MAX_STABILITY);
   }
 
+  // 3. Atualização e Progressão de Situações Atuais (Expedições, Discursos, Guerras, etc.)
+  if (next.ongoingSituations && next.ongoingSituations.length > 0) {
+    next.ongoingSituations = next.ongoingSituations.map((sit) => {
+      if (sit.status !== "ativa") return sit;
+      const remaining = sit.turnsRemaining - 1;
+      if (remaining <= 0) {
+        let resultMsg = sit.consequencesSummary;
+        if (!resultMsg) {
+          if (sit.type === "expedicao") {
+            resultMsg = "A expedição retornou ao posto de comando com suprimentos e dados vitais de reconhecimento.";
+          } else if (sit.type === "discurso") {
+            resultMsg = "As repercussões do discurso assentaram-se, consolidando a união civil e moral da população.";
+          } else if (sit.type === "investigacao") {
+            resultMsg = "A investigação colheu todas as provas cabíveis e entregou o dossiê final.";
+          } else if (sit.type === "projeto") {
+            resultMsg = "As obras e os preparativos do projeto foram concluídos com êxito.";
+          } else {
+            resultMsg = "A situação foi concluída com desfecho favorável.";
+          }
+        }
+        upkeepMessages.push(`[Situação Concluída] ${sit.title}: ${resultMsg}`);
+        return {
+          ...sit,
+          turnsRemaining: 0,
+          status: "concluida" as const,
+          consequencesSummary: resultMsg,
+        };
+      }
+      return {
+        ...sit,
+        turnsRemaining: remaining,
+      };
+    });
+  }
+
   // Limpar delayed events já consumidos neste turno
   next.delayedEvents = next.delayedEvents.filter((d) => d.triggerAtTurn > next.turn);
 

@@ -1,0 +1,270 @@
+{
+  "id": "game_1790455144587_697256",
+  "name": "Reino de Valoria",
+  "storylineId": "dark_plague",
+  "storylineTitle": "A Praga das Sombras",
+  "worldLorePrompt": "\nUniverso: Reino em decomposição moral e sanitária sob a Febre das Sombras.\nAtmosfera: Céus plúmbeos, névoa espessa sobre os rios, máscaras de bico de corvo dos boticários, fogueiras crepitando em praça pública.\nConflito: A Inquisição liderada por Malakor vê na peste um castigo divino aos pecados da corte; cientistas e boticários como Vivienne tentam conter a infecção sem superstição.\nTom Literário: Gótico medieval, soturno, evocativo, tratando da fragilidade da vida, podridão de tecidos e desespero das massas.\n\n\nANTECEDENTES DA COROAÇÃO (SEED 697256):\n- Soberano: Regente Corvus (Justo, Cauteloso, Estratégico) - Governante austero cuja tarefa não é expandir o império, mas impedir que ele seja extinto.\n- Antecessor: Rainha Beatrice (Vossa tia reinante). Causa da transição: Enlouqueceu após ver a corte morrer ao seu redor e trancou-se na cripta real.\n- Acontecimentos Imediatos: Uma chuva contínua de outono apodreceu as colheitas nos campos e multiplicou as ratazanas nas vielas.\n- Rumor da Corte: \"Os coveiros ameaçam parar de recolher os cadáveres se não receberem o dobro do ouro.\"\n",
+  "seed": 697256,
+  "prologue": {
+    "rulerTitle": "Sua Majestade Real",
+    "rulerName": "Regente Corvus",
+    "dynasty": "Casa de Valente",
+    "age": 36,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "reputation": "Governante austero cuja tarefa não é expandir o império, mas impedir que ele seja extinto.",
+    "predecessorName": "Rainha Beatrice",
+    "predecessorRelation": "Vossa tia reinante",
+    "ascensionCircumstance": "Enlouqueceu após ver a corte morrer ao seu redor e trancou-se na cripta real.",
+    "recentEvents": [
+      "Metade da guarnição do porto deserdou após os primeiros infectados cuspirem sangue.",
+      "A fumaça das piras funerárias cobre o céu da capital dia e noite.",
+      "Famílias nobres abandonaram seus palacetes rumo a feudos isolados nas montanhas."
+    ],
+    "initialCrisis": "Um galeão infectado quebrou a quarentena e aportou no cais principal da cidade.",
+    "courtWhisper": "Os coveiros ameaçam parar de recolher os cadáveres se não receberem o dobro do ouro.",
+    "proceduralVariation": "Uma chuva contínua de outono apodreceu as colheitas nos campos e multiplicou as ratazanas nas vielas."
+  },
+  "turn": 2,
+  "year": 1210,
+  "month": 12,
+  "gold": 593,
+  "food": 467,
+  "population": 19500,
+  "stability": 51,
+  "military": 50,
+  "factions": {
+    "nobles": 5,
+    "merchants": -20,
+    "clergy": 35,
+    "peasants": -25,
+    "military": 20
+  },
+  "relations": {
+    "arvandor": -30,
+    "eldoria": -40,
+    "khar": 0
+  },
+  "flags": {
+    "plague_active": true,
+    "inquisition_roaming": true
+  },
+  "activeWars": [],
+  "laws": [
+    "Toque de Recolher Noturno",
+    "Quarentena do Fogo Sagrado"
+  ],
+  "currentRuler": {
+    "id": "ruler_1",
+    "name": "Regente Corvus",
+    "dynasty": "Casa de Valente",
+    "title": "Sua Majestade Real",
+    "age": 36,
+    "reignYears": 4,
+    "traits": [
+      "Justo",
+      "Cauteloso",
+      "Estratégico"
+    ],
+    "avatar": "👑"
+  },
+  "heirs": [
+    {
+      "id": "heir_1",
+      "name": "Príncipe Bryan",
+      "dynasty": "Casa de Valente",
+      "title": "Príncipe Herdeiro",
+      "age": 18,
+      "reignYears": 0,
+      "traits": [
+        "Audaz",
+        "Guerreiro"
+      ],
+      "avatar": "🗡️"
+    },
+    {
+      "id": "heir_2",
+      "name": "Princesa Lyra",
+      "dynasty": "Casa de Valente",
+      "title": "Princesa Real",
+      "age": 15,
+      "reignYears": 0,
+      "traits": [
+        "Erudita",
+        "Diplomata"
+      ],
+      "avatar": "📜"
+    }
+  ],
+  "rulersHistory": [],
+  "characters": {
+    "inquisitor_malakor": {
+      "id": "inquisitor_malakor",
+      "name": "Grão-Inquisidor Malakor",
+      "title": "O Martelo dos Hereges",
+      "role": "Sacerdote",
+      "loyalty": 30,
+      "influence": 85,
+      "alive": true,
+      "traits": [
+        "Fanático",
+        "Implacável",
+        "Asceta"
+      ],
+      "faction": "clergy",
+      "avatar": "🔥"
+    },
+    "apothecary_vivienne": {
+      "id": "apothecary_vivienne",
+      "name": "Vivienne de Lis",
+      "title": "Boticária-Mor da Coroa",
+      "role": "Conselheira",
+      "loyalty": 70,
+      "influence": 50,
+      "alive": true,
+      "traits": [
+        "Erudita",
+        "Alquimista",
+        "Corajosa"
+      ],
+      "faction": "merchants",
+      "avatar": "🧪"
+    },
+    "baron_cassian": {
+      "id": "baron_cassian",
+      "name": "Barão Cassian",
+      "title": "Senhor dos Feudos do Lago",
+      "role": "Nobre",
+      "loyalty": 45,
+      "influence": 65,
+      "alive": true,
+      "traits": [
+        "Paranoico",
+        "Isolacionista",
+        "Rico"
+      ],
+      "faction": "nobles",
+      "avatar": "🏰"
+    }
+  },
+  "realms": {
+    "arvandor": {
+      "id": "arvandor",
+      "name": "Império de Arvandor",
+      "population": 38000,
+      "military": 75,
+      "wealth": 60,
+      "relation": -30,
+      "flags": {
+        "borders_sealed": true
+      }
+    },
+    "eldoria": {
+      "id": "eldoria",
+      "name": "Portos Fechados de Eldoria",
+      "population": 24000,
+      "military": 35,
+      "wealth": 70,
+      "relation": -40,
+      "flags": {
+        "maritime_quarantine": true
+      }
+    },
+    "khar": {
+      "id": "khar",
+      "name": "Estepes Remotas de Khar",
+      "population": 30000,
+      "military": 60,
+      "wealth": 25,
+      "relation": 0,
+      "flags": {
+        "uninfected": true
+      }
+    }
+  },
+  "delayedEvents": [
+    {
+      "id": "delayed-1790455333319-x8w9",
+      "eventId": "dynastic_marriage_ceremony",
+      "triggerAtTurn": 4
+    }
+  ],
+  "history": [
+    {
+      "id": "hist_2_1790455333320",
+      "turn": 1,
+      "year": 1210,
+      "month": 12,
+      "eventTitle": "Proposta de Matrimônio Dinástico",
+      "playerDecision": "Aceitamos o dote imperial, mas exigimos que a guarda nobre vigie as provAceitamos o dote imperial, mas exigimos que a guarda nobre vigie as provincias infectadas.",
+      "narrative": "O selo de cera vermelha quebra sobre o pergaminho, aceitando o ouro e as terras férteis que chegam como um bálsamo para as cofres esvaziados. A nobreza, satisfeita com a aliança, ordena que suas guardas armadas se posicionem nas fronteiras das províncias infectadas, criando uma barreira de aço e medo que isola a podridão, mas aprofunda a desconfiança das massas que veem seus filhos serem empurrados para a linha de frente.",
+      "effectsSummary": [
+        "+200 Ouro",
+        "+80 Comida",
+        "+15 Aprovação (Nobres)",
+        "+5 Aprovação (Exército)",
+        "+5% Estabilidade",
+        "Um desfecho futuro foi selado."
+      ],
+      "rulerName": "Regente Corvus"
+    }
+  ],
+  "currentEvent": {
+    "id": "noble_feud",
+    "title": "Sangue e Herança: A Disputa dos Ducados",
+    "description": "O Duque de Oakhaven e a Condessa de Valemont reuniram cavaleiros em armas por causa de uma mina de prata na fronteira de seus domínios. A guerra civil interna é iminente.",
+    "characterId": "chancellor_vane",
+    "tags": [
+      "nobres",
+      "justiça",
+      "política"
+    ],
+    "weight": 9,
+    "choices": [
+      {
+        "id": "confiscate_mine",
+        "label": "Confiscar a mina para a coroa e desarmar ambos os lados",
+        "intentDescription": "Aumenta a renda régia enquanto impõe disciplina severa.",
+        "actions": [
+          {
+            "type": "ADD_GOLD",
+            "amount": 150
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "nobles",
+            "amount": -25
+          },
+          {
+            "type": "MODIFY_STABILITY",
+            "amount": 10
+          }
+        ]
+      },
+      {
+        "id": "favor_oakhaven",
+        "label": "Arbitrar a favor do Duque de Oakhaven em troca de apoio político",
+        "intentDescription": "Fortalece um aliado poderoso e aliena a condessa.",
+        "actions": [
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "nobles",
+            "amount": 10
+          },
+          {
+            "type": "ADD_GOLD",
+            "amount": 70
+          },
+          {
+            "type": "MODIFY_STABILITY",
+            "amount": -5
+          }
+        ]
+      }
+    ]
+  },
+  "isGameOver": false
+}

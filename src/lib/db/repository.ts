@@ -3,6 +3,7 @@ import { KingdomState } from "@/types/game";
 export type GameSummary = {
   id: string;
   name: string;
+  storylineTitle?: string;
   turn: number;
   year: number;
   month: number;

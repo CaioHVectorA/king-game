@@ -1,0 +1,281 @@
+{
+  "id": "game_1790458588690_111507",
+  "name": "Estação Orbital Exodus-7",
+  "storylineId": "colony_exodus",
+  "storylineTitle": "Estação Orbital Exodus-7",
+  "worldLorePrompt": "\nUniverso: Estação Orbital Exodus-7 em órbita geoestacionária de uma Terra desolada por guerra nuclear e tempestades de plasma.\nCultura: Alta tecnologia decadente, pragmatismo militar de sobrevivência, contraste entre a elite de cientistas/engenheiros da cúpula de comando e os operários fabris dos decks inferiores.\nAutoridade: O Diretor-Geral / Comandante da Estação possui poder supremo de decreto, aconselhado pela I.A. de bordo e pelos chefes de setor.\nRecursos: Ouro representa Créditos de Energia e Cripto-Dólares; Comida representa Biomassa e Rações Hidropônicas; População representa Colonos Ativos e Técnicos; Ordem representa Estabilidade Civil e Ausência de Motins; Exército representa Forças de Segurança e Drones de Contenção.\nEstilo Narrativo: Frio, técnico, urgente, claustrofóbico e cinematográfico. Termos como \"Diretor\", \"Ponte de Comando\", \"Nível Inferior\", \"Descompressão\".\n\n\nANTECEDENTES DA COROAÇÃO (SEED 111507):\n- Soberano: Sarah Vance (Pragmático, Cibernético, Estratégico) - Ascensão como Promovida pelo Conselho Operário. Perfil governante: Engenheira Visionária. Juramento íntimo: \"Preservar os vinte mil colonos criogênicos a qualquer custo\".\n- Antecessor: Dra. Helena Cross (A Fundadora da Estação). Causa da transição: Morreu de envenenamento por radiação cósmica durante o conserto da cúpula estelar.\n- Acontecimentos Imediatos: Uma tempestade de micro-meteoritos abriu fissuras nos coletores solares externos, forçando uso contínuo de baterias.\n- Rumor da Corte: \"Dizem que o Conselho Corporativo escondeu três cápsulas de escape exclusivas para a elite científica.\"\n",
+  "seed": 111507,
+  "prologue": {
+    "rulerTitle": "Diretora-Geral",
+    "rulerName": "Sarah Vance",
+    "dynasty": "Diretoria Exodus",
+    "age": 36,
+    "traits": [
+      "Pragmático",
+      "Cibernético",
+      "Estratégico"
+    ],
+    "reputation": "Ascensão como Promovida pelo Conselho Operário. Perfil governante: Engenheira Visionária. Juramento íntimo: \"Preservar os vinte mil colonos criogênicos a qualquer custo\".",
+    "predecessorName": "Dra. Helena Cross",
+    "predecessorRelation": "A Fundadora da Estação",
+    "ascensionCircumstance": "Morreu de envenenamento por radiação cósmica durante o conserto da cúpula estelar.",
+    "recentEvents": [
+      "A Terra perdeu os últimos sinais de comunicação de rádio de longo alcance.",
+      "O Reator Primário completou quinhentos ciclos de queima contínua sem manutenção pesada.",
+      "A comitiva dos sindicatos operários exige audiência imediata na ponte de comando."
+    ],
+    "initialCrisis": "Sarah Vance relata que as bobinas magnéticas do Reator de Plasma entraram em oscilação crítica.",
+    "courtWhisper": "Dizem que o Conselho Corporativo escondeu três cápsulas de escape exclusivas para a elite científica.",
+    "proceduralVariation": "Uma tempestade de micro-meteoritos abriu fissuras nos coletores solares externos, forçando uso contínuo de baterias."
+  },
+  "turn": 2,
+  "year": 2389,
+  "month": 2,
+  "gold": 414,
+  "food": 477,
+  "population": 34000,
+  "stability": 67,
+  "military": 55,
+  "factions": {
+    "nobles": 10,
+    "merchants": 20,
+    "clergy": 10,
+    "peasants": -10,
+    "military": 25
+  },
+  "relations": {
+    "salvage_fleet": -10,
+    "bunker_surface": 15,
+    "orbital_pirates": -50
+  },
+  "flags": {
+    "reactor_stable": true,
+    "cryo_units_online": true
+  },
+  "activeWars": [],
+  "laws": [
+    "Protocolo de Oxigênio Nível 2",
+    "Toque de Recolher nos Hangares"
+  ],
+  "currentRuler": {
+    "id": "ruler_1",
+    "name": "Sarah Vance",
+    "dynasty": "Diretoria Exodus",
+    "title": "Diretora-Geral",
+    "age": 36,
+    "reignYears": 1,
+    "traits": [
+      "Pragmático",
+      "Cibernético",
+      "Estratégico"
+    ],
+    "avatar": "🛰️",
+    "archetype": "Engenheira Visionária",
+    "origin": "Promovida pelo Conselho Operário",
+    "personalIntent": "Preservar os vinte mil colonos criogênicos a qualquer custo"
+  },
+  "heirs": [
+    {
+      "id": "heir_1",
+      "name": "Príncipe Bryan",
+      "dynasty": "Casa de Valente",
+      "title": "Príncipe Herdeiro",
+      "age": 18,
+      "reignYears": 0,
+      "traits": [
+        "Audaz",
+        "Guerreiro"
+      ],
+      "avatar": "🗡️"
+    },
+    {
+      "id": "heir_2",
+      "name": "Princesa Lyra",
+      "dynasty": "Casa de Valente",
+      "title": "Princesa Real",
+      "age": 15,
+      "reignYears": 0,
+      "traits": [
+        "Erudita",
+        "Diplomata"
+      ],
+      "avatar": "📜"
+    }
+  ],
+  "rulersHistory": [],
+  "characters": {
+    "protocol_edi": {
+      "id": "protocol_edi",
+      "name": "Protocolo EDI",
+      "role": "Conselheira Sintética de Bordo",
+      "title": "I.A. Central da Estação",
+      "loyalty": 80,
+      "influence": 75,
+      "alive": true,
+      "faction": "clergy",
+      "traits": [
+        "Analítica",
+        "Imparcial",
+        "Infalível"
+      ],
+      "avatar": "🤖"
+    },
+    "chief_engineer": {
+      "id": "chief_engineer",
+      "name": "Sarah Vance",
+      "role": "Engenheira-Chefe",
+      "title": "Supervisora do Reator",
+      "loyalty": 65,
+      "influence": 70,
+      "alive": true,
+      "faction": "peasants",
+      "traits": [
+        "Pragmática",
+        "Incansável"
+      ],
+      "avatar": "⚙️"
+    },
+    "security_marshal": {
+      "id": "security_marshal",
+      "name": "Marechal Alex Roman",
+      "role": "Comandante da Segurança",
+      "title": "Chefe das Forças de Contenção",
+      "loyalty": 70,
+      "influence": 65,
+      "alive": true,
+      "faction": "military",
+      "traits": [
+        "Severo",
+        "Vigilante"
+      ],
+      "avatar": "🛡️"
+    },
+    "doctor_reid": {
+      "id": "doctor_reid",
+      "name": "Dr. Julian Reid",
+      "role": "Diretor Médico e Biológico",
+      "title": "Mestre dos Domos Hidropônicos",
+      "loyalty": 60,
+      "influence": 55,
+      "alive": true,
+      "faction": "clergy",
+      "traits": [
+        "Brilhante",
+        "Metódico"
+      ],
+      "avatar": "🧪"
+    }
+  },
+  "realms": {
+    "salvage_fleet": {
+      "id": "salvage_fleet",
+      "name": "Frota de Sucateiros Asteroidais",
+      "population": 12000,
+      "military": 45,
+      "wealth": 70,
+      "relation": -10,
+      "flags": {
+        "hostile": false
+      }
+    },
+    "bunker_surface": {
+      "id": "bunker_surface",
+      "name": "Complexo Bunker Subterrâneo 04",
+      "population": 8500,
+      "military": 35,
+      "wealth": 40,
+      "relation": 15,
+      "flags": {
+        "allied": false
+      }
+    }
+  },
+  "delayedEvents": [],
+  "history": [
+    {
+      "id": "hist_2_1790459080937",
+      "turn": 1,
+      "year": 2389,
+      "month": 2,
+      "eventTitle": "Proposta de Matrimônio Dinástico",
+      "playerDecision": "*Inspeciono o terminal holografico com cautela* \"Sarah Vance falando. Explique os dados termicos.\"",
+      "narrative": "Os holofotes da Ponte de Comando se voltam para os painéis térmicos, ignorando a proposta diplomática e focando nas anomalias de calor dos coletores solares. A nobreza observa em silêncio, frustrada pela prioridade dada à engenharia sobre a política, enquanto a IA processa os dados em tempo real.",
+      "effectsSummary": [
+        "+2% Estabilidade",
+        "-5 Aprovação (Nobres)"
+      ],
+      "rulerName": "Sarah Vance"
+    }
+  ],
+  "currentEvent": {
+    "id": "treaty_eldoria",
+    "title": "Pacto das Rotas Douradas",
+    "description": "Eldoria propõe uma aliança comercial irrestrita: redução mútua de impostos portuários e patrulhamento conjunto contra piratas nas baías.",
+    "characterId": "merchant_alistair",
+    "tags": [
+      "diplomacia",
+      "economia"
+    ],
+    "weight": 9,
+    "choices": [
+      {
+        "id": "sign_pact",
+        "label": "Ratificar a aliança e abrir nossos portos às frotas eldorienses",
+        "intentDescription": "Estreita laços diplomáticos e dinamiza o comércio.",
+        "actions": [
+          {
+            "type": "MODIFY_RELATION",
+            "targetId": "eldoria",
+            "amount": 30
+          },
+          {
+            "type": "ADD_GOLD",
+            "amount": 120
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "merchants",
+            "amount": 20
+          }
+        ]
+      },
+      {
+        "id": "reject_pact",
+        "label": "Recusar. Não permitiremos que mercadores estrangeiros dominem nossos mares",
+        "intentDescription": "Protecionismo econômico e desconfiança de vizinhos.",
+        "actions": [
+          {
+            "type": "MODIFY_RELATION",
+            "targetId": "eldoria",
+            "amount": -20
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "nobles",
+            "amount": 15
+          }
+        ]
+      }
+    ]
+  },
+  "documents": [
+    {
+      "id": "reactor_manifest",
+      "title": "Manual de Sobrecarga do Reator Ômega",
+      "subtitle": "Diretriz Técnica de Emergência",
+      "category": "relatorio",
+      "author": "Engenharia de Propulsão Orbital",
+      "content": "A queima contínua do núcleo de deutério está em 87% da capacidade crítica. O desvio de energia para os escudos de radiação causará apagões temporários nos setores residenciais operários."
+    },
+    {
+      "id": "cryo_inventory",
+      "title": "Registro de Carga Humana Crio-3",
+      "subtitle": "Inventário de Colonos em Êxtase",
+      "category": "relatorio",
+      "author": "Diretoria Médica da Estação",
+      "content": "Vinte e quatro mil colonos encontram-se em suspensão criogênica estável. Em caso de descompressão catastrófica do Módulo B, a perda dos tanques será irreversível."
+    }
+  ],
+  "conversationHistory": [],
+  "isGameOver": false
+}

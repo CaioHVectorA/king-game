@@ -20,11 +20,11 @@ export class GeminiAIProvider implements AIProvider {
     const model = this.client.getGenerativeModel({
       model: this.modelName,
       generationConfig: {
-        temperature: 0.2, // Baixa temperatura para consistência estrutural
-        maxOutputTokens: 350,
+        temperature: 0.3,
+        maxOutputTokens: 1024,
         responseMimeType: "application/json",
       },
-      systemInstruction: getSystemPrompt(request.worldLore),
+      systemInstruction: getSystemPrompt(request.worldLore, request.storylineId),
     });
 
     const promptPayload = `
@@ -53,6 +53,9 @@ Retorne o objeto JSON estrito com intent, actions, narrative e confidence.
 
     const result = await model.generateContent(promptPayload);
     const textResponse = result.response.text();
-    return parseAIResponse(textResponse);
+    return parseAIResponse(textResponse, {
+      storylineId: request.storylineId,
+      playerDecision: request.playerDecision,
+    });
   }
 }

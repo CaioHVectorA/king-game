@@ -17,6 +17,14 @@ export type StorylineInitialState = {
   activeWars: string[];
 };
 
+export type StorylineResourceLabels = {
+  gold: { name: string; icon: string; description: string; unit?: string };
+  food: { name: string; icon: string; description: string; unit?: string };
+  population: { name: string; icon: string; description: string; unit?: string };
+  stability: { name: string; icon: string; description: string; unit?: string };
+  military: { name: string; icon: string; description: string; unit?: string };
+};
+
 export type StorylineDefinition = {
   id: string;
   name: string;
@@ -26,6 +34,9 @@ export type StorylineDefinition = {
   difficulty: StorylineDifficulty;
   tags: string[];
   bannerEmoji: string;
+
+  // Rótulos e unidades variáveis de estado do domínio
+  resourceLabels?: StorylineResourceLabels;
 
   // Diretrizes narrativas e de lore para a IA
   worldLorePrompt: string;

@@ -57,11 +57,11 @@ Retorne o objeto JSON estrito com intent, actions, narrative e confidence.
       body: JSON.stringify({
         model: this.model,
         messages: [
-          { role: "system", content: getSystemPrompt(request.worldLore) },
+          { role: "system", content: getSystemPrompt(request.worldLore, request.storylineId) },
           { role: "user", content: promptPayload },
         ],
-        temperature: 0.2,
-        max_tokens: 350,
+        temperature: 0.3,
+        max_tokens: 1024,
         response_format: { type: "json_object" },
       }),
     });
@@ -72,6 +72,9 @@ Retorne o objeto JSON estrito com intent, actions, narrative e confidence.
 
     const data = await res.json();
     const content = data.choices?.[0]?.message?.content || "";
-    return parseAIResponse(content);
+    return parseAIResponse(content, {
+      storylineId: request.storylineId,
+      playerDecision: request.playerDecision,
+    });
   }
 }

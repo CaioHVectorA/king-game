@@ -2,19 +2,19 @@
   "id": "game_1789675908778_985755",
   "name": "Reino de Valoria",
   "seed": 985755,
-  "turn": 3,
+  "turn": 4,
   "year": 1142,
-  "month": 5,
-  "gold": 626,
-  "food": 704,
+  "month": 6,
+  "gold": 654,
+  "food": 516,
   "population": 26500,
-  "stability": 82,
+  "stability": 92,
   "military": 55,
   "factions": {
     "nobles": -5,
     "merchants": 25,
     "clergy": 20,
-    "peasants": 10,
+    "peasants": 35,
     "military": 30
   },
   "relations": {
@@ -222,98 +222,77 @@
         "-20 Aprovação (Nobres)"
       ],
       "rulerName": "Alden II"
+    },
+    {
+      "id": "hist_4_1790451851795",
+      "turn": 3,
+      "year": 1142,
+      "month": 6,
+      "eventTitle": "Seca Severa nas Terras do Sul",
+      "playerDecision": "Abrir os celeiros reais e enviar carretas de grãos",
+      "narrative": "Perante Elenor dos Vales, você proclamou: \"Abrir os celeiros reais e enviar carretas de grãos\". Vossas ordens foram executadas perante a corte.",
+      "effectsSummary": [
+        "-150 Comida",
+        "+25 Aprovação (Camponeses)",
+        "+10% Estabilidade"
+      ],
+      "rulerName": "Alden II"
     }
   ],
   "currentEvent": {
-    "id": "drought_south",
-    "title": "Seca Severa nas Terras do Sul",
-    "description": "A estiagem já dura quatro meses. As plantações secaram e os poços dos vilarejos do sul estão vazios. Elenor dos Vales chega à corte rogando pela abertura dos celeiros da coroa ou redução dos tributos.",
-    "characterId": "elenor_peasant",
+    "id": "war_threat_arvandor",
+    "title": "Tambores de Guerra na Fronteira de Arvandor",
+    "description": "Embaixadores do Império de Arvandor entregam um ultimato: entreguem as fortalezas do desfiladeiro ocidental ou enfrentem uma invasão em massa de seus regimentos de lanceiros.",
+    "characterId": "general_thorne",
     "tags": [
-      "natureza",
-      "camponeses",
-      "comida"
+      "guerra",
+      "militar",
+      "diplomacia"
     ],
-    "weight": 12,
-    "requirements": [
-      {
-        "type": "MIN_FOOD",
-        "value": 100
-      }
-    ],
+    "weight": 9,
     "choices": [
       {
-        "id": "open_granaries",
-        "label": "Abrir os celeiros reais e enviar carretas de grãos",
-        "intentDescription": "Gastar reservas de comida para socorrer os lavradores.",
+        "id": "mobilize_for_war",
+        "label": "Rejeitar a chantagem e mobilizar todas as legiões",
+        "intentDescription": "Preparar-se para a guerra total.",
         "actions": [
           {
-            "type": "ADD_FOOD",
-            "amount": -150,
-            "reason": "Ajuda aos famintos"
-          },
-          {
-            "type": "MODIFY_FACTION",
-            "faction": "peasants",
-            "amount": 25
-          },
-          {
-            "type": "MODIFY_STABILITY",
-            "amount": 10
-          }
-        ]
-      },
-      {
-        "id": "tax_nobles_for_wells",
-        "label": "Obrigar os nobres locais a financiarem novos poços",
-        "intentDescription": "Poupar grãos reais e transferir o encargo aos barões.",
-        "actions": [
-          {
-            "type": "MODIFY_FACTION",
-            "faction": "nobles",
-            "amount": -20
-          },
-          {
-            "type": "MODIFY_FACTION",
-            "faction": "peasants",
-            "amount": 15
+            "type": "START_WAR",
+            "kingdomId": "arvandor"
           },
           {
             "type": "ADD_GOLD",
-            "amount": 60,
-            "reason": "Contribuição compulsória dos barões"
-          }
-        ],
-        "delayedEvents": [
+            "amount": -120
+          },
           {
-            "triggerAfterTurns": 3,
-            "eventId": "noble_retaliation"
+            "type": "MODIFY_MILITARY",
+            "amount": 15
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "military",
+            "amount": 25
           }
         ]
       },
       {
-        "id": "ignore_drought",
-        "label": "Ignorar a seca. As reservas devem proteger a capital",
-        "intentDescription": "Preservar recursos da corte a custo do povo.",
+        "id": "bribe_ambassadors",
+        "label": "Subornar emissários e enviar tributo em ouro para conter o avanço",
+        "intentDescription": "Comprar a paz temporária com tesouro.",
         "actions": [
           {
+            "type": "ADD_GOLD",
+            "amount": -220
+          },
+          {
+            "type": "MODIFY_RELATION",
+            "targetId": "arvandor",
+            "amount": 20
+          },
+          {
             "type": "MODIFY_FACTION",
-            "faction": "peasants",
-            "amount": -35
-          },
-          {
-            "type": "MODIFY_STABILITY",
+            "faction": "military",
             "amount": -15
-          },
-          {
-            "type": "MODIFY_POPULATION",
-            "amount": -1200
-          }
-        ],
-        "delayedEvents": [
-          {
-            "triggerAfterTurns": 2,
-            "eventId": "peasant_revolt"
           }
         ]
       }

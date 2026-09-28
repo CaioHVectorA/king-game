@@ -33,6 +33,13 @@ export class PRNG {
     return items[items.length - 1];
   }
 
+  // Pick random element uniformly from array
+  pickOne<T>(items: T[]): T {
+    if (items.length === 0) throw new Error("Empty array in pickOne");
+    const idx = this.nextInt(0, items.length - 1);
+    return items[idx];
+  }
+
   getSeed(): number {
     return this.state;
   }

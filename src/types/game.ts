@@ -19,6 +19,7 @@ export type Character = {
   traits: string[];
   faction?: FactionName;
   avatar?: string;
+  appearance?: string;
 };
 
 export type Ruler = {
@@ -29,7 +30,29 @@ export type Ruler = {
   age: number;
   reignYears: number;
   traits: string[];
+  archetype?: string;
+  origin?: string;
+  personalIntent?: string;
   avatar?: string;
+};
+
+export type DocumentEntry = {
+  id: string;
+  title: string;
+  subtitle?: string;
+  category: "tratado" | "edito" | "diario" | "relatorio" | "sagrado" | "dossie" | "mapa";
+  author?: string;
+  content: string;
+  updatedAtTurn?: number;
+};
+
+export type ConversationMessage = {
+  id: string;
+  sender: "character" | "player";
+  characterName: string;
+  text: string;
+  actionGesture?: string;
+  timestamp: number;
 };
 
 export type Realm = {
@@ -40,6 +63,21 @@ export type Realm = {
   wealth: number;
   relation: number; // -100 to 100
   flags: Record<string, boolean>;
+};
+
+export type SituationType = "expedicao" | "guerra" | "crise" | "projeto" | "discurso" | "investigacao";
+
+export type OngoingSituation = {
+  id: string;
+  title: string;
+  type: SituationType;
+  description: string;
+  startedAtTurn: number;
+  totalTurns: number;
+  turnsRemaining: number;
+  status: "ativa" | "concluida" | "critica";
+  assignedPersonnel?: string;
+  consequencesSummary?: string;
 };
 
 export type GameAction =
@@ -57,7 +95,16 @@ export type GameAction =
   | { type: "KILL_RULER"; cause: string }
   | { type: "ADD_LAW"; law: string }
   | { type: "REMOVE_LAW"; law: string }
-  | { type: "EXECUTE_OR_EXILE_CHARACTER"; characterId: string; actionType: "execute" | "exile" };
+  | { type: "EXECUTE_OR_EXILE_CHARACTER"; characterId: string; actionType: "execute" | "exile" }
+  | {
+      type: "START_SITUATION";
+      title: string;
+      situationType: SituationType;
+      durationTurns: number;
+      description: string;
+      personnel?: string;
+    }
+  | { type: "RESOLVE_SITUATION"; situationId: string; resultText: string };
 
 export type DelayedEvent = {
   id: string;
@@ -86,6 +133,14 @@ export type Requirement =
   | { type: "MIN_FACTION"; faction: FactionName; value: number }
   | { type: "MAX_FACTION"; faction: FactionName; value: number };
 
+export type EventChainInfo = {
+  id: string;
+  step: number;
+  maxSteps: number;
+  nextEventId?: string;
+  branchOnChoice?: Record<string, string>;
+};
+
 export type GameEvent = {
   id: string;
   title: string;
@@ -96,6 +151,9 @@ export type GameEvent = {
   tags: string[];
   weight: number;
   isDelayedTriggerOnly?: boolean;
+  chain?: EventChainInfo;
+  isDynamic?: boolean;
+  generatedByAI?: boolean;
 };
 
 export type GameHistoryEntry = {
@@ -110,6 +168,22 @@ export type GameHistoryEntry = {
   rulerName: string;
 };
 
+export type KingdomPrologue = {
+  rulerTitle: string;
+  rulerName: string;
+  dynasty: string;
+  age: number;
+  traits: string[];
+  reputation: string;
+  predecessorName: string;
+  predecessorRelation: string;
+  ascensionCircumstance: string;
+  recentEvents: string[];
+  initialCrisis: string;
+  courtWhisper: string;
+  proceduralVariation: string;
+};
+
 export type KingdomState = {
   id: string;
   name: string;
@@ -117,6 +191,7 @@ export type KingdomState = {
   storylineTitle?: string;
   worldLorePrompt?: string;
   seed: number;
+  prologue?: KingdomPrologue;
   turn: number;
   year: number;
   month: number; // 1 to 12
@@ -139,15 +214,29 @@ export type KingdomState = {
   rulersHistory: Array<Ruler & { deathYear: number; causeOfDeath: string }>;
 
   characters: Record<string, Character>;
+  deceasedCharacters?: Array<{
+    id: string;
+    name: string;
+    turn: number;
+    year: number;
+    cause: string;
+  }>;
+  activeChains?: Record<string, { currentStep: number; lastChoiceId?: string }>;
+  ongoingSituations?: OngoingSituation[];
   realms: Record<string, Realm>;
+
+  documents?: DocumentEntry[];
+  conversationHistory?: ConversationMessage[];
 
   delayedEvents: DelayedEvent[];
   history: GameHistoryEntry[];
 
   currentEvent: GameEvent | null;
+  pendingDynamicEvent?: GameEvent | null;
 
   isGameOver: boolean;
   gameOverReason?: string;
+  isVictory?: boolean;
 };
 
 export type TurnInput = {
@@ -170,4 +259,5 @@ export type TurnResult = {
   newRuler?: Ruler;
   gameOver?: boolean;
   gameOverReason?: string;
+  isVictory?: boolean;
 };

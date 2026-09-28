@@ -17,6 +17,25 @@ export type AIInterpretationRequest = {
   recentHistory: string[];
   charactersPresent?: Array<{ name: string; role: string }>;
   worldLore?: string;
+  storylineId?: string;
+};
+
+export type AIDynamicEventProposal = {
+  title: string;
+  description: string;
+  characterName?: string;
+  characterTitle?: string;
+  characterRole?: string;
+  characterFaction?: FactionName;
+  characterAvatar?: string;
+  characterAppearance?: string;
+  choices?: Array<{ id: string; label: string; intentDescription?: string }>;
+};
+
+export type AICampaignEnding = {
+  isGameOver: boolean;
+  isVictory?: boolean;
+  reason: string;
 };
 
 export type AIInterpretationResponse = {
@@ -24,6 +43,8 @@ export type AIInterpretationResponse = {
   actions: GameAction[];
   narrative: string;
   confidence: number;
+  nextEventProposal?: AIDynamicEventProposal;
+  campaignEnding?: AICampaignEnding;
 };
 
 export interface AIProvider {

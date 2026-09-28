@@ -26,11 +26,15 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
-    const { name, rulerName, seed, storylineId } = body;
+    const { name, rulerName, rulerTitle, archetype, origin, personalIntent, seed, storylineId } = body;
 
     const state = createInitialKingdomState({
-      name: name?.trim() || "Reino de Valoria",
-      rulerName: rulerName?.trim() || "Alden II",
+      name: name?.trim(),
+      rulerName: rulerName?.trim(),
+      rulerTitle: rulerTitle?.trim(),
+      archetype: archetype?.trim(),
+      origin: origin?.trim(),
+      personalIntent: personalIntent?.trim(),
       seed: typeof seed === "number" ? seed : undefined,
       storylineId: typeof storylineId === "string" ? storylineId : undefined,
     });

@@ -89,6 +89,7 @@ export class FileGameRepository implements IGameRepository {
       summariesMap.set(state.id, {
         id: state.id,
         name: state.name,
+        storylineTitle: state.storylineTitle,
         turn: state.turn,
         year: state.year,
         month: state.month,
@@ -110,6 +111,7 @@ export class FileGameRepository implements IGameRepository {
             summariesMap.set(state.id, {
               id: state.id,
               name: state.name,
+              storylineTitle: state.storylineTitle,
               turn: state.turn,
               year: state.year,
               month: state.month,

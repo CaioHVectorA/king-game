@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { FactionName, GameAction, KingdomState } from "@/types/game";
 import { clamp, LIMITS, sanitizeDelta } from "./rules";
+import { getActiveOrSuccessorCharacter } from "./characters";
 
 export const FactionNameSchema = z.enum([
   "nobles",
@@ -82,6 +83,19 @@ export const GameActionSchema = z.discriminatedUnion("type", [
     type: z.literal("EXECUTE_OR_EXILE_CHARACTER"),
     characterId: z.string(),
     actionType: z.enum(["execute", "exile"]),
+  }),
+  z.object({
+    type: z.literal("START_SITUATION"),
+    title: z.string().max(100),
+    situationType: z.enum(["expedicao", "guerra", "crise", "projeto", "discurso", "investigacao"]),
+    durationTurns: z.number().int().min(1).max(20).default(3),
+    description: z.string().max(400),
+    personnel: z.string().max(120).optional(),
+  }),
+  z.object({
+    type: z.literal("RESOLVE_SITUATION"),
+    situationId: z.string(),
+    resultText: z.string().max(400),
   }),
 ]);
 
@@ -284,19 +298,81 @@ export function applyAction(
       break;
     }
     case "EXECUTE_OR_EXILE_CHARACTER": {
-      const char = next.characters[action.characterId];
+      // Normaliza ID caso venha abreviado da IA (ex: "thorne" -> "general_thorne")
+      const charIdMap: Record<string, string> = {
+        thorne: "general_thorne",
+        elenor: "elenor_peasant",
+        vane: "chancellor_vane",
+        alistair: "merchant_alistair",
+        ignatius: "archbishop_ignatius",
+        morris: "counselor_morris",
+      };
+      const canonicalId = charIdMap[action.characterId.toLowerCase()] || action.characterId;
+      const char = next.characters[canonicalId] || next.characters[action.characterId];
+
       if (char) {
+        const targetId = char.id;
         next.characters = {
           ...next.characters,
-          [action.characterId]: {
+          [targetId]: {
             ...char,
             alive: false,
           },
         };
+
+        // Registra formalmente na lista perpétua de falecidos
+        const deceasedList = next.deceasedCharacters ? [...next.deceasedCharacters] : [];
+        if (!deceasedList.some((d) => d.id === targetId)) {
+          deceasedList.push({
+            id: targetId,
+            name: char.name,
+            turn: next.turn,
+            year: next.year,
+            cause:
+              action.actionType === "execute"
+                ? "Executado(a) por decreto soberano"
+                : "Banido(a) perpétuo(a) das terras da coroa",
+          });
+        }
+        next.deceasedCharacters = deceasedList;
+
+        // Garante que o sucessor correspondente seja instanciado imediatamente
+        getActiveOrSuccessorCharacter(targetId, next);
+
         effectMessage =
           action.actionType === "execute"
-            ? `${char.name} foi executado(a) por traição.`
-            : `${char.name} foi banido(a) para além das fronteiras.`;
+            ? `${char.name} foi executado(a) publicamente por decreto real. A vaga foi transferida.`
+            : `${char.name} foi banido(a) perpétua e sumariamente das terras do reino.`;
+      }
+      break;
+    }
+    case "START_SITUATION": {
+      const ongoing = next.ongoingSituations ? [...next.ongoingSituations] : [];
+      const sitId = `sit-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
+      const duration = Math.max(1, action.durationTurns || 3);
+      ongoing.push({
+        id: sitId,
+        title: action.title,
+        type: action.situationType,
+        description: action.description,
+        startedAtTurn: next.turn,
+        totalTurns: duration,
+        turnsRemaining: duration,
+        status: "ativa",
+        assignedPersonnel: action.personnel,
+      });
+      next.ongoingSituations = ongoing;
+      effectMessage = `Nova situação iniciada: "${action.title}" (${duration} turnos de duração).`;
+      break;
+    }
+    case "RESOLVE_SITUATION": {
+      if (next.ongoingSituations && next.ongoingSituations.length > 0) {
+        next.ongoingSituations = next.ongoingSituations.map((s) =>
+          s.id === action.situationId || s.title.toLowerCase().includes(action.situationId.toLowerCase())
+            ? { ...s, status: "concluida" as const, turnsRemaining: 0, consequencesSummary: action.resultText }
+            : s
+        );
+        effectMessage = `Situação concluída: ${action.resultText}`;
       }
       break;
     }
