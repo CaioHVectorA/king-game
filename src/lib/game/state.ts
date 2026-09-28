@@ -66,6 +66,38 @@ export function createInitialKingdomState(params?: {
     seed,
   });
 
+  // Metas dinásticas para maior replayability
+  const isZombie = storyline.id === "zombie_apocalypse" || storyline.id === "rio_zombie";
+  const defaultGoals = [
+    {
+      id: "goal_survive_10",
+      title: "Consolidação Inicial",
+      description: "Manter o domínio firme e seguro por 10 turnos completos.",
+      targetType: "turns" as const,
+      targetValue: 10,
+      completed: false,
+      rewardText: "+15 de Estabilidade para o reino",
+    },
+    {
+      id: "goal_economic_security",
+      title: isZombie ? "Arsenal e Reservas" : "Cofres do Tesouro",
+      description: isZombie ? "Alcançar 600 unidades de suprimentos ou tesouro." : "Acumular 500 moedas de ouro para a coroa.",
+      targetType: "gold" as const,
+      targetValue: isZombie ? 600 : 500,
+      completed: false,
+      rewardText: "Prestígio comercial e aliança fortalecida",
+    },
+    {
+      id: "goal_stability_peak",
+      title: "Paz e Ordem Social",
+      description: "Atingir 80% de Estabilidade do Domínio.",
+      targetType: "stability" as const,
+      targetValue: 80,
+      completed: false,
+      rewardText: "Lealdade total do povo e guarda honrada",
+    },
+  ];
+
   const enrichedWorldLore = `${storyline.worldLorePrompt}
 
 ANTECEDENTES DA COROAÇÃO (SEED ${seed}):
@@ -144,6 +176,8 @@ ANTECEDENTES DA COROAÇÃO (SEED ${seed}):
     activeChains: {},
     ongoingSituations: [],
     realms: { ...storyline.realms },
+
+    dynasticGoals: defaultGoals,
 
     delayedEvents: [],
     history: [],

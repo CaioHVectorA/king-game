@@ -2,12 +2,12 @@
 
 @layer base {
   :root {
-    --background: #09090b;
+    --background: #06070a;
     --foreground: #f4f4f5;
   }
 
   body {
-    background-color: #09090b;
+    background-color: #06070a;
     color: #f4f4f5;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
@@ -20,82 +20,131 @@
   font-family: var(--font-cinzel), serif;
 }
 
-/* Scrollbar Monocromática e Minimalista */
+/* Scrollbar com brilho temático de Game */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #07080c;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 0px;
+  background: #272a38;
+  border: 1px solid #3f435a;
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #d97706;
 }
 
-/* Superfícies Flat Monocromáticas */
-.mono-surface {
-  background-color: #111113;
-  border: 1px solid #27272a;
+/* Glassmorphism Dark & Moldura de Game HUD */
+.game-hud-panel {
+  background: linear-gradient(180deg, rgba(17, 19, 28, 0.92) 0%, rgba(10, 11, 16, 0.96) 100%);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
 }
 
-.mono-surface-hover {
-  transition: border-color 0.1s ease, background-color 0.1s ease;
-}
-.mono-surface-hover:hover {
-  border-color: #52525b;
-  background-color: #18181b;
+.game-card {
+  background: linear-gradient(135deg, rgba(20, 22, 33, 0.85) 0%, rgba(12, 13, 19, 0.95) 100%);
+  border: 1px solid #282c3f;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.mono-btn {
-  background-color: #18181b;
-  border: 1px solid #27272a;
-  color: #f4f4f5;
-  transition: all 0.1s ease;
+.game-card:hover {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.15), inset 0 0 12px rgba(245, 158, 11, 0.05);
+  transform: translateY(-2px);
 }
-.mono-btn:hover:not(:disabled) {
-  background-color: #27272a;
-  border-color: #52525b;
+
+.game-card-active {
+  background: linear-gradient(135deg, rgba(35, 28, 14, 0.9) 0%, rgba(18, 15, 10, 0.95) 100%);
+  border: 1px solid #f59e0b;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.25), inset 0 0 15px rgba(245, 158, 11, 0.1);
 }
-.mono-btn:active:not(:disabled) {
+
+/* Moldura Ornamentada com Cantos Dourados */
+.game-frame {
+  position: relative;
+  border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+.game-frame::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #f59e0b;
+  border-left: 2px solid #f59e0b;
+}
+
+.game-frame::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid #f59e0b;
+  border-right: 2px solid #f59e0b;
+}
+
+/* Botões Estilizados em Deck de Ação de RPG */
+.game-btn-tactical {
+  background: linear-gradient(180deg, #1d2130 0%, #11131c 100%);
+  border: 1px solid #333952;
+  color: #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.15s ease;
+}
+
+.game-btn-tactical:hover:not(:disabled) {
+  background: linear-gradient(180deg, #2a3047 0%, #171a26 100%);
+  border-color: #f59e0b;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+}
+
+.game-btn-tactical:active:not(:disabled) {
   transform: translateY(1px);
 }
 
-.mono-btn-primary {
-  background-color: #f4f4f5;
-  border: 1px solid #f4f4f5;
-  color: #09090b;
-  font-weight: 700;
-  transition: all 0.1s ease;
+.game-btn-primary {
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+  border: 1px solid #fbbf24;
+  color: #000000;
+  font-weight: 800;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+  transition: all 0.15s ease;
 }
-.mono-btn-primary:hover:not(:disabled) {
-  background-color: #e4e4e7;
-  border-color: #e4e4e7;
+
+.game-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+  transform: translateY(-1px);
 }
-.mono-btn-primary:active:not(:disabled) {
+
+.game-btn-primary:active:not(:disabled) {
   transform: translateY(1px);
 }
 
-/* Animação minimalista e rápida */
-@keyframes monoFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
+/* Animações Vibrantes e Cinematográficas */
+@keyframes gamePulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  50% {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.7);
   }
 }
 
-.animate-mono-in {
-  animation: monoFadeIn 0.18s ease-out forwards;
+.animate-game-pulse {
+  animation: gamePulseGlow 2s infinite ease-in-out;
 }
 
-/* Animação fluida e vibrante para Barras de Progresso */
 @keyframes progressScanline {
   0% {
     background-position: 0 0;
@@ -140,50 +189,3 @@
 .animate-shimmer-sweep {
   animation: shimmerSweep 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
-
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.85;
-    box-shadow: 0 0 4px rgba(244, 244, 245, 0.3);
-  }
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 10px rgba(244, 244, 245, 0.75);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 1.8s ease-in-out infinite;
-}
-
-@keyframes dangerPulse {
-  0%, 100% {
-    opacity: 0.8;
-    box-shadow: 0 0 3px rgba(248, 113, 113, 0.4);
-  }
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 12px rgba(248, 113, 113, 0.85);
-  }
-}
-
-.animate-danger-pulse {
-  animation: dangerPulse 1.2s ease-in-out infinite;
-}
-
-@keyframes beamSpark {
-  0%, 100% {
-    transform: scaleY(1);
-    filter: brightness(1);
-  }
-  50% {
-    transform: scaleY(1.3);
-    filter: brightness(1.5);
-  }
-}
-
-.animate-beam-spark {
-  animation: beamSpark 0.9s ease-in-out infinite;
-}
-
-

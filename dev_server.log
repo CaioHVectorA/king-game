@@ -1,0 +1,17 @@
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+✓ Ready in 926ms
+✓ Running next.config.ts took 111ms
+
+ HEAD / 200 in 574ms (next.js: 313ms, application-code: 262ms)
+ GET / 200 in 86ms (next.js: 14ms, application-code: 72ms)
+ GET /api/game 200 in 246ms (next.js: 180ms, application-code: 65ms)
+ GET /api/game 200 in 14ms (next.js: 5ms, application-code: 9ms)
+ GET / 200 in 67ms (next.js: 8ms, application-code: 59ms)
+ GET /api/game 200 in 13ms (next.js: 3ms, application-code: 10ms)
+ GET /api/game 200 in 12ms (next.js: 5ms, application-code: 6ms)
+ POST /api/game 200 in 33ms (next.js: 5ms, application-code: 28ms)
+ GET /intro/game_1790597571204_917207 200 in 1047ms (next.js: 993ms, application-code: 55ms)
+ GET /api/game?id=game_1790597571204_917207 200 in 14ms (next.js: 6ms, application-code: 8ms)
+ GET /api/game?id=game_1790597571204_917207 200 in 29ms (next.js: 18ms, application-code: 11ms)

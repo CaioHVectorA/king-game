@@ -22,6 +22,16 @@ export type Character = {
   appearance?: string;
 };
 
+export type DynasticGoal = {
+  id: string;
+  title: string;
+  description: string;
+  targetType: "gold" | "food" | "population" | "stability" | "military" | "turns" | "laws";
+  targetValue: number;
+  completed: boolean;
+  rewardText: string;
+};
+
 export type Ruler = {
   id: string;
   name: string;
@@ -227,6 +237,8 @@ export type KingdomState = {
 
   documents?: DocumentEntry[];
   conversationHistory?: ConversationMessage[];
+
+  dynasticGoals?: DynasticGoal[];
 
   delayedEvents: DelayedEvent[];
   history: GameHistoryEntry[];
