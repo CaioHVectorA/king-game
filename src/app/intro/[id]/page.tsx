@@ -6,7 +6,7 @@ import { KingdomState } from "@/types/game";
 import { getKingdomFeelings } from "@/lib/game/feelings";
 import { KingdomMap } from "@/components/map/KingdomMap";
 import { AnimatedProgressBar } from "@/components/ui/AnimatedProgressBar";
-import { ArrowLeft, ArrowRight, MessageSquare, Send, Shield, Compass, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, MessageSquare, Send, Shield, Compass, Crown, Sparkles } from "lucide-react";
 
 export default function IntroPage() {
   const params = useParams();
@@ -76,26 +76,27 @@ export default function IntroPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#09090b] text-[#f4f4f5] flex flex-col items-center justify-center p-4 font-mono select-none">
-        <span className="text-xs uppercase tracking-widest text-[#71717a] mb-2">
-          RECUPERANDO REGISTROS DA COROAÇÃO...
+      <div className="min-h-screen bg-[#06070a] text-[#f4f4f5] flex flex-col items-center justify-center p-4 font-mono select-none">
+        <span className="text-xs uppercase tracking-widest text-amber-400 mb-2 flex items-center gap-2">
+          <Crown className="w-5 h-5 animate-bounce" />
+          <span>RECUPERANDO REGISTROS DA COROAÇÃO...</span>
         </span>
-        <div className="w-6 h-6 border-2 border-[#71717a] border-t-[#f4f4f5] animate-spin" />
+        <div className="w-6 h-6 border-2 border-amber-500/30 border-t-amber-400 animate-spin" />
       </div>
     );
   }
 
   if (errorMsg || !state) {
     return (
-      <div className="min-h-screen bg-[#09090b] text-[#f4f4f5] flex flex-col items-center justify-center p-4 font-mono">
-        <div className="max-w-md w-full p-6 bg-[#111113] border border-[#27272a] text-center space-y-4">
-          <span className="text-xs text-red-400 block">[ ERRO NA CRÔNICA ]</span>
-          <p className="text-sm text-[#a1a1aa]">{errorMsg || "Campanha inexistente."}</p>
+      <div className="min-h-screen bg-[#06070a] text-[#f4f4f5] flex flex-col items-center justify-center p-4 font-mono">
+        <div className="max-w-md w-full p-6 game-card text-center space-y-4">
+          <span className="text-xs text-red-400 font-bold block">[ ERRO NA CRÔNICA ]</span>
+          <p className="text-sm text-[#94a3b8]">{errorMsg || "Campanha inexistente."}</p>
           <button
             onClick={() => router.push("/")}
-            className="w-full py-2.5 bg-[#18181b] hover:bg-[#27272a] border border-[#3f3f46] text-[#f4f4f5] text-xs uppercase tracking-wider cursor-pointer"
+            className="w-full py-2.5 game-btn-tactical text-xs uppercase tracking-wider cursor-pointer font-bold"
           >
-            [ VOLTAR À TELA INICIAL ]
+            [ VOLTAR AO MENU INICIAL ]
           </button>
         </div>
       </div>
@@ -107,7 +108,6 @@ export default function IntroPage() {
   const ruler = state.currentRuler;
   const sid = state.storylineId || "valoria_classic";
 
-  // ── Labels adaptadas por cenário ─────────────────────────────────────────
   const isZombie = sid === "zombie_apocalypse" || sid === "rio_zombie";
   const isSciFi = sid === "colony_exodus";
 
@@ -195,7 +195,6 @@ export default function IntroPage() {
         beginSub: "Iniciar o reinado e abrir as primeiras audiências",
       };
 
-  // Localiza o mesmo conselheiro oficial da corte para consulta
   const charList = Object.values(state.characters || {});
   const mainCounselor =
     charList.find((c) =>
@@ -212,78 +211,65 @@ export default function IntroPage() {
     };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-[#f4f4f5] p-4 sm:p-8 font-sans select-none flex flex-col justify-between max-w-4xl mx-auto">
-      {/* 1. CABEÇALHO DA INTRODUÇÃO */}
-      <header className="border-b border-[#27272a] pb-4 flex items-center justify-between font-mono">
+    <div className="min-h-screen bg-[#06070a] text-[#f4f4f5] p-4 sm:p-8 font-mono select-none flex flex-col justify-between max-w-4xl mx-auto">
+      {/* 1. CABEÇALHO DO PRÓLOGO DE GAME */}
+      <header className="game-hud-panel p-4 border-b border-amber-500/30 flex items-center justify-between">
         <div>
-          <span className="text-[10px] uppercase tracking-widest text-[#71717a] block">
+          <span className="text-[10px] uppercase tracking-widest text-amber-400 font-bold block">
             {labels.prologueHeader}
           </span>
-          <h1 className="font-royal text-xl sm:text-2xl font-bold text-[#f4f4f5] tracking-tight">
+          <h1 className="font-royal text-xl sm:text-2xl font-extrabold text-amber-100 tracking-wide">
             {state.name} • {state.storylineTitle}
           </h1>
         </div>
 
         <button
           onClick={() => router.push("/")}
-          className="text-xs text-[#71717a] hover:text-[#f4f4f5] flex items-center gap-1.5 cursor-pointer"
+          className="text-xs text-[#94a3b8] hover:text-white flex items-center gap-1.5 cursor-pointer font-bold"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>[ INÍCIO ]</span>
+          <span>[ MENU ]</span>
         </button>
       </header>
 
-      {/* 2. CONTEÚDO NARRATIVO: QUEM É VOCÊ, QUEM ERA O REI ANTERIOR, MAPA E CONSELHO */}
-      <main className="my-8 space-y-6">
-        {/* SEÇÃO 1: QUEM É VOCÊ NO TRONO (CUSTOMIZAÇÃO DETALHADA) */}
-        <div className="bg-[#111113] border border-[#27272a] p-5 sm:p-6 space-y-4">
-          <div className="flex items-center justify-between border-b border-[#27272a] pb-2 font-mono">
-            <span className="text-[11px] uppercase tracking-widest text-[#a1a1aa]">
+      {/* 2. PAINÉIS DE GAME RPG */}
+      <main className="my-6 space-y-6">
+        <div className="game-card p-5 sm:p-6 space-y-4 border-amber-500/30">
+          <div className="flex items-center justify-between border-b border-[#333952] pb-2">
+            <span className="text-[11px] uppercase tracking-widest text-amber-400 font-bold flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
               {labels.section01}
             </span>
-            <span className="text-[10px] text-[#71717a]">
-              SEED: {state.seed}
-            </span>
+            <span className="text-[10px] text-[#71717a]">SEED: {state.seed}</span>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xl">{ruler.avatar || "👑"}</span>
-                <h2 className="font-royal text-xl sm:text-2xl font-bold text-[#f4f4f5]">
+                <span className="text-2xl">{ruler.avatar || "👑"}</span>
+                <h2 className="font-royal text-xl sm:text-2xl font-bold text-amber-100">
                   {ruler.title} {ruler.name}
                 </h2>
               </div>
-              <p className="text-xs font-mono text-[#a1a1aa] mt-1">
-                {labels.dynasty}
-              </p>
+              <p className="text-xs text-[#94a3b8] mt-1 font-mono">{labels.dynasty}</p>
             </div>
 
             <div className="flex flex-wrap gap-1.5">
               {ruler.archetype && (
-                <span className="text-[10px] font-mono uppercase px-2 py-0.5 bg-[#18181b] border border-[#f4f4f5] text-[#f4f4f5]">
+                <span className="text-[10px] uppercase px-2 py-0.5 border border-amber-500/40 text-amber-300 bg-amber-950/20 font-bold">
                   {ruler.archetype}
                 </span>
               )}
               {ruler.origin && (
-                <span className="text-[10px] font-mono uppercase px-2 py-0.5 bg-[#18181b] border border-[#52525b] text-[#d4d4d8]">
+                <span className="text-[10px] uppercase px-2 py-0.5 border border-[#333952] bg-[#11131c] text-[#cbd5e1]">
                   {ruler.origin}
                 </span>
               )}
-              {ruler.traits.map((trait) => (
-                <span
-                  key={trait}
-                  className="text-[10px] font-mono uppercase px-2 py-0.5 bg-[#141418] border border-[#27272a] text-[#a1a1aa]"
-                >
-                  {trait}
-                </span>
-              ))}
             </div>
           </div>
 
-          {/* VITALIDADE E PRESTÍGIO DA LINHAGEM COM BARRAS DE PROGRESSO ANIMADAS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-            <div className="p-2.5 bg-[#18181b] border border-[#27272a] space-y-1">
+            <div className="p-2.5 bg-[#0a0b10] border border-[#333952]">
               <AnimatedProgressBar
                 value={Math.min(100, Math.max(25, 95 - (ruler.age || 30)))}
                 min={0}
@@ -297,7 +283,7 @@ export default function IntroPage() {
               />
             </div>
 
-            <div className="p-2.5 bg-[#18181b] border border-[#27272a] space-y-1">
+            <div className="p-2.5 bg-[#0a0b10] border border-[#333952]">
               <AnimatedProgressBar
                 value={82}
                 min={0}
@@ -313,119 +299,80 @@ export default function IntroPage() {
           </div>
 
           {ruler.personalIntent && (
-            <div className="p-3 bg-[#18181b] border-l-2 border-[#f4f4f5] text-xs font-mono text-[#f4f4f5]">
-              <span className="text-[9px] uppercase tracking-widest text-[#71717a] block mb-0.5">
+            <div className="p-3 bg-[#0a0b10] border-l-2 border-amber-400 text-xs text-amber-200">
+              <span className="text-[9px] uppercase tracking-widest text-amber-400 font-bold block mb-0.5">
                 {labels.intent}
               </span>
               "{ruler.personalIntent}"
             </div>
           )}
 
-          <p className="text-xs sm:text-sm text-[#d4d4d8] leading-relaxed font-serif italic pt-1">
-            "{prologue?.reputation || "Um líder nascido da necessidade."}"  
+          <p className="text-xs sm:text-sm text-[#cbd5e1] leading-relaxed font-sans italic pt-1">
+            "{prologue?.reputation || "Um líder nascido da necessidade."}"
           </p>
         </div>
 
-        {/* SEÇÃO 2: A SUCESSÃO E O REI ANTERIOR */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-[#111113] border border-[#27272a] p-4 sm:p-5 space-y-2">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-[#71717a] block">
+          <div className="game-card p-4 sm:p-5 space-y-2">
+            <span className="text-[10px] uppercase tracking-widest text-amber-400 font-bold block">
               {labels.section02}
             </span>
-            <h3 className="font-royal text-base font-bold text-[#f4f4f5]">
+            <h3 className="font-royal text-base font-bold text-amber-200">
               {labels.section02title} ({prologue?.predecessorRelation || "Antecessor"})
             </h3>
-            <p className="text-xs text-[#a1a1aa] leading-relaxed font-sans">
+            <p className="text-xs text-[#94a3b8] leading-relaxed font-sans">
               {prologue?.ascensionCircumstance || labels.section02fallback}
             </p>
           </div>
 
-          <div className="bg-[#111113] border border-[#27272a] p-4 sm:p-5 space-y-2">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-[#71717a] block">
+          <div className="game-card p-4 sm:p-5 space-y-2">
+            <span className="text-[10px] uppercase tracking-widest text-amber-400 font-bold block">
               {labels.section03}
             </span>
-            <h3 className="font-royal text-base font-bold text-[#f4f4f5]">
+            <h3 className="font-royal text-base font-bold text-amber-200">
               {labels.section03title}
             </h3>
-            <p className="text-xs text-[#a1a1aa] leading-relaxed font-serif italic">
+            <p className="text-xs text-[#cbd5e1] leading-relaxed font-sans italic">
               "{prologue?.courtWhisper || labels.section03fallback}"
             </p>
           </div>
         </div>
 
-        {/* SEÇÃO 3: MAPA DETERMINÍSTICO DO DOMÍNIO */}
-        <div className="bg-[#111113] border border-[#27272a] p-4 sm:p-5 space-y-3">
-          <div className="flex items-center justify-between border-b border-[#27272a] pb-2 font-mono">
-            <span className="text-[11px] uppercase tracking-widest text-[#a1a1aa] flex items-center gap-1.5">
+        {/* MAPA */}
+        <div className="game-card p-4 sm:p-5 space-y-3">
+          <div className="flex items-center justify-between border-b border-[#333952] pb-2 font-mono">
+            <span className="text-[11px] uppercase tracking-widest text-amber-400 font-bold flex items-center gap-1.5">
               <Compass className="w-3.5 h-3.5" />
               {labels.section04}
             </span>
-            <span className="text-[10px] text-[#71717a]">
-              INSPEÇÃO DISPONÍVEL
-            </span>
           </div>
-
-          <p className="text-xs text-[#71717a] font-mono">
-            {labels.section04desc}
-          </p>
-
           <KingdomMap seed={state.seed} storylineId={state.storylineId} />
         </div>
 
-        {/* SEÇÃO 4: CONSULTA CONFIDENCIAL AO CONSELHEIRO (IA EM TEMPO REAL) */}
-        <div className="bg-[#111113] border border-[#27272a] p-5 sm:p-6 space-y-3 font-mono">
-          <div className="flex items-center justify-between border-b border-[#27272a] pb-2">
-            <span className="text-[11px] uppercase tracking-widest text-[#a1a1aa] flex items-center gap-1.5">
-              <MessageSquare className="w-3.5 h-3.5" />
+        {/* CONSULTA AO CONSELHEIRO */}
+        <div className="game-card p-5 sm:p-6 space-y-3">
+          <div className="flex items-center justify-between border-b border-[#333952] pb-2">
+            <span className="text-[11px] uppercase tracking-widest text-amber-400 font-bold flex items-center gap-1.5">
+              <MessageSquare className="w-3.5 h-3.5 text-amber-400" />
               {labels.section05}
-            </span>
-            <span className="text-[10px] text-[#71717a]">
-              CONSELHO EM TEMPO REAL (IA)
             </span>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 border-b border-[#27272a] pb-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 border-b border-[#333952] pb-3">
             <div className="flex items-start gap-3">
-              <span className="text-2xl p-2 bg-[#18181b] border border-[#27272a]">
+              <span className="text-2xl p-2 bg-[#0a0b10] border border-[#333952]">
                 {(mainCounselor as any).avatar || "👤"}
               </span>
               <div>
-                <h3 className="font-bold text-sm text-[#f4f4f5]">
+                <h3 className="font-bold text-sm text-amber-200">
                   {mainCounselor.name}
                 </h3>
-                <p className="text-[11px] text-[#a1a1aa]">
-                  {mainCounselor.title || mainCounselor.role} • O mesmo conselheiro que vos guiará no jogo
+                <p className="text-[11px] text-[#94a3b8]">
+                  {mainCounselor.title || mainCounselor.role}
                 </p>
               </div>
             </div>
-
-            {/* BARRAS DO CONSELHEIRO */}
-            <div className="flex flex-col gap-1.5 w-full sm:w-56 shrink-0">
-              <AnimatedProgressBar
-                value={mainCounselor.loyalty ?? 40}
-                min={-100}
-                max={100}
-                bipolar
-                label={labels.counselorLoyalty}
-                statusText={labels.counselorLoyaltyStatus(mainCounselor.loyalty ?? 40)}
-                height="xs"
-                showGlowHead={true}
-              />
-              <AnimatedProgressBar
-                value={mainCounselor.influence ?? 60}
-                min={0}
-                max={100}
-                label={labels.counselorInfluence}
-                statusText={labels.counselorInfluenceStatus}
-                height="xs"
-                showGlowHead={true}
-              />
-            </div>
           </div>
-
-          <p className="text-xs text-[#71717a] leading-relaxed">
-            {labels.counselorDesc}
-          </p>
 
           <form onSubmit={handleAskCounselor} className="flex gap-2 pt-1">
             <input
@@ -434,12 +381,12 @@ export default function IntroPage() {
               onChange={(e) => setCounselorQuestion(e.target.value)}
               placeholder={labels.counselorPlaceholder}
               disabled={isAskingCounselor}
-              className="flex-1 bg-[#09090b] border border-[#27272a] focus:border-[#f4f4f5] px-3.5 py-2 text-xs text-[#f4f4f5] focus:outline-none"
+              className="flex-1 bg-[#0a0b10] border border-[#333952] focus:border-amber-400 px-3.5 py-2 text-xs text-[#f4f4f5] focus:outline-none"
             />
             <button
               type="submit"
               disabled={!counselorQuestion.trim() || isAskingCounselor}
-              className="px-4 py-2 bg-[#18181b] hover:bg-[#27272a] disabled:opacity-40 border border-[#3f3f46] text-[#f4f4f5] text-xs uppercase tracking-wider cursor-pointer flex items-center gap-1.5 shrink-0"
+              className="px-4 py-2 game-btn-tactical text-xs uppercase cursor-pointer flex items-center gap-1.5 shrink-0 font-bold"
             >
               <span>{isAskingCounselor ? "Consultando..." : "Perguntar"}</span>
               <Send className="w-3 h-3" />
@@ -447,119 +394,22 @@ export default function IntroPage() {
           </form>
 
           {counselorAnswer && (
-            <div className="p-3 bg-[#18181b] border-l-2 border-[#f4f4f5] text-xs font-serif text-[#d4d4d8] leading-relaxed mt-2 animate-mono-in">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#71717a] block mb-1">
-                Resposta de {mainCounselor.name}:
-              </span>
+            <div className="p-3 bg-[#0a0b10] border-l-2 border-amber-400 text-xs text-amber-100 leading-relaxed font-sans italic">
               "{counselorAnswer}"
             </div>
           )}
         </div>
-
-        {/* SEÇÃO 6: O SENTIMENTO DO REINO (BARRAS DE PROGRESSO ANIMADAS) */}
-        <div className="bg-[#111113] border border-[#27272a] p-4 sm:p-5 space-y-3 font-mono">
-          <div className="flex items-center justify-between border-b border-[#27272a] pb-2">
-            <span className="text-[10px] uppercase tracking-widest text-[#71717a] block">
-              06. O Pulso Inicial do Reino (Como você encontra o governo)
-            </span>
-            <span className="text-[10px] text-[#71717a]">
-              MÉTRICAS VITAIS
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-xs">
-            <div className="p-2.5 bg-[#18181b] border border-[#27272a] space-y-1.5">
-              <div className="flex items-center justify-between text-[9px]">
-                <span className="uppercase text-[#71717a]">Tesouro</span>
-                <span className="font-bold text-[#f4f4f5] truncate max-w-[60px]">{feelings.treasury.feeling}</span>
-              </div>
-              <AnimatedProgressBar
-                value={feelings.treasury.percentage}
-                min={0}
-                max={100}
-                level={feelings.treasury.level}
-                height="xs"
-                showGlowHead={true}
-                showShimmer={true}
-              />
-            </div>
-
-            <div className="p-2.5 bg-[#18181b] border border-[#27272a] space-y-1.5">
-              <div className="flex items-center justify-between text-[9px]">
-                <span className="uppercase text-[#71717a]">Celeiros</span>
-                <span className="font-bold text-[#f4f4f5] truncate max-w-[60px]">{feelings.food.feeling}</span>
-              </div>
-              <AnimatedProgressBar
-                value={feelings.food.percentage}
-                min={0}
-                max={100}
-                level={feelings.food.level}
-                height="xs"
-                showGlowHead={true}
-                showShimmer={true}
-              />
-            </div>
-
-            <div className="p-2.5 bg-[#18181b] border border-[#27272a] space-y-1.5">
-              <div className="flex items-center justify-between text-[9px]">
-                <span className="uppercase text-[#71717a]">População</span>
-                <span className="font-bold text-[#f4f4f5] truncate max-w-[60px]">{feelings.population.feeling}</span>
-              </div>
-              <AnimatedProgressBar
-                value={feelings.population.percentage}
-                min={0}
-                max={100}
-                level={feelings.population.level}
-                height="xs"
-                showGlowHead={true}
-                showShimmer={true}
-              />
-            </div>
-
-            <div className="p-2.5 bg-[#18181b] border border-[#27272a] space-y-1.5">
-              <div className="flex items-center justify-between text-[9px]">
-                <span className="uppercase text-[#71717a]">Ordem</span>
-                <span className="font-bold text-[#f4f4f5] truncate max-w-[60px]">{feelings.stability.feeling}</span>
-              </div>
-              <AnimatedProgressBar
-                value={feelings.stability.percentage}
-                min={0}
-                max={100}
-                level={feelings.stability.level}
-                height="xs"
-                showGlowHead={true}
-                showShimmer={true}
-              />
-            </div>
-
-            <div className="p-2.5 bg-[#18181b] border border-[#27272a] space-y-1.5">
-              <div className="flex items-center justify-between text-[9px]">
-                <span className="uppercase text-[#71717a]">Exército</span>
-                <span className="font-bold text-[#f4f4f5] truncate max-w-[60px]">{feelings.military.feeling}</span>
-              </div>
-              <AnimatedProgressBar
-                value={feelings.military.percentage}
-                min={0}
-                max={100}
-                level={feelings.military.level}
-                height="xs"
-                showGlowHead={true}
-                showShimmer={true}
-              />
-            </div>
-          </div>
-        </div>
       </main>
 
-      {/* 3. BOTÃO DE AVANÇO PARA A SALA DO TRONO */}
-      <footer className="border-t border-[#27272a] pt-6 font-mono flex flex-col sm:flex-row items-center justify-between gap-3">
-        <span className="text-[10px] text-[#71717a] text-center sm:text-left">
+      {/* FOOTER */}
+      <footer className="pt-4 border-t border-[#333952] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span className="text-[10px] text-[#94a3b8]">
           {labels.beginSub}
         </span>
 
         <button
           onClick={() => router.push(`/play/${state.id}`)}
-          className="w-full sm:w-auto px-6 py-3.5 bg-[#f4f4f5] hover:bg-[#e4e4e7] text-[#09090b] font-bold text-xs uppercase tracking-widest cursor-pointer transition-all active:translate-y-0.5 flex items-center justify-center gap-2"
+          className="w-full sm:w-auto px-6 py-3.5 game-btn-primary cursor-pointer text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2"
         >
           <span>[ {labels.begin} ]</span>
           <ArrowRight className="w-4 h-4" />
