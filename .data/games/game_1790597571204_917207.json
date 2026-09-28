@@ -1,10 +1,10 @@
 {
-  "id": "game_1790555149548_624038",
+  "id": "game_1790597571204_917207",
   "name": "Reino de Valoria",
   "storylineId": "valoria_classic",
   "storylineTitle": "As Crônicas de Valoria",
-  "worldLorePrompt": "\nUniverso: Reino de Valoria e as Terras Centrais.\nCultura: Nobreza feudal tradicional que valoriza linhagens antigas e banquetes suntuosos, contrastada pela emergente Liga Mercante de Eldoria.\nClima Religioso: Culto da Chama Sagrada liderado pelo Arcebispo, zeloso contra heresias e dízimos em atraso.\nTensão Central: Os barões temem a perda de terras para as guildas, e os camponeses suportam o peso dos tributos nas épocas de seca.\nEstilo Narrativo: Solene, cortesão, com foco em intrigas palacianas e decisões de estado ponderadas.\n\n\nANTECEDENTES DA COROAÇÃO (SEED 624038):\n- Soberano: Alden II (Justo, Cauteloso, Estratégico) - Ascensão como Herdeiro de Direito. Perfil governante: Diplomata Cínico. Juramento íntimo: \"Consolidar o tesouro da dinastia e conter as ambições da nobreza\".\n- Antecessor: Rei Edmund II (Vosso predecessor). Causa da transição: Caiu do corcel real durante um torneio cerimonial, gerando comoção em toda a corte.\n- Acontecimentos Imediatos: Dois barões de linhagem antiga rivalizam pelo controle da rica mina de ferro de Oakhaven.\n- Rumor da Corte: \"Os cofres reais têm reservas suficientes para a paz, mas não suportariam um cerco de seis luas.\"\n",
-  "seed": 624038,
+  "worldLorePrompt": "\nUniverso: Reino de Valoria e as Terras Centrais.\nCultura: Nobreza feudal tradicional que valoriza linhagens antigas e banquetes suntuosos, contrastada pela emergente Liga Mercante de Eldoria.\nClima Religioso: Culto da Chama Sagrada liderado pelo Arcebispo, zeloso contra heresias e dízimos em atraso.\nTensão Central: Os barões temem a perda de terras para as guildas, e os camponeses suportam o peso dos tributos nas épocas de seca.\nEstilo Narrativo: Solene, cortesão, com foco em intrigas palacianas e decisões de estado ponderadas.\n\n\nANTECEDENTES DA COROAÇÃO (SEED 917207):\n- Soberano: Alden II (Justo, Cauteloso, Estratégico) - Ascensão como Herdeiro de Direito. Perfil governante: Diplomata Cínico. Juramento íntimo: \"Consolidar o tesouro da dinastia e conter as ambições da nobreza\".\n- Antecessor: Rei Alden I (Vosso pai). Causa da transição: Faleceu pacificamente durante o sono aos 62 anos, deixando uma dinastia respeitada.\n- Acontecimentos Imediatos: A Liga Mercante de Eldoria enviou uma delegação suntuosa exigindo a renegociação das taxas alfandegárias.\n- Rumor da Corte: \"Os lavradores acreditam que um novo rei trará justiça contra as cobranças abusivas dos senhores de terras.\"\n",
+  "seed": 917207,
   "prologue": {
     "rulerTitle": "Sua Majestade Real",
     "rulerName": "Alden II",
@@ -16,17 +16,17 @@
       "Estratégico"
     ],
     "reputation": "Ascensão como Herdeiro de Direito. Perfil governante: Diplomata Cínico. Juramento íntimo: \"Consolidar o tesouro da dinastia e conter as ambições da nobreza\".",
-    "predecessorName": "Rei Edmund II",
-    "predecessorRelation": "Vosso predecessor",
-    "ascensionCircumstance": "Caiu do corcel real durante um torneio cerimonial, gerando comoção em toda a corte.",
+    "predecessorName": "Rei Alden I",
+    "predecessorRelation": "Vosso pai",
+    "ascensionCircumstance": "Faleceu pacificamente durante o sono aos 62 anos, deixando uma dinastia respeitada.",
     "recentEvents": [
       "A cerimônia solene de coroação na Sé Sagrada reuniu barões de todas as províncias.",
       "As guildas artesãs ofereceram presentes de seda e prata em troca de proteção comercial.",
       "O conselho da coroa jurou lealdade perante a espada ancestral da dinastia."
     ],
     "initialCrisis": "Emissários do povo e das guildas aguardam ansiosos na antecâmara para a primeira audiência do novo reinado.",
-    "courtWhisper": "Os cofres reais têm reservas suficientes para a paz, mas não suportariam um cerco de seis luas.",
-    "proceduralVariation": "Dois barões de linhagem antiga rivalizam pelo controle da rica mina de ferro de Oakhaven."
+    "courtWhisper": "Os lavradores acreditam que um novo rei trará justiça contra as cobranças abusivas dos senhores de terras.",
+    "proceduralVariation": "A Liga Mercante de Eldoria enviou uma delegação suntuosa exigindo a renegociação das taxas alfandegárias."
   },
   "turn": 1,
   "year": 1142,
@@ -109,14 +109,15 @@
       "name": "Mestre Morris",
       "title": "Conselheiro Pessoal da Coroa",
       "role": "Conselheiro Real",
-      "loyalty": 85,
-      "influence": 57,
+      "loyalty": 78,
+      "influence": 64,
       "alive": true,
       "traits": [
         "Sábio",
         "Observador",
         "Leal",
-        "Diplomata"
+        "Diplomata",
+        "Incorruptível"
       ],
       "faction": "nobles",
       "avatar": "📜"
@@ -126,14 +127,14 @@
       "name": "Lorde Vane",
       "title": "Chanceler da Coroa",
       "role": "Chanceler",
-      "loyalty": 30,
-      "influence": 78,
+      "loyalty": 28,
+      "influence": 70,
       "alive": true,
       "traits": [
         "Astuto",
         "Aristocrata",
         "Ambicioso",
-        "Disciplinado"
+        "Vigilante"
       ],
       "faction": "nobles",
       "avatar": "👑"
@@ -143,14 +144,14 @@
       "name": "Barão Lucian de Aldeiavelha",
       "title": "Porta-Voz dos Nobres do Leste",
       "role": "Barão Feudal",
-      "loyalty": 24,
-      "influence": 67,
+      "loyalty": 31,
+      "influence": 63,
       "alive": true,
       "traits": [
         "Orgulhoso",
         "Rancoroso",
         "Conspirador",
-        "Perspicaz"
+        "Obstinado"
       ],
       "faction": "nobles",
       "avatar": "🏰"
@@ -160,14 +161,14 @@
       "name": "Lady Isolda de Val-Verde",
       "title": "Matriarca das Terras Férteis",
       "role": "Nobre Latifundiária",
-      "loyalty": 54,
-      "influence": 59,
+      "loyalty": 48,
+      "influence": 58,
       "alive": true,
       "traits": [
         "Tradicionalista",
         "Econômica",
         "Calculista",
-        "Pragmático"
+        "Rancoroso"
       ],
       "faction": "nobles",
       "avatar": "💎"
@@ -177,14 +178,14 @@
       "name": "General Thorne",
       "title": "Comandante das Legiões",
       "role": "General",
-      "loyalty": 60,
+      "loyalty": 54,
       "influence": 75,
       "alive": true,
       "traits": [
         "Disciplinado",
         "Veterano",
         "Implacável",
-        "Audacioso"
+        "Perspicaz"
       ],
       "faction": "military",
       "avatar": "⚔️"
@@ -194,14 +195,14 @@
       "name": "Capitã Valéria",
       "title": "Comandante da Guarda das Muralhas",
       "role": "Capitã de Defesa",
-      "loyalty": 70,
-      "influence": 62,
+      "loyalty": 71,
+      "influence": 59,
       "alive": true,
       "traits": [
         "Corajosa",
         "Incorruptível",
         "Tática",
-        "Pragmático"
+        "Idealista"
       ],
       "faction": "military",
       "avatar": "🛡️"
@@ -211,8 +212,8 @@
       "name": "Carrick da Sombra",
       "title": "Mestre dos Espiões do Reino",
       "role": "Batedor Chefe",
-      "loyalty": 47,
-      "influence": 49,
+      "loyalty": 51,
+      "influence": 45,
       "alive": true,
       "traits": [
         "Discreto",
@@ -228,14 +229,14 @@
       "name": "Mestre Alistair",
       "title": "Porta-voz da Liga Mercante",
       "role": "Comerciante",
-      "loyalty": 46,
-      "influence": 69,
+      "loyalty": 35,
+      "influence": 74,
       "alive": true,
       "traits": [
         "Pragmático",
         "Rico",
         "Calculista",
-        "Obstinado"
+        "Leal"
       ],
       "faction": "merchants",
       "avatar": "💰"
@@ -245,14 +246,14 @@
       "name": "Mestre Kaelen de Ferro",
       "title": "Grão-Mestre dos Ferreiros e Artesãos",
       "role": "Mestre de Guilda",
-      "loyalty": 50,
-      "influence": 63,
+      "loyalty": 43,
+      "influence": 62,
       "alive": true,
       "traits": [
         "Trabalhador",
         "Teimoso",
         "Exigente",
-        "Cansado da Guerra"
+        "Disciplinado"
       ],
       "faction": "merchants",
       "avatar": "🔨"
@@ -262,14 +263,14 @@
       "name": "Bruno das Docas",
       "title": "Capitão dos Barqueiros do Rio",
       "role": "Contrabandista",
-      "loyalty": 26,
-      "influence": 38,
+      "loyalty": 34,
+      "influence": 37,
       "alive": true,
       "traits": [
         "Oportunista",
         "Audacioso",
         "Bem-Informado",
-        "Disciplinado"
+        "Cansado da Guerra"
       ],
       "faction": "merchants",
       "avatar": "⚓"
@@ -279,14 +280,14 @@
       "name": "Arcebispo Ignatius",
       "title": "Guardião da Chama Sagrada",
       "role": "Sacerdote",
-      "loyalty": 52,
-      "influence": 70,
+      "loyalty": 44,
+      "influence": 60,
       "alive": true,
       "traits": [
         "Piedoso",
         "Dogmático",
         "Tradicionalista",
-        "Perspicaz"
+        "Desconfiado"
       ],
       "faction": "clergy",
       "avatar": "🕊️"
@@ -296,14 +297,14 @@
       "name": "Inquisidor Malakor",
       "title": "Vigário da Chama Purificadora",
       "role": "Inquisidor",
-      "loyalty": 50,
-      "influence": 66,
+      "loyalty": 52,
+      "influence": 69,
       "alive": true,
       "traits": [
         "Fanático",
         "Severo",
         "Implacável",
-        "Leal"
+        "Empático"
       ],
       "faction": "clergy",
       "avatar": "🔥"
@@ -313,14 +314,14 @@
       "name": "Mestra Miriam dos Remédios",
       "title": "Boticária e Médica da Corte",
       "role": "Boticária",
-      "loyalty": 71,
-      "influence": 46,
+      "loyalty": 75,
+      "influence": 40,
       "alive": true,
       "traits": [
         "Humanitária",
         "Erudita",
         "Paz",
-        "Idealista"
+        "Audacioso"
       ],
       "faction": "clergy",
       "avatar": "🌿"
@@ -330,14 +331,13 @@
       "name": "Elenor dos Vales",
       "title": "Voz dos Lavradores",
       "role": "Camponesa",
-      "loyalty": 19,
-      "influence": 52,
+      "loyalty": 15,
+      "influence": 54,
       "alive": true,
       "traits": [
         "Obstinada",
         "Carismática",
-        "Idealista",
-        "Vigilante"
+        "Idealista"
       ],
       "faction": "peasants",
       "avatar": "🌾"
@@ -347,14 +347,14 @@
       "name": "Thomas dos Vales",
       "title": "Líder dos Camponeses Armados",
       "role": "Revolucionário",
-      "loyalty": 19,
+      "loyalty": 15,
       "influence": 64,
       "alive": true,
       "traits": [
         "Feroz",
         "Vingativo",
         "Corajoso",
-        "Empático"
+        "Silencioso"
       ],
       "faction": "peasants",
       "avatar": "⚒️"
@@ -364,14 +364,14 @@
       "name": "Marta do Forno Comunitário",
       "title": "Matriarca da Cidade Baixa",
       "role": "Trabalhadora",
-      "loyalty": 45,
-      "influence": 41,
+      "loyalty": 33,
+      "influence": 36,
       "alive": true,
       "traits": [
         "Sincera",
         "Sofrida",
         "Generosa",
-        "Rancoroso"
+        "Audacioso"
       ],
       "faction": "peasants",
       "avatar": "👵"
@@ -447,63 +447,59 @@
   "delayedEvents": [],
   "history": [],
   "currentEvent": {
-    "id": "khar_raiders_border",
-    "title": "Cavaleiros de Khar no Horizonte",
-    "description": "Bandos de saqueadores das estepes de Khar queimaram postos avançados e roubaram rebanhos inteiros nas vilas setentrionais. O General exige ação rápida.",
-    "characterId": "general_thorne",
+    "id": "valoria_coronation_jubilee",
+    "title": "O Jubileu da Coroação nos Salões de Mármore",
+    "description": "Embaixadores e barões de todas as províncias chegam à capital para celebrar o aniversário de coroação da dinastia. Mestre Alistair e Lorde Vane debatem se a coroa deve oferecer um banquete suntuoso com esmolas ou reservar os cofres para fortificações.",
+    "characterId": "chancellor_vane",
     "tags": [
-      "fronteira",
-      "militar",
-      "combate"
+      "celebração",
+      "corte",
+      "ouro"
     ],
-    "weight": 9,
-    "chain": {
-      "id": "chain_khar_war",
-      "step": 1,
-      "maxSteps": 3,
-      "branchOnChoice": {
-        "strike_back": "khar_step2_counterattack_ambush",
-        "build_border_forts": "khar_step2_siege_of_forts"
-      }
-    },
+    "weight": 15,
     "choices": [
       {
-        "id": "strike_back",
-        "label": "Lançar contra-ofensiva de cavalaria para esmagar os invasores",
-        "intentDescription": "Demonstra força mas arrisca baixas militares.",
+        "id": "grand_jubilee_feast",
+        "label": "Promover grandioso banquete e distribuir carretas de pão ao povo",
+        "intentDescription": "Gasta recursos para elevar ao máximo a lealdade das massas e da nobreza.",
         "actions": [
           {
-            "type": "MODIFY_MILITARY",
-            "amount": -5
+            "type": "ADD_GOLD",
+            "amount": -110
           },
           {
             "type": "ADD_FOOD",
-            "amount": 80,
-            "reason": "Gado recuperado"
+            "amount": -60
           },
           {
             "type": "MODIFY_STABILITY",
-            "amount": 10
+            "amount": 15
           },
           {
-            "type": "MODIFY_RELATION",
-            "targetId": "khar",
-            "amount": -25
+            "type": "MODIFY_FACTION",
+            "faction": "nobles",
+            "amount": 15
+          },
+          {
+            "type": "MODIFY_FACTION",
+            "faction": "peasants",
+            "amount": 20
           }
         ]
       },
       {
-        "id": "build_border_forts",
-        "label": "Financiar uma cadeia de paliçadas e torres defensivas",
-        "intentDescription": "Investimento em proteção permanente.",
+        "id": "austere_prayer",
+        "label": "Celebrar com orações austeras na Sé e doar ouro aos mosteiros",
+        "intentDescription": "Agrada ao clero mantendo gastos reais comedidos.",
         "actions": [
           {
             "type": "ADD_GOLD",
-            "amount": -140
+            "amount": -50
           },
           {
-            "type": "MODIFY_MILITARY",
-            "amount": 15
+            "type": "MODIFY_FACTION",
+            "faction": "clergy",
+            "amount": 25
           },
           {
             "type": "MODIFY_STABILITY",

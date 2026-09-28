@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Encounter } from "@/lib/game/encounters";
 import { AnimatedProgressBar } from "@/components/ui/AnimatedProgressBar";
-import { Send, Zap, ArrowRight, Sparkles, MessageSquare, Shield, Crown } from "lucide-react";
+import { Send, Zap, ArrowRight, Sparkles, Crown, Volume2 } from "lucide-react";
 
 export type ChatMessage = {
   id: string;
@@ -68,6 +68,63 @@ function EffectCard({ text }: { text: string }) {
           showShimmer
         />
       </div>
+    </div>
+  );
+}
+
+// Componente com Efeito Typewriter e Animação de Fala Oral do Personagem
+function TypewriterMessage({
+  text,
+  speed = 18,
+  onComplete,
+}: {
+  text: string;
+  speed?: number;
+  onComplete?: () => void;
+}) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    setDisplayedText("");
+    setIsTyping(true);
+    let i = 0;
+
+    const timer = setInterval(() => {
+      if (i < text.length) {
+        setDisplayedText((prev) => prev + text.charAt(i));
+        i++;
+      } else {
+        clearInterval(timer);
+        setIsTyping(false);
+        onComplete?.();
+      }
+    }, speed);
+
+    return () => clearInterval(timer);
+  }, [text, speed, onComplete]);
+
+  const handleSkip = () => {
+    setDisplayedText(text);
+    setIsTyping(false);
+    onComplete?.();
+  };
+
+  return (
+    <div className="relative group">
+      <p className="text-sm text-[#f4f4f5] font-sans leading-relaxed">
+        {displayedText}
+        {isTyping && <span className="inline-block w-2 h-4 ml-0.5 bg-amber-400 animate-pulse" />}
+      </p>
+
+      {isTyping && (
+        <button
+          onClick={handleSkip}
+          className="mt-2 px-2 py-0.5 text-[9px] uppercase border border-amber-500/40 text-amber-300 bg-amber-950/30 hover:bg-amber-900/50 cursor-pointer font-mono font-bold"
+        >
+          [ Pular Digitação ⏩ ]
+        </button>
+      )}
     </div>
   );
 }
@@ -307,8 +364,9 @@ export function ConversationStage({
       {/* CARD DO PETICIONÁRIO / PERSONAGEM */}
       <div className="shrink-0 game-hud-panel border-b border-amber-500/30 p-4 sm:p-5">
         <div className="max-w-3xl mx-auto flex items-start gap-4">
-          <div className="text-4xl p-3.5 border-2 border-amber-500/40 bg-[#0a0b10] shrink-0 shadow-lg">
+          <div className="text-4xl p-3.5 border-2 border-amber-500/40 bg-[#0a0b10] shrink-0 shadow-lg relative">
             {encounter.character.avatar}
+            <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#0a0b10] animate-pulse" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
@@ -334,9 +392,10 @@ export function ConversationStage({
       {/* ÁREA DE MENSAGENS E DIÁLOGOS DE RPG */}
       <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4">
         <div className="max-w-3xl mx-auto space-y-4">
-          {messages.map((msg) => {
+          {messages.map((msg, idx) => {
             const isPlayer = msg.sender === "player";
             const isCounselor = msg.sender === "counselor";
+            const isLatestNpcMsg = !isPlayer && !isCounselor && idx === messages.length - 1;
 
             if (isCounselor) {
               return (
@@ -382,8 +441,9 @@ export function ConversationStage({
                   {encounter.character.avatar}
                 </div>
                 <div className="flex-1 space-y-2">
-                  <div className="text-xs uppercase text-amber-400 font-mono font-bold">
-                    {msg.senderName}
+                  <div className="text-xs uppercase text-amber-400 font-mono font-bold flex items-center gap-2">
+                    <span>{msg.senderName}</span>
+                    <Volume2 className="w-3.5 h-3.5 text-amber-400/80 animate-pulse" />
                   </div>
 
                   {msg.actionGesture && (
@@ -393,7 +453,11 @@ export function ConversationStage({
                   )}
 
                   <div className="p-4 game-card text-sm text-[#f4f4f5] font-sans leading-relaxed">
-                    {msg.text}
+                    {isLatestNpcMsg ? (
+                      <TypewriterMessage text={msg.text} />
+                    ) : (
+                      <p className="text-sm text-[#f4f4f5] font-sans leading-relaxed">{msg.text}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -424,7 +488,7 @@ export function ConversationStage({
 
           {isReplying && (
             <div className="flex items-center gap-3 text-xs text-amber-400 font-mono p-3">
-              <span>{encounter.character.name} pondera a resposta...</span>
+              <span className="animate-pulse">● {encounter.character.name} pensa e inicia a fala...</span>
             </div>
           )}
 
