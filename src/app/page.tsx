@@ -6,9 +6,8 @@ import { STORYLINES } from "@/content/storylines";
 import { StorylineDefinition } from "@/content/storylines/types";
 import { GameSummary } from "@/lib/db/repository";
 import { getSavedSessionsIndex } from "@/lib/storage/save-manager";
-import { ArrowRight, Dices } from "lucide-react";
+import { ArrowRight, Dices, Shield, Crown, Play, Sparkles } from "lucide-react";
 
-// Defaults por storyline
 const STORYLINE_DEFAULTS: Record<
   string,
   {
@@ -182,231 +181,189 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-[#f4f4f5] font-mono flex flex-col">
-      {/* TOPO */}
-      <header className="border-b border-[#27272a] px-6 py-4 flex items-center justify-between shrink-0">
-        <div>
-          <span className="text-[10px] uppercase tracking-widest text-[#52525b] block mb-0.5">
-            ROLEPLAY CONVERSACIONAL POR IA
-          </span>
-          <h1 className="font-royal text-2xl font-bold tracking-tight text-[#f4f4f5]">
-            COROA &amp; PALAVRA
-          </h1>
+    <div className="min-h-screen bg-[#06070a] text-[#f4f4f5] font-mono flex flex-col select-none">
+      {/* TOPO: BARRA DE GAME LAUNCHER */}
+      <header className="game-hud-panel border-b border-amber-500/30 px-6 py-4 flex items-center justify-between shrink-0 sticky top-0 z-50">
+        <div className="flex items-center gap-3">
+          <div className="p-2 border border-amber-500/40 bg-amber-950/30 text-amber-400 font-bold">
+            <Crown className="w-6 h-6 animate-pulse" />
+          </div>
+          <div>
+            <span className="text-[10px] uppercase tracking-widest text-amber-400/80 font-bold block">
+              GAME ENGINE SIMULATOR v2.5
+            </span>
+            <h1 className="font-royal text-2xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100">
+              COROA &amp; PALAVRA — KINGDOM SIMULATOR
+            </h1>
+          </div>
         </div>
         {savedGames.length > 0 && (
-          <div className="text-[10px] text-[#71717a]">
-            <span className="text-[#f4f4f5] font-bold">{savedGames.length}</span> reinados salvos
+          <div className="flex items-center gap-2 px-3 py-1.5 border border-amber-500/30 bg-amber-950/20 text-xs">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+            <span className="text-amber-200 font-bold">{savedGames.length}</span>
+            <span className="text-amber-400/70 uppercase text-[10px]">Partidas Salvas</span>
           </div>
         )}
       </header>
 
-      {/* CORPO PRINCIPAL — sidebar + conteúdo */}
+      {/* CORPO PRINCIPAL */}
       <div className="flex flex-1 overflow-hidden">
-        {/* SIDEBAR DE LORES */}
-        <aside className="w-52 shrink-0 border-r border-[#27272a] overflow-y-auto">
-          <div className="p-3 border-b border-[#27272a]">
-            <span className="text-[9px] uppercase tracking-widest text-[#52525b]">
-              Cenários
+        {/* SIDEBAR DE CAMPAÑAS E SELEÇÃO DE RPG */}
+        <aside className="w-64 sm:w-72 shrink-0 border-r border-[#272a38] overflow-y-auto bg-[#090b10] p-3 space-y-3">
+          <div className="pb-2 border-b border-[#272a38] flex items-center justify-between">
+            <span className="text-[10px] uppercase tracking-widest text-amber-400 font-bold">
+              1. Selecionar Campanha
             </span>
+            <span className="text-[10px] text-[#71717a]">({STORYLINES.length} Cenários)</span>
           </div>
-          <nav className="flex flex-col">
+
+          <nav className="space-y-2">
             {STORYLINES.map((s) => {
               const isSelected = selectedStoryline.id === s.id;
               return (
                 <button
                   key={s.id}
                   onClick={() => handleSelectStoryline(s)}
-                  className={`w-full text-left px-4 py-4 border-b border-[#1c1c1e] transition-colors cursor-pointer ${
-                    isSelected
-                      ? "bg-[#1c1c1e] border-l-2 border-l-[#f4f4f5]"
-                      : "hover:bg-[#111113] border-l-2 border-l-transparent"
+                  className={`w-full text-left p-3 text-xs transition-all cursor-pointer rounded-sm ${
+                    isSelected ? "game-card-active" : "game-card"
                   }`}
                 >
-                  <div className="text-[10px] text-[#52525b] uppercase mb-0.5">{s.era}</div>
-                  <div
-                    className={`text-xs font-bold leading-tight ${
-                      isSelected ? "text-[#f4f4f5]" : "text-[#a1a1aa]"
-                    }`}
-                  >
-                    {s.name}
-                  </div>
-                  <div className="flex items-center gap-1 mt-1.5">
-                    <span
-                      className={`text-[8px] uppercase px-1 py-0.5 border ${
-                        isSelected ? "border-[#52525b] text-[#71717a]" : "border-[#27272a] text-[#3f3f46]"
-                      }`}
-                    >
+                  <div className="flex items-center justify-between text-[10px] text-[#71717a] uppercase mb-1">
+                    <span>{s.era}</span>
+                    <span className="px-1.5 py-0.5 border border-amber-500/30 text-amber-300 bg-amber-950/20 font-bold">
                       {s.difficulty}
                     </span>
                   </div>
+                  <div className={`font-royal font-bold text-sm ${isSelected ? "text-amber-200" : "text-[#e2e8f0]"}`}>
+                    {s.name}
+                  </div>
+                  <p className="text-[11px] text-[#94a3b8] mt-1 line-clamp-2 font-sans">
+                    {s.subtitle}
+                  </p>
                 </button>
               );
             })}
           </nav>
         </aside>
 
-        {/* ÁREA PRINCIPAL */}
-        <main className="flex-1 overflow-y-auto p-6 space-y-6">
+        {/* ÁREA PRINCIPAL: DETALHES DO JOGO & PERSONAGEM */}
+        <main className="flex-1 overflow-y-auto p-6 space-y-6 bg-[#08090d]">
           {errorMsg && (
-            <div className="p-3 bg-[#18181b] border border-[#f4f4f5] text-xs text-[#f4f4f5]">
+            <div className="p-3 bg-red-950/60 border border-red-500/60 text-xs text-red-200 animate-pulse">
               [ ERRO: {errorMsg} ]
             </div>
           )}
 
-          {/* PREMISSA DO CENÁRIO */}
-          <section>
-            <div className="flex items-start justify-between gap-4 mb-3">
+          {/* DETALHES DO CENÁRIO EM GAME CARD */}
+          <section className="game-card p-5 space-y-3 relative overflow-hidden">
+            <div className="flex items-start justify-between gap-4">
               <div>
-                <div className="text-[10px] text-[#52525b] uppercase tracking-widest mb-1">
-                  {selectedStoryline.era}
+                <div className="text-[10px] text-amber-400 font-bold uppercase tracking-widest mb-1 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>{selectedStoryline.era}</span>
                 </div>
-                <h2 className="font-royal text-xl font-bold text-[#f4f4f5]">
+                <h2 className="font-royal text-2xl font-bold text-amber-100">
                   {selectedStoryline.name}
                 </h2>
-                <p className="text-xs text-[#71717a] mt-0.5">{selectedStoryline.subtitle}</p>
+                <p className="text-xs text-[#94a3b8] mt-1 font-sans">{selectedStoryline.subtitle}</p>
               </div>
-              <div className="flex items-center gap-2 shrink-0 text-[9px] uppercase">
-                {selectedStoryline.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-1.5 py-0.5 border border-[#27272a] text-[#52525b]"
-                  >
+              <div className="flex items-center gap-1.5 shrink-0 text-[10px] uppercase">
+                {selectedStoryline.tags.map((tag) => (
+                  <span key={tag} className="px-2 py-0.5 border border-[#333952] bg-[#11131c] text-amber-300 font-bold">
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="p-4 bg-[#111113] border border-[#27272a]">
-              <p className="text-[11px] text-[#a1a1aa] leading-relaxed font-sans whitespace-pre-line">
-                {selectedStoryline.worldLorePrompt.trim()}
-              </p>
+            <div className="p-4 bg-[#0a0b10] border border-[#272a38] text-xs text-[#cbd5e1] font-sans leading-relaxed whitespace-pre-line">
+              {selectedStoryline.worldLorePrompt.trim()}
             </div>
           </section>
 
-          {/* FORMULÁRIO DE CUSTOMIZAÇÃO */}
-          <form onSubmit={handleCreate} className="space-y-5">
-            <div className="border-b border-[#27272a] pb-1">
-              <span className="text-[9px] uppercase tracking-widest text-[#52525b]">
-                {selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                  ? "Defina seu Líder e Reduto"
-                  : selectedStoryline.id === "colony_exodus"
-                  ? "Defina seu Diretor e Estação"
-                  : "Quem é você no poder"}
+          {/* PAINEL DE CRIAÇÃO DO LÍDER */}
+          <form onSubmit={handleCreate} className="game-card p-5 space-y-5 border-amber-500/30">
+            <div className="border-b border-[#272a38] pb-2 flex items-center justify-between">
+              <span className="text-xs uppercase tracking-widest text-amber-400 font-bold flex items-center gap-2">
+                <Shield className="w-4 h-4 text-amber-400" />
+                <span>2. Atributos &amp; Perfil do Regente</span>
               </span>
+              <span className="text-[10px] text-[#71717a]">Customização Livre</span>
             </div>
 
-            {/* Linha 1: nome, título, domínio */}
+            {/* Nome, Título, Domínio */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="text-[10px] text-[#52525b] uppercase block mb-1.5">
-                  {selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                    ? "Nome do Líder"
-                    : selectedStoryline.id === "colony_exodus"
-                    ? "Nome do Diretor"
-                    : "Nome do Governante"}
+                <label className="text-[10px] text-[#94a3b8] uppercase block mb-1 font-bold">
+                  Nome do Governante
                 </label>
                 <input
                   type="text"
                   value={rulerName}
                   onChange={(e) => setRulerName(e.target.value)}
                   required
-                  className="w-full bg-[#111113] border border-[#27272a] focus:border-[#71717a] px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
+                  className="w-full bg-[#0a0b10] border border-[#333952] focus:border-amber-400 px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
                 />
               </div>
               <div>
-                <label className="text-[10px] text-[#52525b] uppercase block mb-1.5">
-                  {selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                    ? "Posto / Patente"
-                    : selectedStoryline.id === "colony_exodus"
-                    ? "Cargo Oficial"
-                    : "Título Oficial"}
+                <label className="text-[10px] text-[#94a3b8] uppercase block mb-1 font-bold">
+                  Cargo / Título
                 </label>
                 <input
                   type="text"
                   value={rulerTitle}
                   onChange={(e) => setRulerTitle(e.target.value)}
                   required
-                  className="w-full bg-[#111113] border border-[#27272a] focus:border-[#71717a] px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
+                  className="w-full bg-[#0a0b10] border border-[#333952] focus:border-amber-400 px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
                 />
               </div>
               <div>
-                <label className="text-[10px] text-[#52525b] uppercase block mb-1.5">
-                  {selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                    ? "Nome do Reduto / Base"
-                    : selectedStoryline.id === "colony_exodus"
-                    ? "Nome da Estação / Frota"
-                    : "Nome do Domínio"}
+                <label className="text-[10px] text-[#94a3b8] uppercase block mb-1 font-bold">
+                  Nome do Domínio
                 </label>
                 <input
                   type="text"
                   value={realmName}
                   onChange={(e) => setRealmName(e.target.value)}
                   required
-                  className="w-full bg-[#111113] border border-[#27272a] focus:border-[#71717a] px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
+                  className="w-full bg-[#0a0b10] border border-[#333952] focus:border-amber-400 px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
                 />
               </div>
             </div>
 
-            {/* Linha 2: arquétipo (TEXTO LIVRE), origem (TEXTO LIVRE), seed */}
+            {/* Arquétipo, Origem, Seed */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="text-[10px] text-[#52525b] uppercase block mb-1.5">
-                  {selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                    ? "Perfil de Comando"
-                    : selectedStoryline.id === "colony_exodus"
-                    ? "Especialidade / Perfil"
-                    : "Arquétipo de Liderança"}
+                <label className="text-[10px] text-[#94a3b8] uppercase block mb-1 font-bold">
+                  Arquétipo de Liderança
                 </label>
                 <input
                   type="text"
                   value={archetype}
                   onChange={(e) => setArchetype(e.target.value)}
-                  placeholder={
-                    selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                    ? "Ex: Atirador de Elite, Médico de Campo, Tático Furtivo..."
-                    : selectedStoryline.id === "colony_exodus"
-                    ? "Ex: Engenheira de Sistemas, Cientista Clínca, Pilota de Combate..."
-                    : "Ex: Tirano Calculista, Monge Guerreiro..."
-                  }
-                  className="w-full bg-[#111113] border border-[#27272a] focus:border-[#71717a] px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none placeholder:text-[#3f3f46]"
+                  placeholder="Ex: Diplomata Cínico, General de Ferro..."
+                  className="w-full bg-[#0a0b10] border border-[#333952] focus:border-amber-400 px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
                 />
-                <p className="text-[9px] text-[#3f3f46] mt-1 font-sans">
-                  Qualquer descrição — guiará os diálogos da IA
-                </p>
               </div>
               <div>
-                <label className="text-[10px] text-[#52525b] uppercase block mb-1.5">
-                  {selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                    ? "Como Chegou ao Comando"
-                    : selectedStoryline.id === "colony_exodus"
-                    ? "Motivo da Promoção"
-                    : "Origem da Ascensão"}
+                <label className="text-[10px] text-[#94a3b8] uppercase block mb-1 font-bold">
+                  Origem da Ascensão
                 </label>
                 <input
                   type="text"
                   value={origin}
                   onChange={(e) => setOrigin(e.target.value)}
-                  placeholder={
-                    selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                    ? "Ex: Sobrevivência brutal, Eleito pela comunidade, Golpe interno..."
-                    : selectedStoryline.id === "colony_exodus"
-                    ? "Ex: Promoção após motim, Escolha da IA central, Concurso mérito..."
-                    : "Ex: Golpe de Palácio, Profecia, Herança..."
-                  }
-                  className="w-full bg-[#111113] border border-[#27272a] focus:border-[#71717a] px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none placeholder:text-[#3f3f46]"
+                  placeholder="Ex: Herdeiro, Golpe, Eleito..."
+                  className="w-full bg-[#0a0b10] border border-[#333952] focus:border-amber-400 px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
                 />
-                <p className="text-[9px] text-[#3f3f46] mt-1 font-sans">
-                  Contexto histórico da sua chegada ao poder
-                </p>
               </div>
               <div>
-                <label className="text-[10px] text-[#52525b] uppercase block mb-1.5 flex items-center justify-between">
+                <label className="text-[10px] text-[#94a3b8] uppercase block mb-1 font-bold flex items-center justify-between">
                   <span>Seed Determinística</span>
                   <button
                     type="button"
                     onClick={handleRollSeed}
-                    className="text-[#71717a] hover:text-[#f4f4f5] cursor-pointer flex items-center gap-1 transition-colors"
+                    className="text-amber-400 hover:text-amber-300 cursor-pointer flex items-center gap-1"
                   >
                     <Dices className="w-3 h-3" />
                     <span>Sortear</span>
@@ -417,95 +374,70 @@ export default function HomePage() {
                   value={seed}
                   onChange={(e) => setSeed(parseInt(e.target.value) || 12345)}
                   required
-                  className="w-full bg-[#111113] border border-[#27272a] focus:border-[#71717a] px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
+                  className="w-full bg-[#0a0b10] border border-[#333952] focus:border-amber-400 px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
                 />
-                <p className="text-[9px] text-[#3f3f46] mt-1 font-sans">
-                  Controla geração do mapa e eventos
-                </p>
               </div>
             </div>
 
-            {/* Motivação pessoal */}
+            {/* Motivação secreta */}
             <div>
-              <label className="text-[10px] text-[#52525b] uppercase block mb-1.5">
-                {selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                  ? "Missão Principal / Motivação Oculta"
-                  : selectedStoryline.id === "colony_exodus"
-                  ? "Diretriz Central / Meta de Governo"
-                  : "Juramento Secreto / Motivação Pessoal"}
+              <label className="text-[10px] text-[#94a3b8] uppercase block mb-1 font-bold">
+                Juramento Secreto / Diretriz Central
               </label>
               <input
                 type="text"
                 value={personalIntent}
                 onChange={(e) => setPersonalIntent(e.target.value)}
-                placeholder={
-                  selectedStoryline.id === "rio_zombie" || selectedStoryline.id === "zombie_apocalypse"
-                  ? "Ex: Salvar os sobreviventes, encontrar o antídoto, deter a milícia..."
-                  : selectedStoryline.id === "colony_exodus"
-                  ? "Ex: Preservar a espécie, chegar ao exoplaneta, derrotar os piratas cósmicos..."
-                  : "Ex: Proteger os celeiros a qualquer custo, esmagar barões corruptos..."
-                }
-                className="w-full bg-[#111113] border border-[#27272a] focus:border-[#71717a] px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none placeholder:text-[#3f3f46]"
+                placeholder="Ex: Consolidar o tesouro e guiar o povo à vitória..."
+                className="w-full bg-[#0a0b10] border border-[#333952] focus:border-amber-400 px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none"
               />
-              <p className="text-[9px] text-[#3f3f46] mt-1 font-sans">
-                Guia a IA e influencia os diálogos de forma permanente durante toda a campanha
-              </p>
             </div>
 
             <button
               type="submit"
               disabled={isCreating}
-              className="w-full py-3.5 px-6 bg-[#f4f4f5] hover:bg-[#e4e4e7] disabled:opacity-40 text-[#09090b] font-mono font-bold text-xs uppercase tracking-widest transition-all cursor-pointer active:translate-y-0.5 flex items-center justify-center gap-2"
+              className="w-full py-4 game-btn-primary cursor-pointer uppercase tracking-widest text-xs flex items-center justify-center gap-2 active:scale-[0.99] transition-all"
             >
               {isCreating ? (
-                <span>GERANDO CAMPANHA E MUNDO...</span>
+                <span>GERANDO MUNDO &amp; NARRATIVA...</span>
               ) : (
                 <>
-                  <span>[ INICIAR REINADO: {selectedStoryline.name.toUpperCase()} ]</span>
+                  <Play className="w-4 h-4 fill-black" />
+                  <span>[ CONSAGRAR E INICIAR REINADO: {selectedStoryline.name.toUpperCase()} ]</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>
           </form>
 
-          {/* REINADOS EM ANDAMENTO */}
+          {/* SLOTS DE CARREGAR PARTIDA */}
           {savedGames.length > 0 && (
-            <section className="pt-4 border-t border-[#27272a] space-y-3">
-              <span className="text-[9px] uppercase tracking-widest text-[#52525b] block">
-                Campanhas em Andamento
+            <section className="space-y-3 pt-2">
+              <span className="text-xs uppercase tracking-widest text-amber-400 font-bold block">
+                Slots de Partida em Andamento
               </span>
-              <div className="space-y-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {savedGames.map((game) => (
                   <div
                     key={game.id}
-                    className="p-3 bg-[#111113] border border-[#27272a] hover:border-[#3f3f46] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs transition-colors"
+                    className="game-card p-3.5 flex items-center justify-between gap-3 text-xs"
                   >
                     <div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold text-[#f4f4f5]">{game.name}</span>
-                        <span className="text-[#52525b]">({game.rulerName})</span>
-                        {game.isGameOver && (
-                          <span className="text-[8px] px-1 bg-[#27272a] text-red-400 uppercase">
-                            Colapsado
-                          </span>
-                        )}
+                      <div className="font-bold text-[#f4f4f5] flex items-center gap-2">
+                        <span>{game.name}</span>
+                        <span className="text-[#94a3b8] font-normal">({game.rulerName})</span>
                       </div>
-                      <div className="text-[10px] text-[#52525b] mt-0.5">
+                      <div className="text-[10px] text-[#71717a] mt-1">
                         Turno {game.turn} • Ano {game.year} • {game.storylineTitle || "Valoria"}
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                       <button
-                        onClick={() => router.push(`/intro/${game.id}`)}
-                        className="px-2.5 py-1 bg-[#18181b] hover:bg-[#27272a] border border-[#3f3f46] text-[#71717a] hover:text-[#f4f4f5] cursor-pointer transition-colors text-[10px]"
-                      >
-                        [ Prólogo ]
-                      </button>
-                      <button
                         onClick={() => router.push(`/play/${game.id}`)}
-                        className="px-3 py-1 bg-[#f4f4f5] hover:bg-[#e4e4e7] text-[#09090b] font-bold cursor-pointer text-[10px]"
+                        className="px-3 py-1.5 game-btn-primary cursor-pointer text-[10px] flex items-center gap-1"
                       >
-                        [ Retomar → ]
+                        <Play className="w-3 h-3 fill-black" />
+                        <span>Jogar →</span>
                       </button>
                     </div>
                   </div>
@@ -515,12 +447,6 @@ export default function HomePage() {
           )}
         </main>
       </div>
-
-      {/* RODAPÉ */}
-      <footer className="border-t border-[#27272a] px-6 py-3 text-[9px] text-[#3f3f46] flex flex-col sm:flex-row items-center justify-between gap-1 shrink-0">
-        <span>SQLITE LOCAL • GROQ CLOUD (LLAMA 3.3 70B)</span>
-        <span>ESTRUTURA MULTI-PÁGINAS — APP ROUTER</span>
-      </footer>
     </div>
   );
 }
