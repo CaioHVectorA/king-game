@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Encounter } from "@/lib/game/encounters";
 import { AnimatedProgressBar } from "@/components/ui/AnimatedProgressBar";
-import { Send, Zap, ArrowRight } from "lucide-react";
+import { Send, Zap, ArrowRight, Sparkles } from "lucide-react";
 
 export type ChatMessage = {
   id: string;
@@ -511,6 +511,42 @@ export function ConversationStage({
           ) : (
             /* ─── ESTADO ATIVO: CHAT NORMAL ──────────────────────────────── */
             <>
+              {/* Sugestões Táticas Rápidas de IA / Roleplay ("1-Click Roleplay") */}
+              {encounter.choices && encounter.choices.length > 0 && (
+                <div className="space-y-1.5 pb-1">
+                  <div className="flex items-center gap-1.5 text-[10px] text-[#a1a1aa] font-mono uppercase tracking-wider">
+                    <Sparkles className="w-3 h-3 text-amber-400 shrink-0 animate-pulse" />
+                    <span>Sugestões Táticas de Liderança (Clique para preencher/editar):</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {encounter.choices.map((choice, idx) => (
+                      <button
+                        key={choice.id || idx}
+                        type="button"
+                        onClick={() => {
+                          setInputText(choice.speechReply || choice.label);
+                          setTimeout(() => inputRef.current?.focus(), 50);
+                        }}
+                        className="px-2.5 py-1 text-xs bg-[#141418] hover:bg-[#1f1f26] border border-[#27272a] hover:border-[#52525b] text-[#d4d4d8] hover:text-[#f4f4f5] transition-all cursor-pointer font-sans truncate max-w-[260px] text-left"
+                        title={choice.label}
+                      >
+                        ⚡ {choice.label}
+                      </button>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setInputText(`Exijo relatório detalhado sobre as opções de ${encounter.character.name} antes de qualquer decreto.`);
+                        setTimeout(() => inputRef.current?.focus(), 50);
+                      }}
+                      className="px-2.5 py-1 text-xs bg-[#141418] hover:bg-[#1f1f26] border border-[#27272a] hover:border-[#52525b] text-[#a1a1aa] hover:text-[#f4f4f5] transition-all cursor-pointer font-sans"
+                    >
+                      🔍 Questionar com cautela
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* Dicas de Roleplay e Ações Livres */}
               <div className="flex items-center justify-between text-xs tracking-wider text-[#a1a1aa] font-mono">
                 <span>

@@ -445,6 +445,36 @@ export default function PlayPage() {
                     )}
                   </div>
 
+                  {/* METAS DINÁSTICAS DE REPLAYABILITY */}
+                  {state.dynasticGoals && state.dynasticGoals.length > 0 && (
+                    <div className="p-3 border border-amber-500/30 bg-[#120f08] space-y-2">
+                      <div className="text-[10px] uppercase tracking-widest text-amber-400 font-mono font-bold flex items-center justify-between">
+                        <span>🏆 Metas Dinásticas</span>
+                        <span className="text-[#71717a]">
+                          {state.dynasticGoals.filter((g) => g.completed).length}/{state.dynasticGoals.length}
+                        </span>
+                      </div>
+                      <div className="space-y-1.5">
+                        {state.dynasticGoals.map((goal) => (
+                          <div
+                            key={goal.id}
+                            className={`p-2 border text-xs font-sans transition-colors ${
+                              goal.completed
+                                ? "border-emerald-500/40 bg-[#0a180e] text-emerald-200"
+                                : "border-[#27272a] bg-[#0d0d10] text-[#a1a1aa]"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between font-mono font-bold">
+                              <span>{goal.completed ? "✓ " : "○ "}{goal.title}</span>
+                              {goal.completed && <span className="text-[9px] text-emerald-400">Concluída</span>}
+                            </div>
+                            <p className="text-[11px] mt-0.5 leading-snug">{goal.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {feelingsList.map((f) => (
                     <div
                       key={f.label}

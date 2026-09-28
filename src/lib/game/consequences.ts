@@ -131,6 +131,30 @@ export function processEndOfTurnEffects(state: KingdomState, prng: PRNG): {
     });
   }
 
+  // 4. Verificação e Conclusão de Metas Dinásticas
+  if (next.dynasticGoals && next.dynasticGoals.length > 0) {
+    next.dynasticGoals = next.dynasticGoals.map((goal) => {
+      if (goal.completed) return goal;
+
+      let isReached = false;
+      if (goal.targetType === "gold" && next.gold >= goal.targetValue) isReached = true;
+      if (goal.targetType === "food" && next.food >= goal.targetValue) isReached = true;
+      if (goal.targetType === "population" && next.population >= goal.targetValue) isReached = true;
+      if (goal.targetType === "stability" && next.stability >= goal.targetValue) isReached = true;
+      if (goal.targetType === "military" && next.military >= goal.targetValue) isReached = true;
+      if (goal.targetType === "turns" && next.turn >= goal.targetValue) isReached = true;
+      if (goal.targetType === "laws" && next.laws.length >= goal.targetValue) isReached = true;
+
+      if (isReached) {
+        upkeepMessages.push(`🏆 Meta Dinástica Concluída: [${goal.title}]! Recompensa: ${goal.rewardText}`);
+        next.stability = clamp(next.stability + 10, LIMITS.MIN_STABILITY, LIMITS.MAX_STABILITY);
+        return { ...goal, completed: true };
+      }
+
+      return goal;
+    });
+  }
+
   // Limpar delayed events já consumidos neste turno
   next.delayedEvents = next.delayedEvents.filter((d) => d.triggerAtTurn > next.turn);
 
