@@ -14,6 +14,10 @@ import { processEndOfTurnEffects } from "./consequences";
 import { PRNG } from "./rng";
 import { cloneKingdomState } from "./state";
 import { appendLivingDocument } from "./documents";
+import { detectAndPlantEcho, checkMaturingEchoes } from "./consequence-echoes";
+import { evolvePsychology, updateVoiceWhispers } from "./mind-palace";
+import { evaluateFactionsTurn } from "./factions-matrix";
+import { calculateDynasticScore, evaluateDynasticEnding } from "./endings-codex";
 
 export async function processTurn(
   currentState: KingdomState,
@@ -345,6 +349,48 @@ export async function processTurn(
     effectsSummary.push(msg);
   }
 
+  // 6.1 Manutenção dos Éditos em Vigor
+  if (state.edicts) {
+    for (const edict of state.edicts) {
+      if (edict.isEnacted) {
+        if (edict.monthlyMaintenance?.gold) {
+          state.gold = Math.max(0, state.gold - edict.monthlyMaintenance.gold);
+        }
+        if (edict.monthlyMaintenance?.food) {
+          state.food = Math.max(0, state.food - edict.monthlyMaintenance.food);
+        }
+      }
+    }
+  }
+
+  // 6.2 Ecos Narrativos Kármicos
+  const plantedEcho = detectAndPlantEcho(state.turn, decisionLabel, currentEvent.title);
+  if (plantedEcho) {
+    state.echoes = [...(state.echoes || []), plantedEcho];
+  }
+  const echoEval = checkMaturingEchoes(state);
+  state.echoes = echoEval.activeEchoes;
+  for (const echoText of echoEval.echoNarratives) {
+    effectsSummary.push(echoText);
+  }
+
+  // 6.3 Evolução Psicológica do Soberano (Mind Palace)
+  if (state.psychology) {
+    state.psychology = evolvePsychology(state.psychology, decisionLabel, {
+      stabilityDelta: state.stability - currentState.stability,
+    });
+  }
+
+  // 6.4 Matriz de Facções Vivas
+  const factionEval = evaluateFactionsTurn(state);
+  state.livingFactions = factionEval.updatedFactions;
+  for (const threatMsg of factionEval.threatsTriggered) {
+    effectsSummary.push(threatMsg);
+  }
+
+  // 6.5 Pontuação Dinástica
+  state.dynasticScore = calculateDynasticScore(state);
+
   // 7. Registro de Histórico Dinástico
   const historyEntry: GameHistoryEntry = {
     id: `hist_${state.turn}_${Date.now()}`,
@@ -386,6 +432,12 @@ export async function processTurn(
 
   // 9. Seleciona o Próximo Evento
   state.currentEvent = selectNextEvent(state, prng);
+
+  // 9.1 Atualiza os sussurros do Mind Palace para o novo dilema
+  if (state.currentEvent && state.psychology) {
+    const petitionerChar = state.currentEvent.characterId ? state.characters[state.currentEvent.characterId] : undefined;
+    state.psychology.voices = updateVoiceWhispers(state, state.currentEvent.description, petitionerChar?.name);
+  }
 
   return {
     state,

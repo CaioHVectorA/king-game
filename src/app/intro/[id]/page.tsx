@@ -7,6 +7,7 @@ import { getKingdomFeelings } from "@/lib/game/feelings";
 import { KingdomMap } from "@/components/map/KingdomMap";
 import { AnimatedProgressBar } from "@/components/ui/AnimatedProgressBar";
 import { ArrowLeft, ArrowRight, MessageSquare, Send, Shield, Compass, Sparkles } from "lucide-react";
+import { gameAudio } from "@/lib/audio/game-audio";
 
 export default function IntroPage() {
   const params = useParams();
@@ -558,10 +559,14 @@ export default function IntroPage() {
         </span>
 
         <button
-          onClick={() => router.push(`/play/${state.id}`)}
-          className="w-full sm:w-auto px-6 py-3.5 bg-[#f4f4f5] hover:bg-[#e4e4e7] text-[#09090b] font-bold text-xs uppercase tracking-widest cursor-pointer transition-all active:translate-y-0.5 flex items-center justify-center gap-2"
+          onClick={() => {
+            gameAudio.playStartGame();
+            router.push(`/play/${state.id}`);
+          }}
+          onMouseEnter={() => gameAudio.playHover()}
+          className="w-full sm:w-auto px-8 py-3.5 game-btn-gold rounded text-xs uppercase tracking-widest cursor-pointer transition-all active:translate-y-0.5 flex items-center justify-center gap-2 shadow-lg"
         >
-          <span>[ {labels.begin} ]</span>
+          <span>{labels.begin}</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </footer>

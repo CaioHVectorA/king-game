@@ -5,6 +5,8 @@ import { darkPlagueStoryline } from "./dark-plague";
 import { colonyExodusStoryline } from "./colony-exodus";
 import { zombieApocalypseStoryline } from "./zombie-apocalypse";
 import { rioZombieStoryline } from "./rio-zombie";
+import { republicaDeSangueStoryline } from "./republica-sangue";
+import { arcaniaTronoStoryline } from "./arcania-trono";
 
 export * from "./types";
 
@@ -12,6 +14,8 @@ export const STORYLINES: StorylineDefinition[] = [
   valoriaClassicStoryline,
   kharInvasionStoryline,
   darkPlagueStoryline,
+  republicaDeSangueStoryline,
+  arcaniaTronoStoryline,
   colonyExodusStoryline,
   zombieApocalypseStoryline,
   rioZombieStoryline,

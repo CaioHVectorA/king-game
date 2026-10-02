@@ -234,6 +234,16 @@ export type KingdomState = {
   currentEvent: GameEvent | null;
   pendingDynamicEvent?: GameEvent | null;
 
+  // ─── NOVA GERAÇÃO: MECÂNICAS SOBERANIA ───
+  psychology?: import("./sovereign").LeaderPsychology;
+  livingFactions?: Record<import("./sovereign").FactionId, import("./sovereign").LivingFaction>;
+  echoes?: import("./sovereign").ConsequenceEcho[];
+  edicts?: import("./sovereign").EdictDefinition[];
+  provinces?: import("./sovereign").RealmProvince[];
+  conspiracies?: import("./sovereign").CourtConspiracy[];
+  unlockedEndings?: string[];
+  dynasticScore?: number;
+
   isGameOver: boolean;
   gameOverReason?: string;
   isVictory?: boolean;

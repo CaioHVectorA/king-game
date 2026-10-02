@@ -4,6 +4,11 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Encounter } from "@/lib/game/encounters";
 import { AnimatedProgressBar } from "@/components/ui/AnimatedProgressBar";
 import { Send, Zap, ArrowRight } from "lucide-react";
+import { gameAudio } from "@/lib/audio/game-audio";
+
+import { ChoiceDilemma, ChoiceDilemmaOption } from "@/types/sovereign";
+import { DilemmaChoiceDeck } from "@/components/sovereign/DilemmaChoiceDeck";
+import { Sparkles, ChevronDown, ChevronUp } from "lucide-react";
 
 export type ChatMessage = {
   id: string;
@@ -27,6 +32,7 @@ interface ConversationStageProps {
   } | null;
   onConcludeAudience: (finalDecree: string) => void;
   onNextAudience: () => void;
+  dilemma?: ChoiceDilemma | null;
 }
 
 // Detecta se a mensagem é uma ação (começa com * ou [)
@@ -82,6 +88,7 @@ export function ConversationStage({
   feedback,
   onConcludeAudience,
   onNextAudience,
+  dilemma,
 }: ConversationStageProps) {
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
@@ -99,6 +106,13 @@ export function ConversationStage({
   const [isReplying, setIsReplying] = useState(false);
   const [isConcluded, setIsConcluded] = useState(false);
   const [concludingGesture, setConcludingGesture] = useState<string | null>(null);
+  const [isDilemmaOpen, setIsDilemmaOpen] = useState(true);
+
+  const handleSelectDilemmaOption = (option: ChoiceDilemmaOption) => {
+    gameAudio.playScroll();
+    setInputText(option.promptSuggestion || option.label);
+    inputRef.current?.focus();
+  };
 
   const chatBottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -221,6 +235,7 @@ export function ConversationStage({
 
   // Encerrar audiência e processar o turno com a ordem final do jogador
   const handleDirectDecree = useCallback(() => {
+    gameAudio.playDecree();
     const text = inputText.trim();
     if (text) {
       setInputText("");
@@ -302,16 +317,20 @@ export function ConversationStage({
         <div className="pt-2">
           <button
             ref={nextAudienceBtnRef}
-            onClick={onNextAudience}
-            className="w-full py-4 bg-[#f4f4f5] hover:bg-white text-[#09090b] font-bold text-xs uppercase tracking-widest cursor-pointer transition-all flex items-center justify-center gap-2 shadow-lg shadow-white/5 active:scale-[0.99] border border-white"
+            onClick={() => {
+              gameAudio.playClick();
+              onNextAudience();
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="w-full py-4 game-btn-gold rounded text-xs uppercase tracking-widest cursor-pointer transition-all flex items-center justify-center gap-2 shadow-xl active:translate-y-0.5"
           >
             <span>Próxima Audiência</span>
             <ArrowRight className="w-4 h-4" />
-            <span className="text-[9px] font-mono opacity-60 ml-2 px-1.5 py-0.5 border border-black/20 bg-black/10">
+            <span className="text-[9px] font-mono opacity-80 ml-2 px-1.5 py-0.5 border border-amber-300/40 bg-black/20 rounded">
               Enter
             </span>
           </button>
-          <div className="text-center mt-2 text-[8px] text-[#52525b] font-mono">
+          <div className="text-center mt-2 text-[9px] text-zinc-500 font-mono">
             Pressione [Enter] ou [Espaço] para avançar imediatamente para a próxima audiência
           </div>
         </div>
@@ -511,6 +530,43 @@ export function ConversationStage({
           ) : (
             /* ─── ESTADO ATIVO: CHAT NORMAL ──────────────────────────────── */
             <>
+              {/* DELIBERAÇÕES RECOMENDADAS PELO CONSELHO & VOZES DA MENTE */}
+              {dilemma && dilemma.options && dilemma.options.length > 0 && (
+                <div className="border border-zinc-800 bg-[#121217] p-3 rounded space-y-2 mb-2">
+                  <div className="flex items-center justify-between">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        gameAudio.playClick();
+                        setIsDilemmaOpen((prev) => !prev);
+                      }}
+                      className="flex items-center gap-2 text-xs font-mono uppercase text-amber-400 hover:text-amber-300 font-bold cursor-pointer transition-colors"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Vozes da Mente &amp; Deliberações ({dilemma.options.length})</span>
+                      {isDilemmaOpen ? (
+                        <ChevronUp className="w-3.5 h-3.5 text-zinc-400" />
+                      ) : (
+                        <ChevronDown className="w-3.5 h-3.5 text-zinc-400" />
+                      )}
+                    </button>
+                    <span className="text-[10px] text-zinc-400 font-mono hidden sm:inline">
+                      Clique em um card para formular seu decreto
+                    </span>
+                  </div>
+
+                  {isDilemmaOpen && (
+                    <div className="pt-1">
+                      <DilemmaChoiceDeck
+                        dilemma={dilemma}
+                        onSelectOption={handleSelectDilemmaOption}
+                        disabled={isLoadingTurn || isReplying}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Dicas de Roleplay e Ações Livres */}
               <div className="flex items-center justify-between text-xs tracking-wider text-[#a1a1aa] font-mono">
                 <span>
@@ -537,10 +593,11 @@ export function ConversationStage({
                   <button
                     type="submit"
                     disabled={!inputText.trim() || isReplying || isLoadingTurn}
-                    className="px-4 py-2.5 bg-[#1c1c20] hover:bg-[#27272a] disabled:opacity-30 border border-[#3f3f46] text-[#f4f4f5] text-xs cursor-pointer flex items-center justify-center gap-1.5 transition-colors font-medium"
+                    onMouseEnter={() => gameAudio.playHover()}
+                    className="px-4 py-2.5 game-btn disabled:opacity-30 rounded text-xs cursor-pointer flex items-center justify-center gap-1.5 transition-colors font-medium"
                     title="Enviar fala/pergunta (Enter)"
                   >
-                    <Send className="w-3.5 h-3.5" />
+                    <Send className="w-3.5 h-3.5 text-amber-400" />
                     <span className="text-xs hidden sm:inline">Conversar</span>
                   </button>
 
@@ -548,10 +605,11 @@ export function ConversationStage({
                     type="button"
                     onClick={handleDirectDecree}
                     disabled={isLoadingTurn || isReplying}
-                    className="px-4 py-2.5 bg-[#f4f4f5] hover:bg-white text-[#09090b] font-bold text-xs uppercase tracking-wider cursor-pointer disabled:opacity-30 flex items-center justify-center gap-1 transition-all shadow-md active:scale-[0.98]"
+                    onMouseEnter={() => gameAudio.playHover()}
+                    className="px-4 py-2.5 game-btn-gold rounded text-xs uppercase tracking-wider cursor-pointer disabled:opacity-30 flex items-center justify-center gap-1 transition-all shadow-md active:translate-y-0.5"
                     title="Decretar esta ordem final e avançar o turno (Ctrl+Enter)"
                   >
-                    <Zap className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <Zap className="w-3.5 h-3.5 text-amber-200 fill-amber-200 shrink-0" />
                     <span>Decretar</span>
                   </button>
                 </div>

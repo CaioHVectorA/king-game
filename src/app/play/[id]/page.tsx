@@ -23,6 +23,19 @@ import {
 } from "@/lib/storage/save-manager";
 import { AnimatedProgressBar } from "@/components/ui/AnimatedProgressBar";
 import { OngoingSituationsSidebar } from "@/components/situations/OngoingSituationsSidebar";
+import { gameAudio } from "@/lib/audio/game-audio";
+import { MindPalaceDrawer } from "@/components/sovereign/MindPalaceDrawer";
+import { WarTableModal } from "@/components/sovereign/WarTableModal";
+import { EdictsCouncilModal } from "@/components/sovereign/EdictsCouncilModal";
+import { LivingFactionsDrawer } from "@/components/sovereign/LivingFactionsDrawer";
+import { EchoesTimelineModal } from "@/components/sovereign/EchoesTimelineModal";
+import { DynasticEndingScreen } from "@/components/sovereign/DynasticEndingScreen";
+import { buildChoiceDilemma } from "@/lib/game/dilemmas";
+import { evaluateDynasticEnding } from "@/lib/game/endings-codex";
+import { initializeLeaderPsychology } from "@/lib/game/mind-palace";
+import { initializeLivingFactions } from "@/lib/game/factions-matrix";
+import { DynasticEndingResult } from "@/types/sovereign";
+import { Brain, Compass, Scroll, Users, History, Sparkles } from "lucide-react";
 
 type SidebarTab = "metricas" | "mapa" | "documentos" | "cronica";
 
@@ -65,6 +78,14 @@ export default function PlayPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(true);
 
+  // Estados dos novos módulos de Soberania
+  const [isMindPalaceOpen, setIsMindPalaceOpen] = useState(false);
+  const [isWarTableOpen, setIsWarTableOpen] = useState(false);
+  const [isEdictsModalOpen, setIsEdictsModalOpen] = useState(false);
+  const [isFactionsDrawerOpen, setIsFactionsDrawerOpen] = useState(false);
+  const [isEchoesModalOpen, setIsEchoesModalOpen] = useState(false);
+  const [endingResult, setEndingResult] = useState<DynasticEndingResult | null>(null);
+
   // Carrega o jogo (servidor com fallback resiliente para LocalStorage)
   useEffect(() => {
     if (!gameId) return;
@@ -101,6 +122,7 @@ export default function PlayPage() {
   // Ação de Salvar Manualmente no LocalStorage
   const handleManualSave = () => {
     if (!state) return;
+    gameAudio.playDecree();
     const ok = saveSessionToLocalStorage(state, "manual");
     if (ok) {
       const now = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
@@ -111,6 +133,7 @@ export default function PlayPage() {
 
   // Alterna modo de auto-save
   const handleToggleAutoSave = (mode: AutoSaveMode) => {
+    gameAudio.playClick();
     setAutoSaveMode(mode);
     setAutoSaveModeState(mode);
     setIsAutoSaveConfigOpen(false);
@@ -171,6 +194,14 @@ export default function PlayPage() {
           });
           setIsSuccessionOpen(true);
         }
+
+        // Checagem de Final Dinástico
+        if (data.gameOver || newState.isGameOver) {
+          const ending = evaluateDynasticEnding(newState);
+          if (ending) {
+            setEndingResult(ending);
+          }
+        }
       } catch (err: any) {
         setErrorMsg(err?.message || "O Conselho Real encontrou um obstáculo.");
         setResolvedEncounter(null);
@@ -201,6 +232,8 @@ export default function PlayPage() {
   const activeEncounter =
     resolvedEncounter ||
     (state.currentEvent ? { ...resolveEncounter(state.currentEvent, state), gameId: state.id } : null);
+
+  const activeDilemma = state.currentEvent ? buildChoiceDilemma(state.currentEvent, state) : null;
 
   const availableDocs =
     state.documents && state.documents.length > 0
@@ -248,35 +281,39 @@ export default function PlayPage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#09090b] text-[#f4f4f5] font-mono select-none">
       {/* TOPO: BARRA DE STATUS DO REINO E SALVAMENTO */}
-      <header className="shrink-0 border-b border-[#27272a] px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 bg-[#0d0d12] sticky top-0 z-40">
+      <header className="shrink-0 border-b border-amber-950/40 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 bg-[#08090d]/90 backdrop-blur-sm sticky top-0 z-40">
         <div className="flex items-center gap-2.5">
           <button
-            onClick={() => setSidebarOpen((v) => !v)}
-            className="px-2 py-1 text-[10px] border border-[#27272a] text-[#71717a] hover:text-[#f4f4f5] hover:border-[#52525b] cursor-pointer"
+            onClick={() => {
+              gameAudio.playClick();
+              setSidebarOpen((v) => !v);
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-xs border border-zinc-700 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white rounded cursor-pointer transition-colors"
             title="Alternar painel lateral"
           >
             ☰
           </button>
-          <div>
-            <span className="font-royal text-sm font-bold text-[#f4f4f5]">
+          <div className="flex items-center gap-2">
+            <span className="font-royal text-sm font-bold text-amber-100">
               {state.currentRuler.name}
             </span>
-            <span className="text-[10px] text-[#71717a] ml-2 border border-[#27272a] px-1.5 py-0.5">
+            <span className="text-[10px] text-amber-400/80 border border-amber-500/30 bg-amber-950/30 px-2 py-0.5 rounded font-mono">
               Ano {state.year} • {getMonthName(state.month)} • Turno {state.turn}
             </span>
           </div>
           {state.storylineTitle && (
-            <span className="text-[10px] text-[#52525b] hidden md:inline">
+            <span className="text-[10px] text-zinc-400 hidden md:inline font-mono">
               [{state.storylineTitle}]
             </span>
           )}
         </div>
 
         {/* CONTROLES DE SALVAMENTO LOCAL & NAVEGAÇÃO */}
-        <div className="flex items-center gap-1.5 relative">
+        <div className="flex items-center gap-2 relative">
           {/* Notificação efêmera de salvamento */}
           {saveStatusMsg && (
-            <span className="text-[9px] px-2 py-0.5 bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 font-sans animate-fade-in">
+            <span className="text-[9px] px-2 py-0.5 bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 font-sans animate-fade-in-slide rounded">
               {saveStatusMsg}
             </span>
           )}
@@ -284,7 +321,8 @@ export default function PlayPage() {
           {/* Botão de Salvar Manual */}
           <button
             onClick={handleManualSave}
-            className="px-2 py-1 text-[10px] border border-emerald-600/40 bg-emerald-950/20 text-emerald-400 hover:bg-emerald-900/40 hover:border-emerald-500 cursor-pointer flex items-center gap-1"
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-[11px] border border-emerald-600/40 bg-emerald-950/30 text-emerald-300 hover:bg-emerald-900/50 hover:border-emerald-400 cursor-pointer flex items-center gap-1 rounded transition-colors"
             title="Salvar progresso no LocalStorage do navegador"
           >
             💾 Salvar
@@ -292,39 +330,43 @@ export default function PlayPage() {
 
           {/* Configuração de Auto-Save */}
           <button
-            onClick={() => setIsAutoSaveConfigOpen((prev) => !prev)}
-            className="px-2 py-1 text-[9px] border border-[#27272a] text-[#71717a] hover:text-[#f4f4f5] cursor-pointer"
+            onClick={() => {
+              gameAudio.playClick();
+              setIsAutoSaveConfigOpen((prev) => !prev);
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2 py-1 text-[10px] border border-zinc-700 bg-zinc-900/70 hover:bg-zinc-800 text-zinc-300 rounded cursor-pointer transition-colors"
             title="Configurar frequência de salvamento automático"
           >
-            ⚙ Auto: {autoSaveMode === "interval_5" ? "5 Turnos" : autoSaveMode === "every_turn" ? "1 Turno" : "Manual"}
+            ⚙ Auto: {autoSaveMode === "interval_5" ? "5T" : autoSaveMode === "every_turn" ? "1T" : "Off"}
           </button>
 
           {/* Menu Dropdown de Configuração de Auto-Save */}
           {isAutoSaveConfigOpen && (
-            <div className="absolute right-24 top-8 z-50 bg-[#111116] border border-[#27272a] shadow-xl p-2 w-52 space-y-1 text-[9px]">
-              <div className="text-[#71717a] uppercase text-[8px] pb-1 border-b border-[#27272a]">
+            <div className="absolute right-24 top-9 z-50 bg-[#0d0e14] border border-zinc-700 shadow-2xl p-2 w-52 space-y-1 text-[10px] rounded animate-fade-in-slide">
+              <div className="text-zinc-400 uppercase text-[9px] pb-1 border-b border-zinc-800 font-mono">
                 Frequência de Auto-Save:
               </div>
               <button
                 onClick={() => handleToggleAutoSave("interval_5")}
-                className={`w-full text-left p-1.5 cursor-pointer ${
-                  autoSaveMode === "interval_5" ? "bg-[#181822] text-emerald-400 font-bold" : "text-[#a1a1aa] hover:bg-[#181822]"
+                className={`w-full text-left p-1.5 rounded cursor-pointer ${
+                  autoSaveMode === "interval_5" ? "bg-amber-950/40 text-amber-300 font-bold" : "text-zinc-300 hover:bg-zinc-800"
                 }`}
               >
                 ● A cada 5 turnos (Padrão)
               </button>
               <button
                 onClick={() => handleToggleAutoSave("every_turn")}
-                className={`w-full text-left p-1.5 cursor-pointer ${
-                  autoSaveMode === "every_turn" ? "bg-[#181822] text-emerald-400 font-bold" : "text-[#a1a1aa] hover:bg-[#181822]"
+                className={`w-full text-left p-1.5 rounded cursor-pointer ${
+                  autoSaveMode === "every_turn" ? "bg-amber-950/40 text-amber-300 font-bold" : "text-zinc-300 hover:bg-zinc-800"
                 }`}
               >
                 ● A cada turno (Contínuo)
               </button>
               <button
                 onClick={() => handleToggleAutoSave("manual_only")}
-                className={`w-full text-left p-1.5 cursor-pointer ${
-                  autoSaveMode === "manual_only" ? "bg-[#181822] text-amber-400 font-bold" : "text-[#a1a1aa] hover:bg-[#181822]"
+                className={`w-full text-left p-1.5 rounded cursor-pointer ${
+                  autoSaveMode === "manual_only" ? "bg-amber-950/40 text-amber-300 font-bold" : "text-zinc-300 hover:bg-zinc-800"
                 }`}
               >
                 ● Somente manual (Desativado)
@@ -332,13 +374,85 @@ export default function PlayPage() {
             </div>
           )}
 
+          {/* Botão de abrir Mind Palace (As 4 Vozes da Mente) */}
+          <button
+            onClick={() => {
+              gameAudio.playClick();
+              setIsMindPalaceOpen(true);
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-xs border border-purple-500/40 bg-purple-950/30 hover:bg-purple-900/50 text-purple-200 rounded cursor-pointer font-medium transition-colors flex items-center gap-1.5"
+            title="Abrir o Palácio da Mente e as Quatro Vozes do Monólogo Interior"
+          >
+            <Brain className="w-3.5 h-3.5 text-purple-400" />
+            <span className="hidden sm:inline">Mente</span>
+          </button>
+
+          {/* Botão da Mesa de Guerra & Províncias */}
+          <button
+            onClick={() => {
+              gameAudio.playClick();
+              setIsWarTableOpen(true);
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-xs border border-red-500/40 bg-red-950/30 hover:bg-red-900/50 text-red-200 rounded cursor-pointer font-medium transition-colors flex items-center gap-1.5"
+            title="Abrir a Mesa Tática de Guerra e Guarnições Provinciais"
+          >
+            <Compass className="w-3.5 h-3.5 text-red-400" />
+            <span className="hidden sm:inline">Guerra</span>
+          </button>
+
+          {/* Botão do Códice de Éditos & Leis */}
+          <button
+            onClick={() => {
+              gameAudio.playClick();
+              setIsEdictsModalOpen(true);
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-xs border border-amber-500/40 bg-amber-950/30 hover:bg-amber-900/50 text-amber-200 rounded cursor-pointer font-medium transition-colors flex items-center gap-1.5"
+            title="Abrir o Grande Códice de Éditos e Reformas do Estado"
+          >
+            <Scroll className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden sm:inline">Éditos</span>
+          </button>
+
+          {/* Botão das Cinco Facções Vivas */}
+          <button
+            onClick={() => {
+              gameAudio.playClick();
+              setIsFactionsDrawerOpen(true);
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-xs border border-sky-500/40 bg-sky-950/30 hover:bg-sky-900/50 text-sky-200 rounded cursor-pointer font-medium transition-colors flex items-center gap-1.5"
+            title="Abrir dossiês e lealdade das Cinco Facções do Reino"
+          >
+            <Users className="w-3.5 h-3.5 text-sky-400" />
+            <span className="hidden sm:inline">Facções</span>
+          </button>
+
+          {/* Botão da Linha do Tempo de Ecos Kármicos */}
+          <button
+            onClick={() => {
+              gameAudio.playClick();
+              setIsEchoesModalOpen(true);
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-xs border border-emerald-500/40 bg-emerald-950/30 hover:bg-emerald-900/50 text-emerald-200 rounded cursor-pointer font-medium transition-colors flex items-center gap-1.5"
+            title="Abrir a Linha do Tempo dos Ecos Narrativos Kármicos"
+          >
+            <History className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="hidden sm:inline">Ecos</span>
+          </button>
+
           {/* Botão de abrir Biblioteca / Códice */}
           <button
             onClick={() => {
+              gameAudio.playClick();
               setSelectedDocId(undefined);
               setIsDocViewerOpen(true);
             }}
-            className="px-2.5 py-1 text-xs border border-[#27272a] text-[#a1a1aa] hover:text-[#f4f4f5] hover:border-[#52525b] cursor-pointer font-medium"
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-xs border border-zinc-700 bg-zinc-900/70 hover:bg-zinc-800 text-zinc-300 hover:text-white rounded cursor-pointer font-medium transition-colors"
             title="Abrir códice de documentos e livros do reino"
           >
             📖 Livros
@@ -347,46 +461,60 @@ export default function PlayPage() {
           {/* Botão de alternar Mapa */}
           <button
             onClick={() => {
+              gameAudio.playClick();
               setSidebarOpen(true);
               setSidebarTab("mapa");
             }}
-            className={`px-2.5 py-1 text-xs border flex items-center gap-1.5 cursor-pointer transition-colors ${
+            onMouseEnter={() => gameAudio.playHover()}
+            className={`px-2.5 py-1 text-xs border rounded flex items-center gap-1.5 cursor-pointer transition-colors ${
               sidebarOpen && sidebarTab === "mapa"
-                ? "border-blue-500/50 bg-blue-950/30 text-blue-300 font-bold"
-                : "border-[#27272a] text-[#a1a1aa] hover:text-[#f4f4f5] hover:border-[#52525b]"
+                ? "border-blue-500/50 bg-blue-950/40 text-blue-200 font-bold"
+                : "border-zinc-700 bg-zinc-900/70 hover:bg-zinc-800 text-zinc-300"
             }`}
             title="Abrir cartografia e planta urbana"
           >
             🗺️ Mapa
           </button>
 
-          {/* Botão de alternar Situações Atuais (Menu lateral à direita) */}
+          {/* Botão de alternar Situações Atuais */}
           <button
-            onClick={() => setRightSidebarOpen((v) => !v)}
-            className={`px-2.5 py-1 text-xs border flex items-center gap-1.5 cursor-pointer transition-colors ${
+            onClick={() => {
+              gameAudio.playClick();
+              setRightSidebarOpen((v) => !v);
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className={`px-2.5 py-1 text-xs border rounded flex items-center gap-1.5 cursor-pointer transition-colors ${
               rightSidebarOpen
-                ? "border-emerald-500/50 bg-emerald-950/30 text-emerald-300 font-bold"
-                : "border-[#27272a] text-[#a1a1aa] hover:text-[#f4f4f5] hover:border-[#52525b]"
+                ? "border-amber-500/50 bg-amber-950/40 text-amber-200 font-bold"
+                : "border-zinc-700 bg-zinc-900/70 hover:bg-zinc-800 text-zinc-300"
             }`}
             title="Alternar menu lateral à direita de Situações Atuais (expedições, guerras, discursos)"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
             <span>
               🧭 Situações ({(state.ongoingSituations?.filter((s) => s.status === "ativa").length || 0) + (state.activeWars?.length || 0)})
             </span>
           </button>
 
           <button
-            onClick={() => router.push(`/intro/${state.id}`)}
-            className="px-2.5 py-1 text-xs border border-[#27272a] text-[#71717a] hover:text-[#f4f4f5] cursor-pointer"
+            onClick={() => {
+              gameAudio.playClick();
+              router.push(`/intro/${state.id}`);
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-xs border border-zinc-700 bg-zinc-900/50 hover:bg-zinc-800 text-zinc-400 hover:text-white rounded cursor-pointer transition-colors font-mono"
           >
             Prólogo
           </button>
           <button
-            onClick={() => router.push("/")}
-            className="px-2.5 py-1 text-xs border border-[#27272a] text-[#71717a] hover:text-[#f4f4f5] cursor-pointer"
+            onClick={() => {
+              gameAudio.playClick();
+              router.push("/");
+            }}
+            onMouseEnter={() => gameAudio.playHover()}
+            className="px-2.5 py-1 text-xs border border-amber-500/40 bg-amber-950/30 text-amber-300 hover:bg-amber-900/50 rounded cursor-pointer transition-colors font-mono font-bold"
           >
-            Início
+            Menu
           </button>
         </div>
       </header>
@@ -655,6 +783,7 @@ export default function PlayPage() {
               feedback={feedback}
               onConcludeAudience={handleConcludeAudience}
               onNextAudience={handleNextAudience}
+              dilemma={activeDilemma}
             />
           ) : !state.isGameOver ? (
             <div className="flex-1 flex items-center justify-center text-[#52525b] text-xs font-mono">
@@ -692,10 +821,54 @@ export default function PlayPage() {
         deceasedName={successionInfo.deceasedName}
       />
       <GameOverModal
-        isOpen={state.isGameOver}
+        isOpen={state.isGameOver && !endingResult}
         state={state}
         onRestart={() => router.push("/")}
       />
+
+      {/* ─── SUBSISTEMAS DA NOVA ERA DE SOBERANIA ─── */}
+      <MindPalaceDrawer
+        psychology={state.psychology || initializeLeaderPsychology(state.currentRuler.archetype)}
+        isOpen={isMindPalaceOpen}
+        onClose={() => setIsMindPalaceOpen(false)}
+        rulerName={state.currentRuler.name}
+      />
+
+      <WarTableModal
+        state={state}
+        isOpen={isWarTableOpen}
+        onClose={() => setIsWarTableOpen(false)}
+        onStateUpdate={(ns) => setState(ns)}
+      />
+
+      <EdictsCouncilModal
+        state={state}
+        isOpen={isEdictsModalOpen}
+        onClose={() => setIsEdictsModalOpen(false)}
+        onStateUpdate={(ns) => setState(ns)}
+      />
+
+      <LivingFactionsDrawer
+        factions={state.livingFactions || initializeLivingFactions()}
+        isOpen={isFactionsDrawerOpen}
+        onClose={() => setIsFactionsDrawerOpen(false)}
+      />
+
+      <EchoesTimelineModal
+        echoes={state.echoes || []}
+        currentTurn={state.turn}
+        isOpen={isEchoesModalOpen}
+        onClose={() => setIsEchoesModalOpen(false)}
+      />
+
+      {/* TELA CINEMATOGRÁFICA DE FINAL DINÁSTICO */}
+      {endingResult && (
+        <DynasticEndingScreen
+          ending={endingResult}
+          state={state}
+          onReturnToMenu={() => router.push("/")}
+        />
+      )}
     </div>
   );
 }

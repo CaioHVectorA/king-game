@@ -154,6 +154,16 @@ ANTECEDENTES DA COROAÇÃO (SEED ${seed}):
     documents: getStorylineDocuments(storyline.id),
     conversationHistory: [],
 
+    // ─── NOVA GERAÇÃO: MECÂNICAS SOBERANIA ───
+    psychology: require("./mind-palace").initializeLeaderPsychology(initialRuler.archetype, initialRuler.personalIntent),
+    livingFactions: require("./factions-matrix").initializeLivingFactions(),
+    echoes: [],
+    edicts: require("./edicts").initializeRealmEdicts(),
+    provinces: require("./war-theater").initializeRealmProvinces(),
+    conspiracies: [],
+    unlockedEndings: [],
+    dynasticScore: 0,
+
     isGameOver: false,
     gameOverReason: undefined,
   };
